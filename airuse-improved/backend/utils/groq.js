@@ -31,8 +31,8 @@ function getNextClient() {
 // ── Model Selection ───────────────────────────────────────────────────────────
 // Resume JSON: use the powerful 70b model for quality
 // Cover letter: use 8b-instant for speed (2–3x faster, still great quality)
-const MODEL_HEAVY = process.env.GROQ_MODEL       || 'llama-3.3-70b-versatile';
-const MODEL_FAST  = process.env.GROQ_MODEL_FAST  || 'llama-3.1-8b-instant';
+const MODEL_HEAVY = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
+const MODEL_FAST = process.env.GROQ_MODEL_FAST || 'llama-3.1-8b-instant';
 
 async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -48,7 +48,7 @@ async function callLLM(systemPrompt, userPrompt, retries = 2, model = MODEL_FAST
         model,
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user',   content: userPrompt },
+          { role: 'user', content: userPrompt },
         ],
         temperature: 0.3,
         max_tokens: 1200,  // Cover letter doesn't need more than this
@@ -81,7 +81,7 @@ async function callLLMJSON(systemPrompt, userPrompt, retries = 2) {
         model: MODEL_HEAVY,
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user',   content: userPrompt },
+          { role: 'user', content: userPrompt },
         ],
         temperature: 0.1,
         max_tokens: 4000,
@@ -97,7 +97,7 @@ async function callLLMJSON(systemPrompt, userPrompt, retries = 2) {
         return JSON.parse(raw.trim());
       } catch {
         const start = raw.indexOf('{');
-        const end   = raw.lastIndexOf('}');
+        const end = raw.lastIndexOf('}');
         if (start !== -1 && end > start) {
           return JSON.parse(raw.slice(start, end + 1));
         }
