@@ -10,12 +10,13 @@ const Groq = require('groq-sdk');
 
 // ── Key Pool ──────────────────────────────────────────────────────────────────
 // Add GROQ_API_KEY_2, GROQ_API_KEY_3, etc. in Vercel env vars to rotate keys
+// .trim() strips any \r\n added by PowerShell's echo pipe when setting env vars
 const KEY_POOL = [
   process.env.GROQ_API_KEY,
   process.env.GROQ_API_KEY_2,
   process.env.GROQ_API_KEY_3,
   process.env.GROQ_API_KEY_4,
-].filter(Boolean);
+].filter(Boolean).map(k => k.trim());
 
 if (KEY_POOL.length === 0) {
   console.error('[groq] ✗ No API keys found! Set GROQ_API_KEY in your environment.');
@@ -31,8 +32,9 @@ function getNextClient() {
 // ── Model Selection ───────────────────────────────────────────────────────────
 // Resume JSON: use the powerful 70b model for quality
 // Cover letter: use 8b-instant for speed (2–3x faster, still great quality)
-const MODEL_HEAVY = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
-const MODEL_FAST = process.env.GROQ_MODEL_FAST || 'llama-3.1-8b-instant';
+// .trim() removes any \r\n injected by PowerShell echo when setting Vercel env vars
+const MODEL_HEAVY = (process.env.GROQ_MODEL      || 'llama-3.3-70b-versatile').trim();
+const MODEL_FAST  = (process.env.GROQ_MODEL_FAST || 'llama-3.1-8b-instant').trim();
 
 async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
