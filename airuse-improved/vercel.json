@@ -3,27 +3,18 @@
   "builds": [
     {
       "src": "backend/server.js",
-      "use": "@vercel/node",
-      "config": { "maxLambdaSize": "50mb" }
-    },
-    {
-      "src": "frontend/public/**",
-      "use": "@vercel/static"
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/server.js"
+      "dest": "backend/server.js",
+      "headers": { "x-matched-path": "/api/$1" }
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/public/$1"
+      "dest": "backend/server.js"
     }
-  ],
-  "functions": {
-    "backend/server.js": {
-      "maxDuration": 60
-    }
-  }
+  ]
 }
