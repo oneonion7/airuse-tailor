@@ -1,0 +1,27 @@
+{
+  "name": "airuse-resumeai",
+  "version": "2.0.0",
+  "description": "AI-powered ATS Resume Builder — scores 91+ on ATS scanners. Powered by Groq.",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "setup": "cp -n .env.example .env && echo '✅ .env created — add your GROQ_API_KEY'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "docx": "^9.6.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "groq-sdk": "^1.1.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.7.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

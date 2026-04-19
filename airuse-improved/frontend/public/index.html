@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build ATS-optimized resumes with AI. Upload your resume, paste a job description, and get a perfectly tailored resume in seconds. 100% free, powered by Groq.">
+  <title>ResumeAI — AI-Powered ATS Resume Builder</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ── Nav ── -->
+  <nav class="landing-nav" id="landing-nav">
+    <div class="logo">Resume<span>AI</span></div>
+    <div class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#features">Features</a>
+      <button class="nav-cta" onclick="location.href='builder.html'">Build My Resume →</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ══ Hero ══ -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          AI-Powered · Free to Use
+        </div>
+        <div class="eyebrow">ATS-Optimised Resume Builder</div>
+        <h1>Land interviews<br>with a resume<br><span class="gradient-text">built for parsers</span></h1>
+        <p class="hero-desc">
+          Upload your existing resume and paste the job description.
+          Our AI tailors a perfectly structured, ATS-optimised resume
+          — no subscriptions, no hidden fees.
+        </p>
+        <div class="cta-group">
+          <button class="btn-primary" onclick="location.href='builder.html'">
+            Build My Resume →
+          </button>
+          <span class="price-tag"><strong>100% Free</strong> · Instant results</span>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><div class="trust-dot"></div> Privacy-first</div>
+          <div class="trust-item"><div class="trust-dot"></div> Server-side PDF parsing</div>
+          <div class="trust-item"><div class="trust-dot"></div> Instant PDF download</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="preview-card">
+          <div class="preview-name">ALEX CHEN</div>
+          <div class="preview-role">New York, NY | alex.chen@email.com | linkedin.com/in/alexc</div>
+          <div class="preview-section">
+            <div class="preview-section-title">PROFESSIONAL SUMMARY</div>
+            <div class="preview-line"></div>
+            <div class="preview-line medium"></div>
+            <div class="preview-line short"></div>
+          </div>
+          <div class="preview-section">
+            <div class="preview-section-title">WORK EXPERIENCE</div>
+            <div class="preview-line short"></div>
+            <div class="preview-line"></div>
+            <div class="preview-line medium"></div>
+          </div>
+          <div class="preview-section">
+            <div class="preview-section-title">EDUCATION</div>
+            <div class="preview-line medium"></div>
+          </div>
+          <div class="preview-ai-badge">
+            <div class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan-light);animation:pulse 1.5s infinite"></div>
+            Powered by AI
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Stats Strip ══ -->
+    <section class="stats fade-in">
+      <div class="stat">
+        <div class="stat-num">PDF</div>
+        <div class="stat-label">Upload & auto-fill</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">90+</div>
+        <div class="stat-label">ATS scoring format</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI</div>
+        <div class="stat-label">Groq LLM powered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">No payment required</div>
+      </div>
+    </section>
+
+    <!-- ══ How It Works ══ -->
+    <section class="how-it-works fade-in" id="how-it-works">
+      <div class="section-label">Simple Process</div>
+      <h2>Three steps to your perfect resume</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-icon">📄</div>
+          <h3>Upload or Type</h3>
+          <p>Upload an existing PDF resume to auto-fill, or type your details manually.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-icon">🎯</div>
+          <h3>Paste Job Description</h3>
+          <p>Paste the target job description so the AI can tailor your resume to match.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-icon">⚡</div>
+          <h3>Generate & Download</h3>
+          <p>Get an ATS-optimised resume + cover letter in seconds. Download as PDF.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Features ══ -->
+    <section class="features-section fade-in" id="features">
+      <div class="section-label">Why ResumeAI</div>
+      <h2>Built to get you hired</h2>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Tailored Content</h3>
+          <p>Our AI analyzes the job description and rewrites your experience to match key requirements and keywords.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>ATS-Optimised Format</h3>
+          <p>Clean, parser-friendly formatting that scores 90+ on ATS systems. No fancy graphics that break parsers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Private & Secure</h3>
+          <p>Your data stays on your server. No third-party storage, no data selling. Your resume, your privacy.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="landing-footer">
+    <p>© 2026 ResumeAI · Powered by Groq AI · Completely free</p>
+  </footer>
+
+  <!-- Scroll animations -->
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('landing-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

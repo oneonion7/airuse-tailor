@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build your ATS-optimized resume with AI. Fill in your details, paste the job description, and generate a tailored resume in seconds.">
+  <title>ResumeAI — Builder</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/builder.css">
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav class="builder-nav">
+    <a class="back-btn" href="index.html">← Back</a>
+    <div class="logo" style="font-size:1.1rem">Resume<span>AI</span></div>
+    <div style="font-size:.78rem;color:var(--text-muted)">Powered by Groq AI</div>
+  </nav>
+
+  <!-- ── Progress Bar ── -->
+  <div class="progress-bar-container">
+    <div class="progress-bar">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-label" id="progress-label">0 / 4 fields</div>
+    </div>
+  </div>
+
+  <div class="builder-body">
+
+    <!-- ══ LEFT: Form ══ -->
+    <div class="builder-form">
+      <h2>Build your ATS resume</h2>
+      <p>Fill in your details or upload a PDF to auto-fill. Then paste the target job description.</p>
+
+      <!-- ── Contact Info ── -->
+      <div class="form-section">
+        <div class="form-section-label">
+          <span class="section-icon">👤</span> Contact Information
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full name *</label>
+            <input type="text" id="f-name" placeholder="Alex Chen" data-track>
+          </div>
+          <div class="form-group">
+            <label>Current role / Title</label>
+            <input type="text" id="f-role" placeholder="Senior Software Engineer">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="f-email" placeholder="alex@email.com">
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="f-phone" placeholder="+1 234 567 8900">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>City / Location</label>
+            <input type="text" id="f-city" placeholder="New York, NY">
+          </div>
+          <div class="form-group">
+            <label>LinkedIn (optional)</label>
+            <input type="text" id="f-linkedin" placeholder="linkedin.com/in/alexc">
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Experience ── -->
+      <div class="form-section">
+        <div class="form-section-label">
+          <span class="section-icon">💼</span> Experience & Projects
+        </div>
+
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="upload-zone">
+          <input type="file" id="f-resume-file" accept="application/pdf">
+          <div class="upload-icon">📄</div>
+          <div class="upload-text" id="upload-btn-text">Drop PDF resume here or click to browse</div>
+          <div class="upload-hint">Supports .pdf up to 10 MB — AI will auto-fill all fields</div>
+          <div class="upload-file-info" id="upload-file-info">
+            <span>✓</span> <span id="upload-file-name"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Experience *
+            <span class="char-count" id="exp-count"></span>
+          </label>
+          <textarea id="f-experience"
+            placeholder="Upload a PDF above to auto-fill, or type your work history, projects, and achievements here..."
+            style="min-height:140px"
+            data-track data-counter="exp-count"></textarea>
+        </div>
+      </div>
+
+      <!-- ── Education & Certs ── -->
+      <div class="form-section">
+        <div class="form-section-label">
+          <span class="section-icon">🎓</span> Education & Certifications
+        </div>
+        <div class="form-group">
+          <label>
+            Education Details
+            <span class="char-count" id="edu-count"></span>
+          </label>
+          <textarea id="f-education"
+            placeholder="E.g. B.Tech Computer Science, Jain University (2022–2026), CGPA: 8.0/10"
+            style="min-height:80px"
+            data-counter="edu-count"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Certifications & Extra Info</label>
+          <textarea id="f-certs"
+            placeholder="E.g. Operating Systems Fundamentals | Cisco Networking Academy"
+            style="min-height:60px"></textarea>
+        </div>
+      </div>
+
+      <!-- ── Job Description ── -->
+      <div class="form-section">
+        <div class="form-section-label">
+          <span class="section-icon">🎯</span> Target Job
+        </div>
+        <div class="form-group">
+          <label>
+            Target job description *
+            <span class="char-count" id="jd-count"></span>
+          </label>
+          <textarea id="f-jd"
+            placeholder="Paste the job description here. The AI tailors your resume to match keywords and requirements."
+            style="min-height:120px"
+            data-track data-counter="jd-count"></textarea>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generate-btn">
+        <div class="spinner" id="spinner"></div>
+        <span id="btn-text">Generate Tailored Resume →</span>
+      </button>
+
+      <p class="form-footer-note">
+        Powered by Groq AI · Results in seconds
+      </p>
+    </div>
+
+    <!-- ══ RIGHT: Output ══ -->
+    <div class="builder-output">
+
+      <div class="output-actions" id="output-actions">
+        <button class="action-btn primary" id="download-btn">⬇ Download PDF</button>
+        <button class="action-btn primary docx" id="download-docx-btn">📄 Download Word</button>
+        <button class="action-btn primary txt" id="download-txt-btn">📋 Download ATS Text</button>
+        <button class="action-btn secondary" id="regen-btn">↺ Regenerate</button>
+        <button class="action-btn secondary" id="highlight-keywords-btn">🔦 Highlight Keywords</button>
+      </div>
+
+      <div class="status-bar" id="status-bar">
+        <div class="status-dot"></div>
+        <span id="status-text">AI is generating your resume…</span>
+      </div>
+
+      <div class="output-empty" id="output-empty">
+        <div class="output-empty-icon">📄</div>
+        <h3>Your 90+ ATS resume will appear here</h3>
+        <p>Fill in the form and click generate. Results in seconds.</p>
+      </div>
+
+      <div id="resume-output"></div>
+      <div id="cover-letter-output"></div>
+
+      <!-- Real ATS Score Panel (v2) -->
+      <div id="ats-score-panel" class="ats-score-panel" style="display:none"></div>
+
+      <!-- Tailoring Report — shows what AI changed for the JD -->
+      <div id="tailoring-report" class="tailoring-report" style="display:none">
+        <div class="tailoring-header">
+          <span class="tailoring-icon">🎯</span>
+          <h3>Tailoring Report</h3>
+          <span class="tailoring-subtitle">What the AI changed to match your target job</span>
+        </div>
+
+        <div class="tailoring-score" id="tailoring-score">
+          <div class="score-circle" id="score-circle">
+            <span class="score-value" id="score-value">—</span>
+          </div>
+          <div class="score-label">ATS Sections Included</div>
+        </div>
+
+        <div class="tailoring-section">
+          <h4>📋 Section Checklist</h4>
+          <div class="ats-checklist" id="ats-checklist"></div>
+        </div>
+
+        <div class="tailoring-section">
+          <h4>🔑 Keywords Integrated from JD</h4>
+          <div class="keyword-tags" id="keyword-tags"></div>
+        </div>
+
+        <div class="tailoring-section">
+          <h4>✏️ Changes Made</h4>
+          <ul class="changes-list" id="changes-list"></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/pdfUpload.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/builder.js"></script>
+
+</body>
+</html>
