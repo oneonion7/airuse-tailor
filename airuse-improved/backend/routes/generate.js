@@ -27,13 +27,15 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    console.log(`[generate] Step 1/2 — Generating resume JSON for: ${name}`);
+    console.log(`[generate] Running resume + cover letter in parallel for: ${name}`);
     const resumePrompt = buildResumePrompt({ name, email, phone, city, linkedin, experience, education, certifications, jobDescription });
-    const parsed = await callLLMJSON(RESUME_SYSTEM_PROMPT, resumePrompt);
+    const coverPrompt  = buildCoverPrompt({ name, city, experience, jobDescription });
 
-    console.log(`[generate] Step 2/2 — Generating cover letter`);
-    const coverPrompt = buildCoverPrompt({ name, city, experience, jobDescription });
-    const coverText   = await callLLM(COVER_SYSTEM_PROMPT, coverPrompt);
+    // Run both LLM calls simultaneously — cuts total latency ~50%
+    const [parsed, coverText] = await Promise.all([
+      callLLMJSON(RESUME_SYSTEM_PROMPT, resumePrompt),
+      callLLM(COVER_SYSTEM_PROMPT, coverPrompt),
+    ]);
 
     const info = { name, role, email, phone, city, linkedin };
     const resumeHTML = renderResumeHTML(parsed, info);
