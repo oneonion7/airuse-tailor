@@ -26,14 +26,14 @@ Critical rules:
 - Start response with { and end with }`;
 
 function buildParseResumePrompt(resumeText) {
-  // Increased limit from 3000 to 5000 chars for richer extraction
-  const trimmed = resumeText.length > 5000 ? resumeText.slice(0, 5000) : resumeText;
+  // Keep under 3000 chars to stay within free-tier TPM limits
+  const trimmed = resumeText.length > 3000 ? resumeText.slice(0, 3000) : resumeText;
   return `Parse this resume and extract ALL structured data.
 
 RESUME TEXT:
 ${trimmed}
 
-Output JSON only. Preserve ALL details from experience and projects. Start with {`;
+Output JSON only. Preserve ALL details. Start with {`;
 }
 
 module.exports = { PARSE_RESUME_SYSTEM_PROMPT, buildParseResumePrompt };
