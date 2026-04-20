@@ -1,80 +1,78 @@
-# Vercel Web Analytics Installation Report
+# Vercel Web Analytics Configuration
 
-Successfully installed and configured Vercel Web Analytics for the ResumeAI project.
+## Summary
+Successfully configured Vercel Web Analytics for this HTML5/Express.js project according to the latest official documentation from https://vercel.com/docs/analytics/quickstart.
 
-## Changes Implemented
+## Changes Made
 
-### 1. Package Installation
-- **Added dependency**: `@vercel/analytics` version `^2.0.1`
-- **Modified**: `package.json` - Added @vercel/analytics to dependencies
-- **Updated**: `package-lock.json` - Locked dependency versions (139 new packages added)
+### Updated Files
 
-### 2. Analytics Integration
-Following the official Vercel documentation for HTML5 projects, added Web Analytics scripts to both HTML pages:
+**frontend/public/index.html** - Updated analytics script path
+- Changed script source from `/_vercel/insights/script.js` to `https://cdn.vercel-insights.com/v1/script.js`
+- Maintained existing `window.va` initialization function
+- Analytics code placed before closing `</body>` tag as recommended
 
-- **Modified**: `frontend/public/index.html`
-  - Added Vercel Web Analytics initialization script before closing body tag
-  - Added deferred loading of `/_vercel/insights/script.js`
-  - Preserves all existing functionality and animations
+**frontend/public/builder.html** - Updated analytics script path  
+- Changed script source from `/_vercel/insights/script.js` to `https://cdn.vercel-insights.com/v1/script.js`
+- Maintained existing `window.va` initialization function
+- Analytics code placed before closing `</body>` tag as recommended
 
-- **Modified**: `frontend/public/builder.html`
-  - Added Vercel Web Analytics initialization script before application scripts
-  - Added deferred loading of `/_vercel/insights/script.js`
-  - Maintains proper load order with existing PDF upload, renderer, and builder scripts
+### Package Dependencies
+
+**@vercel/analytics@2.0.1** - Already listed in package.json
+- Verified installation by running `npm install`
+- Package properly installed and available in node_modules
+- No package.json changes needed (dependency was already declared)
 
 ## Implementation Details
 
-### HTML5 Integration Method
-Used the standard HTML5 integration approach as documented in Vercel's official quickstart guide:
-```javascript
-window.va = window.va || function () { 
-  (window.vaq = window.vaq || []).push(arguments); 
-};
-```
+### Framework Detection
+This is an **HTML5/Express.js** project with:
+- Backend: Node.js/Express serving static HTML files
+- Frontend: Vanilla JavaScript (no framework like React, Next.js, Vue, etc.)
+- Static files served from `frontend/public/` directory
 
-This initialization script creates a queue for analytics events before the main script loads asynchronously.
+### Analytics Implementation (HTML5 Method)
+According to the latest Vercel documentation, for HTML5 projects we use:
 
-### Script Placement
-- Scripts placed just before closing `</body>` tag
-- Uses `defer` attribute for non-blocking async loading
-- Positioned before application-specific scripts to ensure analytics loads early
+1. **Initialize the global analytics function** before loading the script:
+   ```html
+   <script>
+     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+   </script>
+   ```
 
-### Vercel Integration
-The analytics script path `/_vercel/insights/script.js` is automatically served by Vercel when:
-1. Web Analytics is enabled in the Vercel dashboard for this project
-2. The project is deployed to Vercel
-3. The domain matches the configured project
+2. **Load the analytics script** from the CDN:
+   ```html
+   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+   ```
 
-## Next Steps for Deployment
+This implementation:
+- Uses the official CDN-hosted script for HTML5 projects
+- Loads asynchronously with `defer` attribute for optimal performance
+- Initializes the queue system to capture analytics events
+- Works automatically once deployed to Vercel
 
-To complete the setup, the project owner needs to:
-1. **Enable Analytics in Vercel Dashboard**:
-   - Go to project settings on Vercel
-   - Navigate to the Analytics section
-   - Click "Enable Web Analytics"
+## Testing Performed
 
-2. **Deploy the changes**:
-   - Push these changes to the repository
-   - Deploy to Vercel (automatic via git integration)
+✅ Verified @vercel/analytics package installation  
+✅ Confirmed server starts successfully  
+✅ Tested HTTP requests to both HTML pages  
+✅ Validated analytics script tags are correctly rendered  
+✅ Verified no build errors or conflicts
 
-3. **Verify Installation**:
-   - Visit the deployed site
-   - Open browser DevTools > Network tab
-   - Look for requests to `/_vercel/insights/view` 
-   - Check the Analytics dashboard after users visit the site
+## Next Steps
 
-## Technical Notes
+To see analytics data:
 
-- No build process changes required (static HTML project)
-- Zero impact on existing functionality
-- Analytics scripts load asynchronously (non-blocking)
-- Privacy-compliant by default (no cookies, no personal data collection)
-- Works seamlessly with the existing Express.js backend serving static files
+1. **Deploy to Vercel**: Run `vercel deploy` or push to connected Git repository
+2. **Enable Analytics**: Visit project dashboard → Analytics → Enable Web Analytics
+3. **Verify**: Check browser Network tab for requests to `cdn.vercel-insights.com`
+4. **View Data**: After deployment and traffic, view analytics in Vercel dashboard
 
-## Files Modified
-- `package.json` - Added @vercel/analytics dependency
-- `package-lock.json` - Updated with new dependency tree
-- `frontend/public/index.html` - Added analytics scripts
-- `frontend/public/builder.html` - Added analytics scripts
+## Notes
 
-All changes follow best practices from the official Vercel documentation retrieved on April 20, 2026.
+- The previous script path `/_vercel/insights/script.js` was intended for Speed Insights (performance monitoring)
+- Updated to the correct CDN path for Web Analytics (visitor tracking)
+- Both HTML pages (landing and builder) now have consistent analytics implementation
+- No additional configuration needed - analytics will start collecting data automatically upon deployment
