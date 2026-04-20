@@ -9,6 +9,7 @@
     "setup": "cp -n .env.example .env && echo '✅ .env created — add your GROQ_API_KEY'"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "cors": "^2.8.5",
     "docx": "^9.6.1",
     "dotenv": "^16.4.5",
