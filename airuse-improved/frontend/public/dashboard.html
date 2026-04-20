@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your saved AI-generated resumes. View, download, and manage all your ATS-optimized resumes in one place.">
+  <title>ResumeAI — My Resumes</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-page">
+
+  <!-- ── Nav ── -->
+  <nav class="dash-nav">
+    <div class="dash-nav-left">
+      <div class="logo">Resume<span>AI</span></div>
+    </div>
+    <div class="dash-nav-right">
+      <div class="nav-user">
+        <div class="nav-user-avatar" id="user-avatar">?</div>
+        <span id="user-email">Loading…</span>
+      </div>
+      <a href="builder.html" class="nav-new-btn">+ New Resume</a>
+      <button class="nav-signout-btn" id="signout-btn">Sign out</button>
+    </div>
+  </nav>
+
+  <!-- ── Main ── -->
+  <main class="dash-main">
+
+    <!-- Header -->
+    <div class="dash-header">
+      <p class="dash-greeting">Good to see you back 👋</p>
+      <h1 class="dash-title">My <span>Resumes</span></h1>
+    </div>
+
+    <!-- Stats -->
+    <div class="dash-stats" id="dash-stats" style="display:none">
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-total">0</div>
+        <div class="stat-card-label">Resumes saved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-best">—</div>
+        <div class="stat-card-label">Best ATS score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-latest">—</div>
+        <div class="stat-card-label">Latest generated</div>
+      </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="dash-section-title">All Resumes</div>
+
+    <!-- Resume Grid -->
+    <div id="resume-grid-container">
+      <!-- Skeleton loaders shown while fetching -->
+      <div class="resume-grid" id="skeleton-grid">
+        <div class="skeleton-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-line" style="width:40%"></div><div class="skeleton skeleton-line" style="width:80%"></div></div>
+        <div class="skeleton-card"><div class="skeleton skeleton-line" style="width:55%"></div><div class="skeleton skeleton-line" style="width:35%"></div><div class="skeleton skeleton-line" style="width:70%"></div></div>
+        <div class="skeleton-card"><div class="skeleton skeleton-line" style="width:65%"></div><div class="skeleton skeleton-line" style="width:45%"></div><div class="skeleton skeleton-line" style="width:75%"></div></div>
+      </div>
+      <!-- Actual resume grid (populated by JS) -->
+      <div class="resume-grid" id="resume-grid" style="display:none"></div>
+      <!-- Empty state -->
+      <div class="dash-empty" id="dash-empty" style="display:none">
+        <div class="dash-empty-icon">📄</div>
+        <h3>No resumes saved yet</h3>
+        <p>Generate your first AI-tailored resume and it'll appear here automatically.</p>
+        <a href="builder.html" class="nav-new-btn" style="margin-top:0.5rem">+ Build My First Resume</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Delete Confirm Dialog ── -->
+  <div class="delete-dialog-overlay" id="delete-overlay">
+    <div class="delete-dialog">
+      <h3>Delete this resume?</h3>
+      <p>This action cannot be undone. The resume will be permanently removed from your account.</p>
+      <div class="delete-dialog-actions">
+        <button class="btn-secondary" id="delete-cancel">Cancel</button>
+        <button class="auth-submit" style="width:auto;padding:0.7rem 1.5rem;margin-top:0;background:linear-gradient(135deg,#ef4444,#dc2626)" id="delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+
+</body>
+</html>

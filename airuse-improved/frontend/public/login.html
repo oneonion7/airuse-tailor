@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Log in to ResumeAI to access your saved resumes and continue building ATS-optimized resumes.">
+  <title>ResumeAI — Log In</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Back to home -->
+  <a href="index.html" class="auth-back">← Back to home</a>
+
+  <div class="auth-page">
+    <div class="auth-card">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <div class="logo">Resume<span>AI</span></div>
+        <span class="tagline">AI-Powered ATS Resume Builder</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="auth-heading">Welcome back</h1>
+      <p class="auth-subheading">Log in to access your saved resumes</p>
+
+      <!-- Alert box (shown on error/success) -->
+      <div class="auth-alert" id="auth-alert"></div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="login-form" novalidate>
+
+        <div class="auth-field">
+          <label for="login-email">Email address</label>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="auth-field">
+          <label for="login-password">Password</label>
+          <input
+            type="password"
+            id="login-password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          >
+          <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-submit" id="login-btn">
+          <div class="spinner"></div>
+          <span class="btn-label">Log in →</span>
+        </button>
+
+      </form>
+
+      <!-- Footer -->
+      <p class="auth-footer">
+        Don't have an account? <a href="signup.html">Sign up free</a>
+      </p>
+
+      <p class="auth-terms">
+        By continuing, you agree to our
+        <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // ── Login Logic ───────────────────────────────────────────────────────────
+    const form    = document.getElementById('login-form');
+    const btn     = document.getElementById('login-btn');
+    const alert   = document.getElementById('auth-alert');
+
+    function showAlert(msg, type = 'error') {
+      alert.textContent = msg;
+      alert.className = `auth-alert ${type}`;
+    }
+    function hideAlert() {
+      alert.className = 'auth-alert';
+    }
+    function setLoading(on) {
+      btn.disabled = on;
+      btn.classList.toggle('loading', on);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showAlert('Please fill in both fields.');
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
+
+        if (error) throw error;
+
+        // Success — redirect to builder or dashboard
+        const redirect = new URLSearchParams(window.location.search).get('redirect') || 'dashboard.html';
+        window.location.href = redirect;
+
+      } catch (err) {
+        showAlert(err.message || 'Login failed. Please try again.');
+        setLoading(false);
+      }
+    });
+  </script>
+
+</body>
+</html>

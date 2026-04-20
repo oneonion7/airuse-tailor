@@ -2,6 +2,7 @@
  * js/builder.js
  * Core form logic: validation, calling the backend /api/generate,
  * wiring up buttons, progress bar, character counters, and toasts.
+ * v3: Auth integration + auto-save to Supabase on generate.
  */
 
 (function () {
@@ -39,6 +40,28 @@
     window.ResumeRenderer.downloadPDF(name);
   });
 
+  // ── Populate auth nav (non-blocking — builder works for guests too) ─────────
+  (async () => {
+    if (!window._auth) return;
+    try {
+      const user = await window._auth.getUser();
+      if (!user) return;
+      const dashLink = document.getElementById('dash-link');
+      const avatar   = document.getElementById('builder-avatar');
+      if (dashLink) dashLink.style.display = 'inline-flex';
+      if (avatar) {
+        const name     = user.user_metadata?.full_name || user.email || '';
+        const initials = name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase() || '?';
+        avatar.textContent = initials;
+        avatar.style.display = 'flex';
+      }
+    } catch (_) { /* silently ignore — auth is optional */ }
+  })();
+
+  // ── In-memory store for current resume (fixes serverless state bug) ─────────
+  // Sent in the body of download requests so they work across server instances.
+  let _currentResume = null;  // { resumeData, resumeInfo, plainText }
+
   // Word document download
   const docxBtn = document.getElementById('download-docx-btn');
   if (docxBtn) {
@@ -46,7 +69,16 @@
       docxBtn.textContent = '⏳ Generating…';
       docxBtn.disabled = true;
       try {
-        const res = await fetch('/api/generate/download-docx', { method: 'POST' });
+        // Use saved resume ID if logged in (dashboard downloads)
+        // Otherwise fall back to sending resumeData in body (guest mode)
+        const body = _currentResume
+          ? JSON.stringify({ resumeData: _currentResume.resumeData, resumeInfo: _currentResume.resumeInfo })
+          : '{}';
+        const res = await fetch('/api/generate/download-docx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+        });
         if (!res.ok) {
           const err = await res.json();
           throw new Error(err.error || 'Download failed');
@@ -78,6 +110,22 @@
       txtBtn.textContent = '⏳ Preparing…';
       txtBtn.disabled = true;
       try {
+        // If we have the plain text in memory, download directly without a server call
+        if (_currentResume?.plainText) {
+          const blob = new Blob([_currentResume.plainText], { type: 'text/plain' });
+          const url  = URL.createObjectURL(blob);
+          const a    = document.createElement('a');
+          const name = document.getElementById('f-name').value.trim() || 'Resume';
+          a.href = url;
+          a.download = `${name.replace(/[^a-zA-Z0-9]/g, '_')}_Resume_ATS.txt`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast('ATS text file downloaded! Use this when uploading to job portals.', 'success');
+          return;
+        }
+        // Fallback: ask server
         const res = await fetch('/api/generate/download-txt', { method: 'POST' });
         if (!res.ok) {
           const err = await res.json();
@@ -180,7 +228,43 @@
       }
 
       window.ResumeRenderer.render(data.resumeHTML, data.coverLetterHTML || null, data.tailoring || null, data.resumePlainText || null);
-      showToast('Resume generated successfully!', 'success');
+
+      // ── Store resume in memory (fixes serverless DOCX/TXT download) ────────
+      _currentResume = {
+        resumeData: data.resumeData || null,
+        resumeInfo: { name, role, email, phone, city, linkedin },
+        plainText:  data.resumePlainText || null,
+      };
+
+      // ── Auto-save to Supabase if user is logged in ─────────────────────────
+      if (window._auth) {
+        try {
+          const token = await window._auth.getToken();
+          if (token) {
+            const title = role ? `${role} Resume` : `${name} Resume`;
+            await fetch('/api/resumes', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                title,
+                resume_data:  data.resumeData  || null,
+                resume_html:  data.resumeHTML   || null,
+                cover_html:   data.coverLetterHTML || null,
+                plain_text:   data.resumePlainText || null,
+              }),
+            });
+            showToast('💾 Resume saved to your account!', 'success');
+          }
+        } catch (saveErr) {
+          // Save failure is non-critical — don't show error to user
+          console.warn('[builder] Auto-save failed:', saveErr.message);
+        }
+      } else {
+        showToast('Resume generated successfully!', 'success');
+      }
 
     } catch (err) {
       console.error('[builder] generate error:', err);

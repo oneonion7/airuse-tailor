@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create a free ResumeAI account to save and manage your AI-generated ATS-optimized resumes.">
+  <title>ResumeAI — Sign Up Free</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Back to home -->
+  <a href="index.html" class="auth-back">← Back to home</a>
+
+  <div class="auth-page">
+    <div class="auth-card">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <div class="logo">Resume<span>AI</span></div>
+        <span class="tagline">AI-Powered ATS Resume Builder</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="auth-heading">Create your account</h1>
+      <p class="auth-subheading">Free forever · No credit card required</p>
+
+      <!-- Alert box -->
+      <div class="auth-alert" id="auth-alert"></div>
+
+      <!-- Signup Form -->
+      <form class="auth-form" id="signup-form" novalidate>
+
+        <div class="auth-field">
+          <label for="signup-name">Full name</label>
+          <input
+            type="text"
+            id="signup-name"
+            placeholder="Alex Chen"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-email">Email address</label>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-password">Password</label>
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Min. 8 characters"
+            autocomplete="new-password"
+            required
+            minlength="8"
+          >
+          <!-- Password strength indicator -->
+          <div class="password-strength" id="pw-strength" style="display:none">
+            <div class="strength-bar" id="bar-1"></div>
+            <div class="strength-bar" id="bar-2"></div>
+            <div class="strength-bar" id="bar-3"></div>
+            <div class="strength-bar" id="bar-4"></div>
+          </div>
+          <span class="strength-label" id="strength-label"></span>
+        </div>
+
+        <div class="auth-field">
+          <label for="signup-confirm">Confirm password</label>
+          <input
+            type="password"
+            id="signup-confirm"
+            placeholder="Repeat your password"
+            autocomplete="new-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="auth-submit" id="signup-btn">
+          <div class="spinner"></div>
+          <span class="btn-label">Create account →</span>
+        </button>
+
+      </form>
+
+      <!-- Footer -->
+      <p class="auth-footer">
+        Already have an account? <a href="login.html">Log in</a>
+      </p>
+
+      <p class="auth-terms">
+        By signing up, you agree to our
+        <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        We'll never share your data.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // ── Password Strength Meter ────────────────────────────────────────────────
+    const pwInput     = document.getElementById('signup-password');
+    const pwStrength  = document.getElementById('pw-strength');
+    const strengthLbl = document.getElementById('strength-label');
+    const bars        = [
+      document.getElementById('bar-1'),
+      document.getElementById('bar-2'),
+      document.getElementById('bar-3'),
+      document.getElementById('bar-4'),
+    ];
+
+    function getStrength(pw) {
+      let score = 0;
+      if (pw.length >= 8)  score++;
+      if (pw.length >= 12) score++;
+      if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+      if (/[0-9]/.test(pw) || /[^A-Za-z0-9]/.test(pw)) score++;
+      return score; // 0–4
+    }
+
+    pwInput.addEventListener('input', () => {
+      const pw = pwInput.value;
+      if (!pw) { pwStrength.style.display = 'none'; strengthLbl.textContent = ''; return; }
+
+      pwStrength.style.display = 'flex';
+      const score = getStrength(pw);
+      const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+      const cls    = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
+
+      bars.forEach((bar, i) => {
+        bar.className = 'strength-bar';
+        if (i < score) bar.classList.add(cls);
+      });
+      strengthLbl.textContent = labels[score] || '';
+      strengthLbl.style.color = score <= 1
+        ? 'var(--error)' : score <= 2
+        ? 'var(--warning)' : 'var(--success)';
+    });
+
+    // ── Signup Logic ──────────────────────────────────────────────────────────
+    const form  = document.getElementById('signup-form');
+    const btn   = document.getElementById('signup-btn');
+    const alert = document.getElementById('auth-alert');
+
+    function showAlert(msg, type = 'error') {
+      alert.textContent = msg;
+      alert.className = `auth-alert ${type}`;
+    }
+    function hideAlert() { alert.className = 'auth-alert'; }
+    function setLoading(on) {
+      btn.disabled = on;
+      btn.classList.toggle('loading', on);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const name     = document.getElementById('signup-name').value.trim();
+      const email    = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const confirm  = document.getElementById('signup-confirm').value;
+
+      // Basic validation
+      if (!name || !email || !password || !confirm) {
+        showAlert('Please fill in all fields.'); return;
+      }
+      if (password.length < 8) {
+        showAlert('Password must be at least 8 characters.'); return;
+      }
+      if (password !== confirm) {
+        showAlert('Passwords do not match.');
+        document.getElementById('signup-confirm').classList.add('error');
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const { data, error } = await window._supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: name }   // stored in user metadata
+          }
+        });
+
+        if (error) throw error;
+
+        // Show success — Supabase sends a confirmation email by default
+        showAlert('✅ Account created! Check your email to confirm, then log in.', 'success');
+        btn.disabled = true;
+
+      } catch (err) {
+        showAlert(err.message || 'Signup failed. Please try again.');
+        setLoading(false);
+      }
+    });
+
+    // Clear confirm error on re-type
+    document.getElementById('signup-confirm').addEventListener('input', function() {
+      this.classList.remove('error');
+    });
+  </script>
+
+</body>
+</html>

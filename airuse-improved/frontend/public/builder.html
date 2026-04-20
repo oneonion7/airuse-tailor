@@ -14,7 +14,16 @@
   <nav class="builder-nav">
     <a class="back-btn" href="index.html">← Back</a>
     <div class="logo" style="font-size:1.1rem">Resume<span>AI</span></div>
-    <div style="font-size:.78rem;color:var(--text-muted)">Powered by Groq AI</div>
+    <div style="display:flex;align-items:center;gap:0.8rem">
+      <span style="font-size:.78rem;color:var(--text-muted)">Powered by Groq AI</span>
+      <!-- Auth nav items (shown when logged in) -->
+      <a href="dashboard.html" id="dash-link"
+         style="display:none;font-size:.8rem;color:var(--accent-light);text-decoration:none"
+         title="My saved resumes">📁 My Resumes</a>
+      <div id="builder-avatar"
+           style="display:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan));display:none;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;cursor:default"
+           id="builder-avatar"></div>
+    </div>
   </nav>
 
   <!-- ── Progress Bar ── -->
@@ -219,6 +228,8 @@
   <script defer src="/_vercel/insights/script.js"></script>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/pdfUpload.js"></script>
   <script src="js/renderer.js"></script>
   <script src="js/builder.js"></script>
