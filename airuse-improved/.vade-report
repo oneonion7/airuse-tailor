@@ -1,0 +1,80 @@
+# Vercel Web Analytics Installation Report
+
+Successfully installed and configured Vercel Web Analytics for the ResumeAI project.
+
+## Changes Implemented
+
+### 1. Package Installation
+- **Added dependency**: `@vercel/analytics` version `^2.0.1`
+- **Modified**: `package.json` - Added @vercel/analytics to dependencies
+- **Updated**: `package-lock.json` - Locked dependency versions (139 new packages added)
+
+### 2. Analytics Integration
+Following the official Vercel documentation for HTML5 projects, added Web Analytics scripts to both HTML pages:
+
+- **Modified**: `frontend/public/index.html`
+  - Added Vercel Web Analytics initialization script before closing body tag
+  - Added deferred loading of `/_vercel/insights/script.js`
+  - Preserves all existing functionality and animations
+
+- **Modified**: `frontend/public/builder.html`
+  - Added Vercel Web Analytics initialization script before application scripts
+  - Added deferred loading of `/_vercel/insights/script.js`
+  - Maintains proper load order with existing PDF upload, renderer, and builder scripts
+
+## Implementation Details
+
+### HTML5 Integration Method
+Used the standard HTML5 integration approach as documented in Vercel's official quickstart guide:
+```javascript
+window.va = window.va || function () { 
+  (window.vaq = window.vaq || []).push(arguments); 
+};
+```
+
+This initialization script creates a queue for analytics events before the main script loads asynchronously.
+
+### Script Placement
+- Scripts placed just before closing `</body>` tag
+- Uses `defer` attribute for non-blocking async loading
+- Positioned before application-specific scripts to ensure analytics loads early
+
+### Vercel Integration
+The analytics script path `/_vercel/insights/script.js` is automatically served by Vercel when:
+1. Web Analytics is enabled in the Vercel dashboard for this project
+2. The project is deployed to Vercel
+3. The domain matches the configured project
+
+## Next Steps for Deployment
+
+To complete the setup, the project owner needs to:
+1. **Enable Analytics in Vercel Dashboard**:
+   - Go to project settings on Vercel
+   - Navigate to the Analytics section
+   - Click "Enable Web Analytics"
+
+2. **Deploy the changes**:
+   - Push these changes to the repository
+   - Deploy to Vercel (automatic via git integration)
+
+3. **Verify Installation**:
+   - Visit the deployed site
+   - Open browser DevTools > Network tab
+   - Look for requests to `/_vercel/insights/view` 
+   - Check the Analytics dashboard after users visit the site
+
+## Technical Notes
+
+- No build process changes required (static HTML project)
+- Zero impact on existing functionality
+- Analytics scripts load asynchronously (non-blocking)
+- Privacy-compliant by default (no cookies, no personal data collection)
+- Works seamlessly with the existing Express.js backend serving static files
+
+## Files Modified
+- `package.json` - Added @vercel/analytics dependency
+- `package-lock.json` - Updated with new dependency tree
+- `frontend/public/index.html` - Added analytics scripts
+- `frontend/public/builder.html` - Added analytics scripts
+
+All changes follow best practices from the official Vercel documentation retrieved on April 20, 2026.
