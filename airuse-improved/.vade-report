@@ -1,0 +1,53 @@
+Vercel Speed Insights Installation
+===================================
+
+Successfully installed and configured Vercel Speed Insights for the ResumeAI project.
+
+## What was implemented:
+
+### 1. Package Installation
+- Installed `@vercel/speed-insights` v2.0.0 via npm
+- Updated package.json with the new dependency
+- Updated package-lock.json with dependency tree
+
+### 2. Frontend Integration
+Added Vercel Speed Insights tracking scripts to both HTML pages:
+
+**Modified Files:**
+- `frontend/public/index.html` - Added Speed Insights script to landing page
+- `frontend/public/builder.html` - Added Speed Insights script to builder page
+
+**Implementation Details:**
+- Added the Speed Insights initialization script in the `<head>` section of both HTML files
+- Used the vanilla HTML/JavaScript integration method from the official Vercel documentation
+- Script initializes the `window.si` function and loads the Speed Insights script from `/_vercel/speed-insights/script.js`
+
+### 3. Implementation Approach
+Following the official Vercel Speed Insights quickstart guide (fetched from https://vercel.com/docs/speed-insights/quickstart):
+- For vanilla HTML/JavaScript projects, the integration uses a lightweight script loader
+- The script is loaded asynchronously with the `defer` attribute to avoid blocking page rendering
+- The Speed Insights script will automatically track Core Web Vitals metrics when deployed on Vercel
+
+## Testing:
+
+✅ Server starts successfully
+✅ Health endpoint responds correctly
+✅ Speed Insights scripts added to both HTML pages
+✅ Package dependencies installed and lock file updated
+✅ No lint errors (no linter configured)
+✅ No test failures (no test suite configured)
+
+## Next Steps:
+
+To complete the Speed Insights setup:
+1. Deploy the application to Vercel
+2. Enable Speed Insights in the Vercel dashboard (Settings → Speed Insights → Enable)
+3. Visit your deployed site to start collecting performance metrics
+4. View metrics in the Vercel dashboard under Speed Insights
+
+## Notes:
+
+- This project is a Node.js/Express application serving static HTML files
+- The integration follows the vanilla HTML/JavaScript pattern from the official documentation
+- Speed Insights will automatically start tracking once the app is deployed and enabled in the Vercel dashboard
+- The tracking script path `/_vercel/speed-insights/script.js` is automatically served by Vercel's platform
