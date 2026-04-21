@@ -87,6 +87,19 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 24px var(--accent-glow);
 }
+.nav-login {
+  font-size: 0.88rem !important;
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s var(--ease) !important;
+  text-decoration: none;
+}
+.nav-login:hover {
+  color: var(--text-primary) !important;
+  background: rgba(255,255,255,0.06);
+}
 
 /* ── Hero ─────────────────────────────────────────────────────────────────── */
 .hero {
@@ -183,10 +196,39 @@
 .cta-group {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   animation: fadeInUp 0.6s 0.4s var(--ease) both;
+}
+.btn-secondary-outline {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.btn-secondary-outline:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--accent-light);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.price-hint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s 0.45s var(--ease) both;
+}
+.price-hint span {
+  color: var(--success);
+  font-weight: 700;
+  margin-right: 0.2rem;
 }
 .price-tag {
   font-size: 0.85rem;
