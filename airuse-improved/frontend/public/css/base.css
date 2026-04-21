@@ -1,45 +1,56 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   css/base.css — Premium Dark Design System
+   css/base.css — Mauve & Lavender Design System
+   Palette: #352b38 · #7e808c · #dad8f9 · #f4f3f8
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 /* ── Design Tokens ────────────────────────────────────────────────────────── */
 :root {
+  /* ── Palette ── */
+  --mauve:        #352b38;
+  --mauve-deep:   #261f28;
+  --mauve-mid:    #44384a;
+  --mauve-light:  #5a4a60;
+  --slate:        #7e808c;
+  --lavender:     #dad8f9;
+  --lavender-dim: rgba(218, 216, 249, 0.55);
+  --offwhite:     #f4f3f8;
+
   /* Backgrounds */
-  --bg-primary:    #0a0a0f;
-  --bg-secondary:  #111118;
-  --bg-card:       rgba(255, 255, 255, 0.04);
-  --bg-glass:      rgba(255, 255, 255, 0.06);
-  --bg-glass-hover:rgba(255, 255, 255, 0.10);
-  --bg-input:      rgba(255, 255, 255, 0.05);
+  --bg-primary:     #1a141c;
+  --bg-secondary:   #211a24;
+  --bg-card:        rgba(53, 43, 56, 0.55);
+  --bg-glass:       rgba(53, 43, 56, 0.45);
+  --bg-glass-hover: rgba(53, 43, 56, 0.70);
+  --bg-input:       rgba(53, 43, 56, 0.60);
 
   /* Text */
-  --text-primary:   #f0f0f5;
-  --text-secondary: #9d9db5;
-  --text-muted:     #5c5c7a;
+  --text-primary:   #f4f3f8;
+  --text-secondary: #c9c7d8;
+  --text-muted:     #7e808c;
 
-  /* Accent — Violet / Indigo */
-  --accent:        #7c3aed;
-  --accent-light:  #a78bfa;
-  --accent-glow:   rgba(124, 58, 237, 0.35);
+  /* Accent — Lavender */
+  --accent:        #9d9bd8;
+  --accent-light:  #dad8f9;
+  --accent-glow:   rgba(218, 216, 249, 0.22);
 
-  /* Accent 2 — Cyan */
-  --cyan:          #06b6d4;
-  --cyan-light:    #67e8f9;
-  --cyan-glow:     rgba(6, 182, 212, 0.25);
+  /* Accent 2 — Soft rose (replaces cyan) */
+  --cyan:          #c4a8d4;
+  --cyan-light:    #e8d5f5;
+  --cyan-glow:     rgba(196, 168, 212, 0.20);
 
   /* Utility */
-  --success:       #10b981;
-  --success-glow:  rgba(16, 185, 129, 0.25);
-  --error:         #ef4444;
-  --error-glow:    rgba(239, 68, 68, 0.25);
-  --warning:       #f59e0b;
+  --success:       #7ec8a4;
+  --success-glow:  rgba(126, 200, 164, 0.22);
+  --error:         #e07878;
+  --error-glow:    rgba(224, 120, 120, 0.22);
+  --warning:       #d4a96a;
 
   /* Borders */
-  --border:        rgba(255, 255, 255, 0.08);
-  --border-light:  rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(124, 58, 237, 0.3);
+  --border:        rgba(218, 216, 249, 0.10);
+  --border-light:  rgba(218, 216, 249, 0.18);
+  --border-accent: rgba(218, 216, 249, 0.30);
 
   /* Radius */
   --radius-sm:     8px;
@@ -48,9 +59,9 @@
   --radius-xl:     24px;
 
   /* Shadows */
-  --shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md:     0 4px 24px rgba(0,0,0,0.4);
-  --shadow-lg:     0 8px 48px rgba(0,0,0,0.5);
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.35);
+  --shadow-md:     0 4px 24px rgba(0,0,0,0.45);
+  --shadow-lg:     0 8px 48px rgba(0,0,0,0.55);
   --shadow-glow:   0 0 30px var(--accent-glow);
 
   /* Transitions */
@@ -80,9 +91,9 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(157, 155, 216, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(196, 168, 212, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(53, 43, 56, 0.40) 0%, transparent 50%);
   z-index: 0;
   pointer-events: none;
   animation: meshShift 20s ease-in-out infinite alternate;
@@ -114,7 +125,7 @@ a:hover { color: var(--cyan-light); }
   color: var(--text-primary);
 }
 .logo span {
-  background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+  background: linear-gradient(135deg, var(--lavender), var(--cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -129,9 +140,7 @@ a:hover { color: var(--cyan-light); }
   border-radius: var(--radius);
 }
 
-.glass-hover {
-  transition: all 0.3s var(--ease);
-}
+.glass-hover { transition: all 0.3s var(--ease); }
 .glass-hover:hover {
   background: var(--bg-glass-hover);
   border-color: var(--border-light);
@@ -145,7 +154,7 @@ a:hover { color: var(--cyan-light); }
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 2rem;
-  background: linear-gradient(135deg, var(--accent), #6d28d9);
+  background: linear-gradient(135deg, #9d9bd8, #7b79c0);
   color: #fff;
   border: none;
   border-radius: var(--radius);
@@ -169,12 +178,8 @@ a:hover { color: var(--cyan-light); }
   transform: translateY(-2px);
   box-shadow: 0 8px 30px var(--accent-glow);
 }
-.btn-primary:hover::before {
-  transform: translateX(100%);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:active { transform: translateY(0); }
 
 /* ── Secondary / Ghost Button ─────────────────────────────────────────────── */
 .btn-secondary {
@@ -217,10 +222,10 @@ a:hover { color: var(--cyan-light); }
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background: rgba(20, 20, 35, 0.9);
+  background: rgba(37, 29, 40, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  color: #fff;
+  color: var(--offwhite);
   padding: 0.9rem 1.8rem;
   border-radius: var(--radius);
   font-size: 0.88rem;
