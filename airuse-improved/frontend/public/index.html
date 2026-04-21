@@ -327,7 +327,7 @@
   // ══ Intersection Observer ════════════════════════════════════════════════
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   // ══ Animated Counters ════════════════════════════════════════════════════
@@ -350,7 +350,7 @@
       requestAnimationFrame(step);
       counterObs.unobserve(el);
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
 
   // ══ Particle Canvas ══════════════════════════════════════════════════════
@@ -375,7 +375,7 @@
     particles.forEach(p => {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(218,216,249,${p.alpha})`;
+      ctx.fillStyle = `rgba(228,77,39,${p.alpha * 0.7})`;
       ctx.fill();
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
@@ -391,7 +391,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(218,216,249,${0.06 * (1 - dist/120)})`;
+          ctx.strokeStyle = `rgba(228,77,39,${0.04 * (1 - dist/120)})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
