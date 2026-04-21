@@ -1,56 +1,61 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   css/base.css — Mauve & Lavender Design System
-   Palette: #352b38 · #7e808c · #dad8f9 · #f4f3f8
+   css/base.css — Bold Orange × Black Design System
+   Palette: #E44D27 · #FD9D45 · #AAAAAA · #000000 · #FFFFFF
+   Font: Helvetica Neue / DM Sans
    ═══════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap');
 
 /* ── Design Tokens ────────────────────────────────────────────────────────── */
 :root {
   /* ── Palette ── */
-  --mauve:        #352b38;
-  --mauve-deep:   #261f28;
-  --mauve-mid:    #44384a;
-  --mauve-light:  #5a4a60;
-  --slate:        #7e808c;
-  --lavender:     #dad8f9;
-  --lavender-dim: rgba(218, 216, 249, 0.55);
-  --offwhite:     #f4f3f8;
+  --red:         #E44D27;
+  --red-deep:    #c43a18;
+  --red-glow:    rgba(228, 77, 39, 0.35);
+  --orange:      #FD9D45;
+  --orange-glow: rgba(253, 157, 69, 0.30);
+  --gray:        #AAAAAA;
+  --gray-dark:   #555555;
+  --gray-light:  #D0D0D0;
 
   /* Backgrounds */
-  --bg-primary:     #1a141c;
-  --bg-secondary:   #211a24;
-  --bg-card:        rgba(53, 43, 56, 0.55);
-  --bg-glass:       rgba(53, 43, 56, 0.45);
-  --bg-glass-hover: rgba(53, 43, 56, 0.70);
-  --bg-input:       rgba(53, 43, 56, 0.60);
+  --bg-primary:     #080808;
+  --bg-secondary:   #111111;
+  --bg-card:        rgba(18, 18, 18, 0.90);
+  --bg-glass:       rgba(255, 255, 255, 0.04);
+  --bg-glass-hover: rgba(255, 255, 255, 0.07);
+  --bg-input:       rgba(255, 255, 255, 0.05);
 
   /* Text */
-  --text-primary:   #f4f3f8;
-  --text-secondary: #c9c7d8;
-  --text-muted:     #7e808c;
+  --text-primary:   #FFFFFF;
+  --text-secondary: #AAAAAA;
+  --text-muted:     #555555;
 
-  /* Accent — Lavender */
-  --accent:        #9d9bd8;
-  --accent-light:  #dad8f9;
-  --accent-glow:   rgba(218, 216, 249, 0.22);
+  /* Accent */
+  --accent:        #E44D27;
+  --accent-light:  #FD9D45;
+  --accent-glow:   rgba(228, 77, 39, 0.35);
 
-  /* Accent 2 — Soft rose (replaces cyan) */
-  --cyan:          #c4a8d4;
-  --cyan-light:    #e8d5f5;
-  --cyan-glow:     rgba(196, 168, 212, 0.20);
+  /* Secondary (keeps compat) */
+  --cyan:          #FD9D45;
+  --cyan-light:    #FFBF7A;
+  --cyan-glow:     rgba(253, 157, 69, 0.25);
+
+  /* Lavender (alias for compat) */
+  --lavender:      #FD9D45;
+  --lavender-dim:  rgba(253, 157, 69, 0.55);
 
   /* Utility */
-  --success:       #7ec8a4;
-  --success-glow:  rgba(126, 200, 164, 0.22);
-  --error:         #e07878;
-  --error-glow:    rgba(224, 120, 120, 0.22);
-  --warning:       #d4a96a;
+  --success:       #5AC994;
+  --success-glow:  rgba(90, 201, 148, 0.20);
+  --error:         #E44D27;
+  --error-glow:    rgba(228, 77, 39, 0.25);
+  --warning:       #FD9D45;
 
   /* Borders */
-  --border:        rgba(218, 216, 249, 0.10);
-  --border-light:  rgba(218, 216, 249, 0.18);
-  --border-accent: rgba(218, 216, 249, 0.30);
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-light:  rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(228, 77, 39, 0.40);
 
   /* Radius */
   --radius-sm:     8px;
@@ -59,10 +64,10 @@
   --radius-xl:     24px;
 
   /* Shadows */
-  --shadow-sm:     0 2px 8px rgba(0,0,0,0.35);
-  --shadow-md:     0 4px 24px rgba(0,0,0,0.45);
-  --shadow-lg:     0 8px 48px rgba(0,0,0,0.55);
-  --shadow-glow:   0 0 30px var(--accent-glow);
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.5);
+  --shadow-md:     0 4px 24px rgba(0,0,0,0.6);
+  --shadow-lg:     0 8px 48px rgba(0,0,0,0.7);
+  --shadow-glow:   0 0 30px var(--red-glow);
 
   /* Transitions */
   --ease:          cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,11 +76,10 @@
 
 /* ── Reset ────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -91,61 +95,36 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(157, 155, 216, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(196, 168, 212, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(53, 43, 56, 0.40) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(228,77,39,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(253,157,69,0.05) 0%, transparent 60%);
   z-index: 0;
   pointer-events: none;
-  animation: meshShift 20s ease-in-out infinite alternate;
-}
-
-@keyframes meshShift {
-  0%   { opacity: 1; }
-  50%  { opacity: 0.7; }
-  100% { opacity: 1; }
 }
 
 /* ── Typography ───────────────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
 
 a { color: var(--accent-light); text-decoration: none; transition: color 0.2s var(--ease); }
-a:hover { color: var(--cyan-light); }
+a:hover { color: #fff; }
 
 /* ── Shared Logo ──────────────────────────────────────────────────────────── */
 .logo {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 800;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
 }
 .logo span {
-  background: linear-gradient(135deg, var(--lavender), var(--cyan));
+  background: linear-gradient(135deg, var(--red), var(--orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-/* ── Glass Card Utility ───────────────────────────────────────────────────── */
-.glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.glass-hover { transition: all 0.3s var(--ease); }
-.glass-hover:hover {
-  background: var(--bg-glass-hover);
-  border-color: var(--border-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 /* ── Primary Button ───────────────────────────────────────────────────────── */
@@ -154,34 +133,24 @@ a:hover { color: var(--cyan-light); }
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 2rem;
-  background: linear-gradient(135deg, #9d9bd8, #7b79c0);
+  background: linear-gradient(135deg, var(--red), #c83e1a);
   color: #fff;
   border: none;
   border-radius: var(--radius);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s var(--ease);
   position: relative;
   overflow: hidden;
 }
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
-  transform: translateX(-100%);
-  transition: transform 0.6s var(--ease);
-}
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--accent-glow);
+  box-shadow: 0 8px 30px var(--red-glow);
 }
-.btn-primary:hover::before { transform: translateX(100%); }
-.btn-primary:active { transform: translateY(0); }
 
-/* ── Secondary / Ghost Button ─────────────────────────────────────────────── */
+/* ── Secondary Button ─────────────────────────────────────────────────────── */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -191,24 +160,23 @@ a:hover { color: var(--cyan-light); }
   color: var(--text-primary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s var(--ease);
 }
 .btn-secondary:hover {
   background: var(--bg-glass);
   border-color: var(--accent);
-  color: var(--accent-light);
+  color: var(--orange);
   transform: translateY(-1px);
 }
 
 /* ── Spinner ──────────────────────────────────────────────────────────────── */
 .spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.2);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
@@ -216,16 +184,15 @@ a:hover { color: var(--cyan-light); }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Toast Notifications ──────────────────────────────────────────────────── */
+/* ── Toast ────────────────────────────────────────────────────────────────── */
 .toast {
   position: fixed;
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background: rgba(37, 29, 40, 0.95);
+  background: rgba(15,15,15,0.95);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  color: var(--offwhite);
+  color: #fff;
   padding: 0.9rem 1.8rem;
   border-radius: var(--radius);
   font-size: 0.88rem;
@@ -238,18 +205,10 @@ a:hover { color: var(--cyan-light); }
   border: 1px solid var(--error);
   box-shadow: 0 0 20px var(--error-glow);
 }
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-.toast.success {
-  border-color: var(--success);
-  box-shadow: 0 0 20px var(--success-glow);
-}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.success { border-color: var(--success); box-shadow: 0 0 20px var(--success-glow); }
 
-/* ══════════════════════════════════════════════════════════════════════════════
-   ATS Resume Output Styles (kept clean for print/PDF)
-   ══════════════════════════════════════════════════════════════════════════════ */
+/* ── Resume Output ────────────────────────────────────────────────────────── */
 #resume-output {
   background: #fff;
   border: 1px solid var(--border);
@@ -263,40 +222,14 @@ a:hover { color: var(--cyan-light); }
   box-shadow: var(--shadow-lg);
 }
 .sh-header    { text-align: center; margin-bottom: 1.5rem; }
-.sh-header h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16pt;
-  font-weight: bold;
-  margin-bottom: .3rem;
-  text-transform: uppercase;
-  letter-spacing: 0;
-}
+.sh-header h1 { font-family: Arial, sans-serif; font-size: 16pt; font-weight: bold; margin-bottom: .3rem; text-transform: uppercase; letter-spacing: 0; }
 .sh-contact   { font-size: 10pt; color: #000; }
 .sh-contact a { color: #000; text-decoration: none; }
-
 .sh-section        { margin-bottom: 1.2rem; }
-h2.sh-section-title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11pt;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: .5rem;
-  color: #000;
-  border-bottom: 1px solid #000;
-  padding-bottom: 2px;
-  letter-spacing: 0;
-}
-
+h2.sh-section-title { font-family: Arial, sans-serif; font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-bottom: .5rem; color: #000; border-bottom: 1px solid #000; padding-bottom: 2px; letter-spacing: 0; }
 .sh-summary   { font-size: 10.5pt; text-align: justify; }
-
 .sh-job        { margin-bottom: 1rem; }
-.sh-job-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: .3rem;
-}
+.sh-job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .3rem; }
 .sh-job-title   { font-size: 10.5pt; font-weight: bold; }
 .sh-job-company { font-size: 10.5pt; }
 .sh-job-dates   { font-size: 10.5pt; font-weight: bold; white-space: nowrap; }
@@ -309,7 +242,4 @@ h2.sh-section-title {
 .sh-edu-uni    { font-size: 10.5pt; }
 .sh-edu-score  { font-size: 10.5pt; }
 
-/* ── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .logo { font-size: 1.1rem; }
-}
+@media (max-width: 900px) { .logo { font-size: 1.1rem; } }

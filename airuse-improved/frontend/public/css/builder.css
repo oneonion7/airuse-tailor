@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    css/builder.css — Premium Dark Builder Page
-   Palette: #352b38 · #7e808c · #dad8f9 · #f4f3f8
+   Palette: #E44D27 · #FD9D45 · #AAAAAA · #000000 · #FFFFFF
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Builder Nav ──────────────────────────────────────────────────────────── */
@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border);
-  background: rgba(20, 15, 22, 0.85);
+  background: rgba(5, 5, 5, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   position: sticky;
@@ -34,8 +34,8 @@
   gap: 0.4rem;
 }
 .back-btn:hover {
-  border-color: var(--lavender);
-  color: var(--lavender);
+  border-color: var(--orange);
+  color: var(--orange);
   background: var(--bg-glass-hover);
 }
 
@@ -61,10 +61,10 @@
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--lavender), var(--cyan));
+  background: linear-gradient(90deg, var(--red), var(--orange));
   border-radius: 4px;
   transition: width 0.5s var(--ease);
-  box-shadow: 0 0 10px rgba(218, 216, 249, 0.25);
+  box-shadow: 0 0 10px rgba(228, 77, 39, 0.30);
 }
 .progress-label {
   font-size: 0.72rem;
@@ -128,7 +128,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--lavender-dim);
+  color: rgba(253, 157, 69, 0.65);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -179,9 +179,9 @@ input::placeholder, textarea::placeholder {
 }
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--lavender);
-  box-shadow: 0 0 0 3px rgba(218, 216, 249, 0.12);
-  background: rgba(218, 216, 249, 0.05);
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(228, 77, 39, 0.14);
+  background: rgba(228, 77, 39, 0.04);
 }
 textarea { min-height: 100px; line-height: 1.6; }
 
@@ -199,9 +199,9 @@ textarea { min-height: 100px; line-height: 1.6; }
 }
 .upload-zone:hover,
 .upload-zone.drag-over {
-  border-color: var(--lavender);
-  background: rgba(218, 216, 249, 0.05);
-  box-shadow: 0 0 20px rgba(218, 216, 249, 0.10);
+  border-color: var(--red);
+  background: rgba(228, 77, 39, 0.04);
+  box-shadow: 0 0 20px rgba(228, 77, 39, 0.12);
 }
 .upload-zone.drag-over { transform: scale(1.01); }
 .upload-zone input[type="file"] {
@@ -249,7 +249,7 @@ textarea { min-height: 100px; line-height: 1.6; }
 .generate-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #9d9bd8, #7b79c0);
+  background: linear-gradient(135deg, var(--red), #c83e1a);
   color: #fff;
   border: none;
   border-radius: var(--radius);
@@ -276,7 +276,7 @@ textarea { min-height: 100px; line-height: 1.6; }
 }
 .generate-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(157, 155, 216, 0.35);
+  box-shadow: 0 8px 30px rgba(228, 77, 39, 0.50);
 }
 .generate-btn:hover:not(:disabled)::before { transform: translateX(100%); }
 .generate-btn:disabled {
@@ -285,7 +285,7 @@ textarea { min-height: 100px; line-height: 1.6; }
   transform: none;
 }
 .generate-btn.loading {
-  background: linear-gradient(135deg, #9d9bd8, #c4a8d4, #7b79c0, #9d9bd8);
+  background: linear-gradient(135deg, var(--red), var(--orange), var(--red));
   background-size: 300% 100%;
   animation: gradientMove 2s linear infinite;
 }
@@ -335,16 +335,16 @@ textarea { min-height: 100px; line-height: 1.6; }
   gap: 0.4rem;
 }
 .action-btn.primary {
-  background: linear-gradient(135deg, #9d9bd8, #7b79c0);
+  background: linear-gradient(135deg, var(--red), #c83e1a);
   color: #fff;
   border: none;
 }
 .action-btn.primary.docx {
-  background: linear-gradient(135deg, #6d7acf, #5568b8);
+  background: linear-gradient(135deg, #333, #222);
 }
 .action-btn.primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(157, 155, 216, 0.35);
+  box-shadow: 0 6px 24px rgba(228, 77, 39, 0.50);
 }
 .action-btn.secondary {
   background: transparent;
@@ -352,9 +352,9 @@ textarea { min-height: 100px; line-height: 1.6; }
   color: var(--text-secondary);
 }
 .action-btn.secondary:hover {
-  border-color: var(--lavender);
-  color: var(--lavender);
-  background: rgba(218, 216, 249, 0.06);
+  border-color: var(--orange);
+  color: var(--orange);
+  background: rgba(253, 157, 69, 0.06);
 }
 
 /* ── Empty State ──────────────────────────────────────────────────────────── */
@@ -381,8 +381,8 @@ textarea { min-height: 100px; line-height: 1.6; }
   animation: iconPulse 3s ease-in-out infinite;
 }
 @keyframes iconPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(218,216,249,0.15); }
-  50%      { box-shadow: 0 0 20px 5px rgba(218,216,249,0.10); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(228,77,39,0.15); }
+  50%      { box-shadow: 0 0 20px 5px rgba(228,77,39,0.10); }
 }
 .output-empty h3 {
   font-size: 1rem;
@@ -414,7 +414,7 @@ textarea { min-height: 100px; line-height: 1.6; }
 .status-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--lavender);
+  background: var(--orange);
   animation: pulse 1.5s infinite;
 }
 @keyframes pulse {
@@ -490,13 +490,13 @@ textarea { min-height: 100px; line-height: 1.6; }
 .score-circle {
   width: 80px; height: 80px;
   border-radius: 50%;
-  background: conic-gradient(#9d9bd8 0%, #c4a8d4 50%, #9d9bd8 100%);
+  background: conic-gradient(var(--red) 0%, var(--orange) 50%, var(--red) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-bottom: 0.5rem;
-  box-shadow: 0 0 25px rgba(157, 155, 216, 0.25);
+  box-shadow: 0 0 25px rgba(228, 77, 39, 0.30);
 }
 .score-circle::before {
   content: '';
@@ -537,16 +537,16 @@ textarea { min-height: 100px; line-height: 1.6; }
 .keyword-tag {
   display: inline-block;
   padding: 0.3rem 0.7rem;
-  background: rgba(218, 216, 249, 0.10);
-  border: 1px solid rgba(218, 216, 249, 0.22);
+  background: rgba(228, 77, 39, 0.08);
+  border: 1px solid rgba(228, 77, 39, 0.20);
   border-radius: var(--radius-xl);
   font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--lavender);
+  font-weight: 600;
+  color: var(--orange);
   transition: all 0.2s var(--ease);
 }
 .keyword-tag:hover {
-  background: rgba(218, 216, 249, 0.18);
+  background: rgba(228, 77, 39, 0.15);
   transform: translateY(-1px);
 }
 
@@ -595,7 +595,7 @@ textarea { min-height: 100px; line-height: 1.6; }
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--lavender-dim);
+  color: rgba(253, 157, 69, 0.55);
   font-weight: 700;
 }
 
@@ -613,8 +613,8 @@ textarea { min-height: 100px; line-height: 1.6; }
    ATS Score Panel — v2
    ═══════════════════════════════════════════════════════ */
 .ats-score-panel {
-  background: rgba(37, 29, 40, 0.90);
-  border: 1px solid var(--border-accent);
+  background: rgba(12, 12, 12, 0.90);
+  border: 1px solid rgba(228, 77, 39, 0.25);
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -645,8 +645,8 @@ textarea { min-height: 100px; line-height: 1.6; }
 
 .ats-spinner {
   width: 18px; height: 18px;
-  border: 2px solid rgba(218, 216, 249, 0.10);
-  border-top-color: var(--lavender);
+  border: 2px solid rgba(255,255,255,0.07);
+  border-top-color: var(--red);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -679,7 +679,7 @@ textarea { min-height: 100px; line-height: 1.6; }
 .ats-bar-wrap {
   flex: 1;
   height: 7px;
-  background: rgba(218, 216, 249, 0.06);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -732,19 +732,19 @@ textarea { min-height: 100px; line-height: 1.6; }
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--lavender-dim);
+  color: rgba(253, 157, 69, 0.55);
 }
 
 /* ── Keyword Highlight ─────────────────────────────────────────────────────── */
 mark.kw-highlight {
-  background: rgba(218, 216, 249, 0.22);
+  background: rgba(253, 157, 69, 0.22);
   color: inherit;
   border-radius: 2px;
   padding: 0 1px;
 }
 
 .action-btn.active {
-  background: rgba(218, 216, 249, 0.12) !important;
-  border-color: rgba(218, 216, 249, 0.40) !important;
-  color: var(--lavender) !important;
+  background: rgba(253, 157, 69, 0.12) !important;
+  border-color: rgba(253, 157, 69, 0.40) !important;
+  color: var(--orange) !important;
 }
