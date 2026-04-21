@@ -10,10 +10,22 @@
 </head>
 <body>
 
-  <!-- Floating orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <!-- Grain Overlay -->
+  <div class="grain"></div>
+
+  <!-- Aurora Background -->
+  <div class="aurora">
+    <div class="aurora-blob a1"></div>
+    <div class="aurora-blob a2"></div>
+    <div class="aurora-blob a3"></div>
+    <div class="aurora-blob a4"></div>
+  </div>
+
+  <!-- Custom Cursor Glow -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- Floating Particles -->
+  <canvas id="particle-canvas"></canvas>
 
   <!-- ── Nav ── -->
   <nav class="landing-nav" id="landing-nav">
@@ -22,7 +34,9 @@
       <a href="#how-it-works">How It Works</a>
       <a href="#features">Features</a>
       <a href="login.html" class="nav-login">Log in</a>
-      <button class="nav-cta" onclick="location.href='signup.html'">Get Started Free →</button>
+      <button class="nav-cta magnetic" onclick="location.href='signup.html'" id="nav-cta-btn">
+        <span class="magnetic-inner">Get Started Free →</span>
+      </button>
     </div>
   </nav>
 
@@ -31,134 +45,230 @@
     <!-- ══ Hero ══ -->
     <section class="hero">
       <div class="hero-left">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          AI-Powered · Free to Use
+
+        <div class="hero-badge genz-badge">
+          <span class="live-dot"></span>
+          <span class="badge-text">AI-Powered · Free Forever</span>
+          <span class="badge-arrow">✦</span>
         </div>
-        <div class="eyebrow">ATS-Optimised Resume Builder</div>
-        <h1>Land interviews<br>with a resume<br><span class="gradient-text">built for parsers</span></h1>
-        <p class="hero-desc">
-          Upload your existing resume and paste the job description.
-          Our AI tailors a perfectly structured, ATS-optimised resume
-          — no subscriptions, no hidden fees.
+
+        <h1 class="hero-h1">
+          <span class="line-wrap"><span class="slide-in">Land</span></span>
+          <span class="line-wrap big"><span class="slide-in delay-1">interviews</span></span>
+          <span class="line-wrap"><span class="slide-in delay-2">with a resume</span></span>
+          <span class="line-wrap gradient-line">
+            <span class="slide-in delay-3 gradient-text-3d">built for parsers</span>
+          </span>
+        </h1>
+
+        <p class="hero-desc fade-up delay-4">
+          Upload your PDF · Paste the JD · Get an ATS-optimised resume in <strong>seconds</strong>.
+          No subscriptions. No hidden fees. Just results.
         </p>
-        <div class="cta-group">
-          <button class="btn-primary" onclick="location.href='signup.html'">
-            Build My Resume →
+
+        <div class="hero-ctas fade-up delay-5">
+          <button class="btn-genz magnetic" onclick="location.href='signup.html'" id="hero-cta-btn">
+            <span class="magnetic-inner">
+              <span class="btn-icon">⚡</span>
+              Build My Resume — Free
+            </span>
+            <span class="btn-glow-ring"></span>
           </button>
-          <button class="btn-secondary-outline" onclick="location.href='login.html'">
-            Log in
+          <button class="btn-ghost magnetic" onclick="location.href='login.html'">
+            <span class="magnetic-inner">Sign in →</span>
           </button>
         </div>
-        <div class="price-hint"><span>✓</span> 100% Free · No credit card · Instant results</div>
-        <div class="trust-row">
-          <div class="trust-item"><div class="trust-dot"></div> Privacy-first</div>
-          <div class="trust-item"><div class="trust-dot"></div> Server-side PDF parsing</div>
-          <div class="trust-item"><div class="trust-dot"></div> Instant PDF download</div>
+
+        <div class="trust-chips fade-up delay-6">
+          <span class="chip">✓ No credit card</span>
+          <span class="chip">✓ Instant results</span>
+          <span class="chip">✓ 90+ ATS score</span>
         </div>
+
       </div>
 
       <div class="hero-right">
-        <div class="preview-card">
-          <div class="preview-name">ALEX CHEN</div>
-          <div class="preview-role">New York, NY | alex.chen@email.com | linkedin.com/in/alexc</div>
-          <div class="preview-section">
-            <div class="preview-section-title">PROFESSIONAL SUMMARY</div>
-            <div class="preview-line"></div>
-            <div class="preview-line medium"></div>
-            <div class="preview-line short"></div>
-          </div>
-          <div class="preview-section">
-            <div class="preview-section-title">WORK EXPERIENCE</div>
-            <div class="preview-line short"></div>
-            <div class="preview-line"></div>
-            <div class="preview-line medium"></div>
-          </div>
-          <div class="preview-section">
-            <div class="preview-section-title">EDUCATION</div>
-            <div class="preview-line medium"></div>
-          </div>
-          <div class="preview-ai-badge">
-            <div class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan-light);animation:pulse 1.5s infinite"></div>
-            Powered by AI
+        <div class="tilt-scene">
+          <div class="preview-card-3d" id="tilt-card">
+            <div class="card-shine" id="card-shine"></div>
+            <div class="card-inner">
+              <div class="preview-name">ALEX CHEN</div>
+              <div class="preview-role">New York, NY | alex.chen@email.com</div>
+              <div class="preview-section">
+                <div class="preview-section-title">PROFESSIONAL SUMMARY</div>
+                <div class="preview-line"></div>
+                <div class="preview-line medium"></div>
+                <div class="preview-line short"></div>
+              </div>
+              <div class="preview-section">
+                <div class="preview-section-title">WORK EXPERIENCE</div>
+                <div class="preview-line short"></div>
+                <div class="preview-line"></div>
+                <div class="preview-line medium"></div>
+              </div>
+              <div class="preview-section">
+                <div class="preview-section-title">EDUCATION</div>
+                <div class="preview-line medium"></div>
+              </div>
+            </div>
+            <div class="card-badge-3d">
+              <span class="badge-pulse"></span>
+              ✦ Powered by AI
+            </div>
+            <!-- Floating 3D chips around card -->
+            <div class="float-chip c1">ATS 94%</div>
+            <div class="float-chip c2">🤖 AI</div>
+            <div class="float-chip c3">PDF ✓</div>
+            <div class="float-chip c4">Free</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══ Stats Strip ══ -->
-    <section class="stats fade-in">
-      <div class="stat">
-        <div class="stat-num">PDF</div>
-        <div class="stat-label">Upload & auto-fill</div>
+    <!-- ══ Scrolling Ticker ══ -->
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span>Land More Interviews</span><span class="sep">✦</span>
+        <span>ATS Score 90+</span><span class="sep">✦</span>
+        <span>AI-Tailored Resumes</span><span class="sep">✦</span>
+        <span>Upload PDF & Auto-Fill</span><span class="sep">✦</span>
+        <span>100% Free Forever</span><span class="sep">✦</span>
+        <span>Instant Download</span><span class="sep">✦</span>
+        <span>Land More Interviews</span><span class="sep">✦</span>
+        <span>ATS Score 90+</span><span class="sep">✦</span>
+        <span>AI-Tailored Resumes</span><span class="sep">✦</span>
+        <span>Upload PDF & Auto-Fill</span><span class="sep">✦</span>
+        <span>100% Free Forever</span><span class="sep">✦</span>
+        <span>Instant Download</span><span class="sep">✦</span>
       </div>
-      <div class="stat">
-        <div class="stat-num">90+</div>
-        <div class="stat-label">ATS scoring format</div>
+    </div>
+
+    <!-- ══ Stats ══ -->
+    <section class="stats-3d fade-in">
+      <div class="stat-3d">
+        <div class="stat-num-3d" data-count="90" data-suffix="+">0+</div>
+        <div class="stat-label-3d">ATS Score Format</div>
       </div>
-      <div class="stat">
-        <div class="stat-num">AI</div>
-        <div class="stat-label">Groq LLM powered</div>
+      <div class="stat-divider"></div>
+      <div class="stat-3d">
+        <div class="stat-num-3d" data-count="100" data-suffix="%">0%</div>
+        <div class="stat-label-3d">Free Forever</div>
       </div>
-      <div class="stat">
-        <div class="stat-num">Free</div>
-        <div class="stat-label">No payment required</div>
+      <div class="stat-divider"></div>
+      <div class="stat-3d">
+        <div class="stat-num-3d" data-count="10" data-suffix="s">0s</div>
+        <div class="stat-label-3d">Generation Time</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-3d">
+        <div class="stat-num-3d">AI</div>
+        <div class="stat-label-3d">Groq LLM Powered</div>
       </div>
     </section>
 
     <!-- ══ How It Works ══ -->
-    <section class="how-it-works fade-in" id="how-it-works">
-      <div class="section-label">Simple Process</div>
-      <h2>Three steps to your perfect resume</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-icon">📄</div>
+    <section class="how-section fade-in" id="how-it-works">
+      <div class="section-eyebrow">Simple Process</div>
+      <h2 class="section-h2">Three steps to <span class="gradient-text-3d">your dream job</span></h2>
+      <div class="steps-3d">
+        <div class="step-3d">
+          <div class="step-num-3d">01</div>
+          <div class="step-emoji">📄</div>
           <h3>Upload or Type</h3>
-          <p>Upload an existing PDF resume to auto-fill, or type your details manually.</p>
+          <p>Drop your existing PDF resume for instant auto-fill, or type your details fresh.</p>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-icon">🎯</div>
+        <div class="step-connector"><div class="connector-line"></div></div>
+        <div class="step-3d">
+          <div class="step-num-3d">02</div>
+          <div class="step-emoji">🎯</div>
           <h3>Paste Job Description</h3>
-          <p>Paste the target job description so the AI can tailor your resume to match.</p>
+          <p>Paste the JD and our AI matches your resume to every keyword and requirement.</p>
         </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-icon">⚡</div>
+        <div class="step-connector"><div class="connector-line"></div></div>
+        <div class="step-3d">
+          <div class="step-num-3d">03</div>
+          <div class="step-emoji">⚡</div>
           <h3>Generate & Download</h3>
-          <p>Get an ATS-optimised resume + cover letter in seconds. Download as PDF.</p>
+          <p>Get a 90+ ATS resume + cover letter in seconds. Download PDF, Word, or plain text.</p>
         </div>
       </div>
     </section>
 
-    <!-- ══ Features ══ -->
-    <section class="features-section fade-in" id="features">
-      <div class="section-label">Why ResumeAI</div>
-      <h2>Built to get you hired</h2>
-      <div class="feature-cards">
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
+    <!-- ══ Bento Features ══ -->
+    <section class="bento-section fade-in" id="features">
+      <div class="section-eyebrow">Why ResumeAI</div>
+      <h2 class="section-h2">Built to get you <span class="gradient-text-3d">hired</span></h2>
+
+      <div class="bento-grid">
+
+        <div class="bento-card bento-large">
+          <div class="bento-glow"></div>
+          <div class="bento-emoji">🤖</div>
           <h3>AI-Tailored Content</h3>
-          <p>Our AI analyzes the job description and rewrites your experience to match key requirements and keywords.</p>
+          <p>Our AI reads the job description and rewrites your experience to match every keyword, requirement, and skill — scoring you higher than generic resumes.</p>
+          <div class="bento-badge">GPT-level · Blazing Fast</div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
+
+        <div class="bento-card bento-medium">
+          <div class="bento-glow"></div>
+          <div class="bento-emoji">📊</div>
           <h3>ATS-Optimised Format</h3>
-          <p>Clean, parser-friendly formatting that scores 90+ on ATS systems. No fancy graphics that break parsers.</p>
+          <p>Clean, parser-friendly formatting that scores 90+ on ATS systems every time.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
+
+        <div class="bento-card bento-small">
+          <div class="bento-glow"></div>
+          <div class="bento-emoji">🔒</div>
           <h3>Private & Secure</h3>
-          <p>Your data stays on your server. No third-party storage, no data selling. Your resume, your privacy.</p>
+          <p>Your data, your rules.</p>
         </div>
+
+        <div class="bento-card bento-small bento-accent">
+          <div class="bento-big-text">90+</div>
+          <div class="bento-sub">ATS Score</div>
+        </div>
+
+        <div class="bento-card bento-medium bento-dark">
+          <div class="bento-glow"></div>
+          <div class="bento-emoji">📄</div>
+          <h3>PDF Upload & Auto-Fill</h3>
+          <p>Drop your existing resume PDF and watch our AI fill in every field in under 3 seconds.</p>
+        </div>
+
+        <div class="bento-card bento-small bento-glow-card">
+          <div class="bento-emoji">⚡</div>
+          <h3>Instant</h3>
+          <p>Results in seconds, not hours.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ CTA Strip ══ -->
+    <section class="cta-strip fade-in">
+      <div class="cta-strip-inner">
+        <div class="cta-strip-text">
+          <h2>Your dream job is <span class="gradient-text-3d">one resume away.</span></h2>
+          <p>Join thousands building smarter resumes with AI.</p>
+        </div>
+        <button class="btn-genz magnetic" onclick="location.href='signup.html'">
+          <span class="magnetic-inner">Start for Free → </span>
+          <span class="btn-glow-ring"></span>
+        </button>
       </div>
     </section>
 
   </main>
 
   <footer class="landing-footer">
-    <p>© 2026 ResumeAI · Powered by Groq AI · Completely free</p>
+    <div class="footer-logo">Resume<span>AI</span></div>
+    <p>© 2026 ResumeAI · Powered by Groq AI · 100% Free</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
   </footer>
 
   <!-- Vercel Web Analytics -->
@@ -167,24 +277,129 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 
-  <!-- Scroll animations -->
   <script>
-    // Nav scroll effect
-    const nav = document.getElementById('landing-nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
+  // ══ Cursor Glow ══════════════════════════════════════════════════════════
+  const cursorGlow = document.getElementById('cursor-glow');
+  let cx = 0, cy = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+  function animateCursor() {
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    cursorGlow.style.transform = `translate(${cx - 150}px, ${cy - 150}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
 
-    // Fade-in on scroll
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+  // ══ 3D Tilt Card ═════════════════════════════════════════════════════════
+  const tiltCard = document.getElementById('tilt-card');
+  const shine = document.getElementById('card-shine');
+  if (tiltCard) {
+    tiltCard.addEventListener('mousemove', e => {
+      const rect = tiltCard.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      tiltCard.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 22}deg) scale3d(1.04,1.04,1.04)`;
+      shine.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(218,216,249,0.18) 0%, transparent 60%)`;
+    });
+    tiltCard.addEventListener('mouseleave', () => {
+      tiltCard.style.transform = 'rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
+      shine.style.background = 'none';
+    });
+  }
+
+  // ══ Magnetic Buttons ═════════════════════════════════════════════════════
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+      btn.querySelector('.magnetic-inner').style.transform = `translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave', e => {
+      btn.querySelector('.magnetic-inner').style.transform = 'translate(0,0)';
+    });
+  });
+
+  // ══ Nav Scroll ═══════════════════════════════════════════════════════════
+  const nav = document.getElementById('landing-nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // ══ Intersection Observer ════════════════════════════════════════════════
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ══ Animated Counters ════════════════════════════════════════════════════
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.dataset.count;
+      const suffix = el.dataset.suffix || '';
+      if (!target) return;
+      let start = 0;
+      const dur = 1800;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const prog = Math.min((timestamp - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - prog, 3);
+        el.textContent = Math.floor(ease * target) + suffix;
+        if (prog < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+  // ══ Particle Canvas ══════════════════════════════════════════════════════
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+  const particles = Array.from({ length: 55 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.8 + 0.3,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    alpha: Math.random() * 0.5 + 0.1,
+  }));
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(218,216,249,${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    });
+    // Draw connecting lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(218,216,249,${0.06 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
-      });
-    }, { threshold: 0.15 });
-    fadeEls.forEach(el => observer.observe(el));
+      }
+    }
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
   </script>
 
 </body>
