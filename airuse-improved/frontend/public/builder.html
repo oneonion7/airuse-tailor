@@ -7,6 +7,7 @@
   <title>ResumeAI — Builder</title>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/builder.css">
+  <script src="js/theme.js"></script>
 </head>
 <body>
 
@@ -16,13 +17,16 @@
     <div class="logo" style="font-size:1.1rem">Resume<span>AI</span></div>
     <div style="display:flex;align-items:center;gap:0.8rem">
       <span style="font-size:.78rem;color:var(--text-muted)">Powered by Groq AI</span>
-      <!-- Auth nav items (shown when logged in) -->
       <a href="dashboard.html" id="dash-link"
          style="display:none;font-size:.8rem;color:var(--accent-light);text-decoration:none"
          title="My saved resumes">📁 My Resumes</a>
       <div id="builder-avatar"
-           style="display:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan));display:none;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;cursor:default"
-           id="builder-avatar"></div>
+           style="display:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan));align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;cursor:default"></div>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="icon"></span>
+        <span class="label-dark">Light</span>
+        <span class="label-light">Dark</span>
+      </button>
     </div>
   </nav>
 
