@@ -6,30 +6,12 @@
       "use": "@vercel/node",
       "config": {
         "maxDuration": 30,
-        "memory": 512
+        "memory": 512,
+        "includeFiles": ["frontend/public/**"]
       }
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/server.js"
-    },
-    {
-      "src": "/css/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
-      "dest": "/css/$1"
-    },
-    {
-      "src": "/js/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
-      "dest": "/js/$1"
-    },
-    {
-      "src": "/(.*)\\.html",
-      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" },
-      "dest": "backend/server.js"
-    },
     {
       "src": "/(.*)",
       "dest": "backend/server.js"

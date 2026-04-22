@@ -31,18 +31,19 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,   // keeps PDF rendering working
 }));
 
-// ── CORS — restrict to your own domain in production ──────────────────────
+// ── CORS — allow localhost + any Vercel deployment ────────────────────────
 const ALLOWED_ORIGINS = [
   'http://localhost:3001',
   'http://localhost:5173',
-  // Add your Vercel domain(s) below:
-  process.env.FRONTEND_URL,          // set this in Vercel env vars
+  process.env.FRONTEND_URL, // optional: set a specific domain in Vercel env vars
 ].filter(Boolean);
 
 app.use(cors({
   origin: (origin, cb) => {
     // Allow requests with no origin (mobile apps, Postman, server-to-server)
     if (!origin) return cb(null, true);
+    // Allow all Vercel preview and production deployments
+    if (origin.endsWith('.vercel.app')) return cb(null, true);
     if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
     cb(new Error(`CORS: Origin ${origin} not allowed`));
   },
@@ -91,10 +92,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
 });
 
-// ── Start ──────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n✅  ResumeAI v3 running at http://localhost:${PORT}`);
-  console.log(`🤖  Model  : ${process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'}`);
-  console.log(`🔑  Groq   : ${process.env.GROQ_API_KEY ? '✓ Set' : '✗ MISSING'}`);
-  console.log(`🗄️  Supabase: ${process.env.SUPABASE_URL ? '✓ Set' : '✗ MISSING — set SUPABASE_URL in .env'}\n`);
-});
+// ── Export for Vercel serverless (MUST be before listen) ──────────────────
+module.exports = app;
+
+// ── Start (local dev only — Vercel ignores this) ───────────────────────────
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n✅  ResumeAI v3 running at http://localhost:${PORT}`);
+    console.log(`🤖  Model  : ${process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'}`);
+    console.log(`🔑  Groq   : ${process.env.GROQ_API_KEY ? '✓ Set' : '✗ MISSING'}`);
+    console.log(`🗄️  Supabase: ${process.env.SUPABASE_URL ? '✓ Set' : '✗ MISSING — set SUPABASE_URL in .env'}\n`);
+  });
+}
