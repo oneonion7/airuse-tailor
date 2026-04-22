@@ -129,6 +129,12 @@
         setLoading(false);
       }
     });
+
+    // ── Show message from auth callback ──────────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('msg') === 'confirm_expired') {
+      showAlert('⚠️ Your confirmation link expired. Please log in or sign up again.');
+    }
   </script>
 
 </body>

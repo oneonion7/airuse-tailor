@@ -277,6 +277,41 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 
+  <!-- ── Supabase Auth Callback Handler ────────────────────────────────────
+       When a user clicks the confirmation link in their email, Supabase
+       redirects them to this page (the Site URL) with #access_token=... in
+       the URL fragment. We load Supabase, let it process the token, and
+       then send the user straight to their dashboard.
+  ──────────────────────────────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    (async function handleAuthCallback() {
+      // Only run when there's an access_token or type=recovery/magiclink in the URL
+      const hash = window.location.hash;
+      if (!hash || (!hash.includes('access_token') && !hash.includes('type='))) return;
+
+      try {
+        const SUPABASE_URL      = 'https://xlcnkjzczobpoopyavmd.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7';
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Supabase JS automatically parses the hash fragment into a session
+        const { data: { session }, error } = await client.auth.getSession();
+
+        if (session) {
+          // Email confirmed and session established — go to dashboard
+          window.location.replace('dashboard.html');
+        } else if (error) {
+          console.error('[auth callback] Error:', error.message);
+          // Token invalid/expired — send to login with a hint
+          window.location.replace('login.html?msg=confirm_expired');
+        }
+      } catch (err) {
+        console.error('[auth callback] Unexpected error:', err);
+      }
+    })();
+  </script>
+
   <script>
   // ══ Cursor Glow ══════════════════════════════════════════════════════════
   const cursorGlow = document.getElementById('cursor-glow');
