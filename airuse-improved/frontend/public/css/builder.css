@@ -1,7 +1,54 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    css/builder.css — Resume Builder Page (Theme-aware)
-   Palette: #E44D27 · #FD9D45 · #AAAAAA · #000000 · #FFFFFF
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Premium Light Mode Overrides at top ─────────────────────────────────── */
+[data-theme="light"] .form-section {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .builder-output {
+  background: #F5F5F5;
+}
+[data-theme="light"] .builder-form {
+  background: #EBEBEB;
+}
+[data-theme="light"] .ats-score-panel {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-color: rgba(228,77,39,0.15);
+}
+[data-theme="light"] .tailoring-report {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .status-bar {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .upload-zone {
+  background: rgba(0,0,0,0.02);
+  border-color: rgba(0,0,0,0.12);
+}
+[data-theme="light"] .progress-bar-container {
+  background: #F5F5F5;
+  border-color: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .checklist-item {
+  background: rgba(0,0,0,0.03);
+}
+[data-theme="light"] .output-empty-icon {
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+[data-theme="light"] .action-btn.secondary {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.10);
+  color: var(--text-secondary);
+}
 
 /* ── Builder Nav ──────────────────────────────────────────────────────────── */
 .builder-nav {

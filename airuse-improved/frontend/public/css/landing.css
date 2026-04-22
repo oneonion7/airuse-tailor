@@ -32,6 +32,8 @@
   pointer-events: none;
   mix-blend-mode: screen;
 }
+/* In light mode, use multiply so blobs appear orange on light bg */
+[data-theme="light"] .aurora-blob { mix-blend-mode: multiply; }
 .a1 {
   width: 800px; height: 800px;
   background: radial-gradient(circle, rgba(228,77,39,0.4), transparent 70%);
@@ -103,13 +105,20 @@
   border-radius: 100px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1);
   transition: all 0.4s var(--ease);
+  gap: 1rem;
 }
 .landing-nav.scrolled {
   top: 1rem;
   background: rgba(10, 10, 10, 0.6);
   box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
 }
-.nav-links { display: flex; align-items: center; gap: 1.5rem; margin-right: 0.2rem; }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+.nav-links { display: flex; align-items: center; gap: 1.5rem; flex: 1; justify-content: center; }
 .nav-links a {
   font-size: 0.9rem;
   color: var(--text-primary);
@@ -131,6 +140,7 @@
   cursor: pointer;
   transition: all 0.3s var(--ease);
   box-shadow: 0 8px 24px rgba(228,77,39,0.4), inset 0 2px 4px rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.2);
+  white-space: nowrap;
 }
 .nav-cta:hover {
   transform: translateY(-2px) scale(1.02);
@@ -656,14 +666,16 @@
   .bento-large, .bento-medium, .bento-small, .bento-accent, .bento-glow-card { grid-column: span 2; }
 }
 @media (max-width: 768px) {
-  .landing-nav { width: 95%; padding: 0.5rem 0.5rem 0.5rem 1.5rem; }
-  .nav-links { display: none; }
+  .landing-nav { width: 95%; padding: 0.5rem 0.7rem 0.5rem 1.4rem; }
+  .nav-links { display: none; }       /* hide text links on mobile */
+  .nav-actions { gap: 0.4rem; }       /* keep theme toggle + CTA */
   .hero-h1 { font-size: 3rem; }
   .bento-grid { grid-template-columns: 1fr; }
   .bento-large, .bento-medium, .bento-small, .bento-accent, .bento-glow-card { grid-column: span 1; }
   .cta-strip-inner { padding: 3rem 1.5rem; border-radius: 32px; }
   .landing-footer { flex-direction: column; align-items: center; text-align: center; }
 }
+
 
  / *    % %  L i g h t   M o d e   O v e r r i d e s    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %  * / 
  [ d a t a - t h e m e = ' l i g h t ' ]   . l a n d i n g - n a v   {   b a c k g r o u n d :   v a r ( - - b g - c a r d ) ;   b o r d e r - c o l o r :   v a r ( - - b o r d e r ) ;   b o x - s h a d o w :   v a r ( - - s h a d o w - s m ) ;   } 

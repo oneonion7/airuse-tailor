@@ -187,9 +187,48 @@
 .delete-dialog p  { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
 .delete-dialog-actions { display: flex; gap: 0.8rem; justify-content: center; }
 
+
+/* ── Premium Light Mode Overrides ─────────────────────────────────────────── */
+[data-theme="light"] .stat-card,
+[data-theme="light"] .resume-card {
+  box-shadow: var(--card-shadow);
+  border-color: transparent;
+}
+[data-theme="light"] .resume-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 0 0 1px rgba(228,77,39,0.15);
+  border-color: transparent;
+}
+[data-theme="light"] .skeleton-card {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.04);
+}
+[data-theme="light"] .delete-dialog {
+  box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+}
+[data-theme="light"] .dash-nav {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.04);
+}
+[data-theme="light"] .card-btn {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--text-secondary);
+}
+[data-theme="light"] .card-btn:hover {
+  background: rgba(228,77,39,0.06);
+  border-color: rgba(228,77,39,0.25);
+  color: var(--red);
+}
+[data-theme="light"] .resume-card-meta .dot {
+  background: rgba(0,0,0,0.2);
+}
+[data-theme="light"] .ats-badge { background: rgba(90,201,148,0.12); }
+[data-theme="light"] .ats-badge.medium { background: rgba(253,157,69,0.12); }
+[data-theme="light"] .ats-badge.low { background: rgba(228,77,39,0.10); }
+
 @media (max-width: 768px) {
   .dash-nav  { padding: 0.9rem 1.2rem; }
   .dash-main { padding: 1.5rem 1rem; }
   .dash-title { font-size: 1.5rem; }
   .resume-grid { grid-template-columns: 1fr; }
 }
+

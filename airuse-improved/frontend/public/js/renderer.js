@@ -109,13 +109,13 @@ window.ResumeRenderer = (function () {
       <div class="ats-score-row">
         <div class="ats-donut-wrap">
           <svg viewBox="0 0 100 100" class="ats-donut">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" stroke-width="10"/>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--ats-track)" stroke-width="10"/>
             <circle cx="50" cy="50" r="42" fill="none" stroke="${color}" stroke-width="10"
               stroke-dasharray="${arc.filled} ${arc.total}"
               stroke-dashoffset="${arc.offset}"
               stroke-linecap="round"/>
             <text x="50" y="44" text-anchor="middle" fill="${color}" font-size="20" font-weight="bold">${score}</text>
-            <text x="50" y="58" text-anchor="middle" fill="#94a3b8" font-size="10">${grade}</text>
+            <text x="50" y="58" text-anchor="middle" fill="var(--ats-label)" font-size="10">${grade}</text>
           </svg>
         </div>
         <div class="ats-breakdown">

@@ -224,3 +224,29 @@
   .auth-card { padding: 2rem 1.4rem; border-radius: 18px; }
   .auth-heading { font-size: 1.3rem; }
 }
+
+/* ── Premium Light Mode ─────────────────────────────────────────────────────── */
+[data-theme="light"] .auth-page  { background: #EBEBEB; }
+[data-theme="light"] .auth-card {
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(30px) saturate(200%);
+  border-color: rgba(0,0,0,0.07);
+  border-top-color: rgba(255,255,255,1);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,1),
+    0 8px 32px rgba(0,0,0,0.08),
+    0 32px 80px rgba(0,0,0,0.05);
+}
+[data-theme="light"] .auth-field input {
+  background: #FFFFFF;
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
+}
+[data-theme="light"] .auth-field input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(228,77,39,0.10);
+}
+[data-theme="light"] .auth-back,
+[data-theme="light"] .auth-footer a { color: var(--red); }
+[data-theme="light"] .strength-bar { background: rgba(0,0,0,0.10); }
+
