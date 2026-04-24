@@ -92,6 +92,37 @@
     </div>
   </div>
 
+  <!-- ── Resume Preview Modal ── -->
+  <div class="preview-overlay" id="preview-overlay">
+    <div class="preview-panel" id="preview-panel">
+
+      <!-- Panel Header -->
+      <div class="preview-header">
+        <div class="preview-header-left">
+          <h2 class="preview-title" id="preview-title">Resume Preview</h2>
+          <span class="preview-date" id="preview-date"></span>
+        </div>
+        <div class="preview-header-actions">
+          <button class="preview-action-btn primary" id="preview-pdf-btn">&#11015; Download PDF</button>
+          <button class="preview-action-btn" id="preview-docx-btn">&#128196; Word</button>
+          <button class="preview-action-btn" id="preview-txt-btn">&#128203; ATS Text</button>
+          <button class="preview-close-btn" id="preview-close" aria-label="Close preview">&#10005;</button>
+        </div>
+      </div>
+
+      <!-- Resume Content -->
+      <div class="preview-body">
+        <div class="preview-resume-wrap">
+          <div class="preview-resume-content" id="preview-resume-content">
+            <!-- resume HTML injected here -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
   <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/auth.js"></script>

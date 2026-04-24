@@ -71,14 +71,26 @@
     grid.style.display = 'grid';
     empty.style.display = 'none';
 
-    // Attach button events
+  // Attach button events
     resumes.forEach(r => {
+      // ── View / Preview ───────────────────────────────────────────────────
+      const card = document.getElementById(`card-${r.id}`);
+      if (card) {
+        // Clicking the card body (not the action buttons) opens preview
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.resume-card-actions')) return;
+          openPreview(r);
+        });
+      }
+      document.getElementById(`view-${r.id}`)
+        ?.addEventListener('click', (e) => { e.stopPropagation(); openPreview(r); });
+
       document.getElementById(`dl-docx-${r.id}`)
-        ?.addEventListener('click', () => downloadDocx(r));
+        ?.addEventListener('click', (e) => { e.stopPropagation(); downloadDocx(r); });
       document.getElementById(`dl-txt-${r.id}`)
-        ?.addEventListener('click', () => downloadTxt(r));
+        ?.addEventListener('click', (e) => { e.stopPropagation(); downloadTxt(r); });
       document.getElementById(`del-${r.id}`)
-        ?.addEventListener('click', () => confirmDelete(r.id));
+        ?.addEventListener('click', (e) => { e.stopPropagation(); confirmDelete(r.id); });
     });
   }
 
@@ -89,33 +101,112 @@
   }
 
   function buildCard(r, idx) {
-    const score     = r.ats_score;
+    const score      = r.ats_score;
     const badgeClass = !score ? '' : score >= 85 ? '' : score >= 70 ? 'medium' : 'low';
-    const badgeText  = score ? `ATS ${score}` : '';
     const badgeHtml  = score
-      ? `<span class="ats-badge ${badgeClass}">${badgeText}</span>`
-      : '';
+      ? `<span class="ats-badge ${badgeClass}">ATS ${score}</span>` : '';
 
     const title = r.title || 'Untitled Resume';
     const date  = formatDate(r.created_at);
+    const hasPreview = !!(r.resume_html);
 
     return `
-      <div class="resume-card" style="animation-delay:${idx * 0.06}s">
+      <div class="resume-card ${hasPreview ? 'has-preview' : ''}" id="card-${r.id}" style="animation-delay:${idx * 0.06}s" role="button" tabindex="0" aria-label="View ${escHtml(title)}">
         <div class="resume-card-header">
           <div class="resume-card-title">${escHtml(title)}</div>
           ${badgeHtml}
         </div>
         <div class="resume-card-meta">
           <span>${date}</span>
+          ${hasPreview ? '<span class="preview-hint">Click to preview &#128065;</span>' : ''}
         </div>
         <div class="resume-card-actions">
-          <button class="card-btn" id="dl-docx-${r.id}">📄 Word</button>
-          <button class="card-btn" id="dl-txt-${r.id}">📋 ATS Text</button>
-          <button class="card-btn danger" id="del-${r.id}">🗑 Delete</button>
+          ${hasPreview ? `<button class="card-btn view" id="view-${r.id}">&#128065; View</button>` : ''}
+          <button class="card-btn" id="dl-docx-${r.id}">&#128196; Word</button>
+          <button class="card-btn" id="dl-txt-${r.id}">&#128203; ATS Text</button>
+          <button class="card-btn danger" id="del-${r.id}">&#128465; Delete</button>
         </div>
       </div>
     `;
   }
+
+  // ── Preview Modal ──────────────────────────────────────────────────────
+  let _activeResume = null;
+
+  function openPreview(r) {
+    _activeResume = r;
+    const overlay = document.getElementById('preview-overlay');
+    document.getElementById('preview-title').textContent = r.title || 'Resume Preview';
+    document.getElementById('preview-date').textContent  = formatDate(r.created_at);
+
+    const content = document.getElementById('preview-resume-content');
+    if (r.resume_html) {
+      content.innerHTML = r.resume_html;
+    } else if (r.plain_text) {
+      content.innerHTML = `<pre style="white-space:pre-wrap;font-family:'Times New Roman',serif;font-size:10.5pt;line-height:1.4;color:#111">${escHtml(r.plain_text)}</pre>`;
+    } else {
+      content.innerHTML = `<div style="text-align:center;padding:4rem;color:var(--text-muted)">No preview available for this resume.</div>`;
+    }
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Keyboard close
+    document.addEventListener('keydown', handlePreviewKey);
+  }
+
+  function closePreview() {
+    document.getElementById('preview-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    _activeResume = null;
+    document.removeEventListener('keydown', handlePreviewKey);
+  }
+
+  function handlePreviewKey(e) {
+    if (e.key === 'Escape') closePreview();
+  }
+
+  document.getElementById('preview-close').addEventListener('click', closePreview);
+
+  // Close on overlay backdrop click
+  document.getElementById('preview-overlay').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closePreview();
+  });
+
+  // Preview PDF button
+  document.getElementById('preview-pdf-btn').addEventListener('click', () => {
+    if (!_activeResume?.resume_html) { alert('No HTML preview available for PDF download.'); return; }
+    const name = _activeResume.title || 'Resume';
+    let printFrame = document.getElementById('pdf-print-frame');
+    if (printFrame) printFrame.remove();
+    printFrame = document.createElement('iframe');
+    printFrame.id = 'pdf-print-frame';
+    printFrame.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:0;height:0;border:none;';
+    document.body.appendChild(printFrame);
+    const doc = printFrame.contentDocument || printFrame.contentWindow.document;
+    doc.open();
+    doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${name}</title>
+    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Times New Roman',serif;color:#000;padding:.6in .7in;font-size:10.5pt;line-height:1.25}
+    .sh-header h1{font-size:20pt;font-weight:bold;text-align:center;margin-bottom:2px}.sh-contact{text-align:center;font-size:9.5pt;margin-bottom:4px}
+    h2.sh-section-title{font-size:11pt;font-weight:bold;text-transform:uppercase;border-bottom:1.5px solid #000;padding-bottom:1px;margin-bottom:4px}
+    .sh-bullets{list-style:disc;padding-left:22px}.sh-bullets li{font-size:10pt;margin-bottom:1px}
+    @media print{body{padding:0}@page{margin:.5in .6in;size:A4}}</style>
+    </head><body>${_activeResume.resume_html}</body></html>`);
+    doc.close();
+    setTimeout(() => { printFrame.contentWindow.focus(); printFrame.contentWindow.print(); setTimeout(() => printFrame.remove(), 3000); }, 400);
+  });
+
+  // Preview Word download
+  document.getElementById('preview-docx-btn').addEventListener('click', () => {
+    if (_activeResume) downloadDocx(_activeResume);
+  });
+
+  // Preview ATS Text download
+  document.getElementById('preview-txt-btn').addEventListener('click', () => {
+    if (_activeResume) downloadTxt(_activeResume);
+  });
+
+
 
   // ── Download DOCX ──────────────────────────────────────────────────────
   async function downloadDocx(r) {
