@@ -12,17 +12,14 @@
 </head>
 <body>
 
-  <!-- Background orbs -->
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
 
-  <!-- Back to home -->
-  <a href="index.html" class="auth-back">← Back to home</a>
+  <a href="index.html" class="auth-back">&#8592; Back to home</a>
 
-  <!-- Theme toggle -->
   <div class="auth-theme-wrap">
     <button class="theme-toggle" aria-label="Toggle theme">
-      <span class="t-icon">🌙</span>
+      <span class="t-icon">&#127769;</span>
       <span class="t-label t-label-dark">Light</span>
       <span class="t-label t-label-light">Dark</span>
     </button>
@@ -37,37 +34,46 @@
         <span class="tagline">AI-Powered ATS Resume Builder</span>
       </div>
 
-      <!-- Heading -->
       <h1 class="auth-heading">Welcome back</h1>
       <p class="auth-subheading">Log in to access your saved resumes</p>
 
-      <!-- Alert box (shown on error/success) -->
       <div class="auth-alert" id="auth-alert"></div>
 
-      <!-- Login Form -->
+      <!-- Google Sign In -->
+      <button class="social-btn google-btn" id="google-btn" type="button">
+        <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+          <path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/>
+          <path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/>
+          <path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/>
+          <path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <!-- Divider -->
+      <div class="auth-divider"><span>or sign in with email</span></div>
+
+      <!-- Email/Password Form -->
       <form class="auth-form" id="login-form" novalidate>
 
         <div class="auth-field">
           <label for="login-email">Email address</label>
-          <input
-            type="email"
-            id="login-email"
-            placeholder="you@example.com"
-            autocomplete="email"
-            required
-          >
+          <div class="input-icon-wrap">
+            <span class="input-icon">&#9993;</span>
+            <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
         </div>
 
         <div class="auth-field">
-          <label for="login-password">Password</label>
-          <input
-            type="password"
-            id="login-password"
-            placeholder="••••••••"
-            autocomplete="current-password"
-            required
-          >
-          <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+          <div class="field-row-label">
+            <label for="login-password">Password</label>
+            <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+          </div>
+          <div class="input-icon-wrap">
+            <span class="input-icon">&#128274;</span>
+            <input type="password" id="login-password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" required>
+            <button type="button" class="pw-toggle" id="pw-toggle-login" aria-label="Show password">&#128065;</button>
+          </div>
         </div>
 
         <button type="submit" class="auth-submit" id="login-btn">
@@ -75,12 +81,52 @@
           <span class="btn-label">Log in &rarr;</span>
         </button>
 
-        <p class="auth-trust">🔒 256-bit encrypted &middot; Never sold &middot; Delete anytime</p>
+        <p class="auth-trust">&#128274; 256-bit encrypted &middot; Never sold &middot; Delete anytime</p>
 
       </form>
 
+      <!-- Divider -->
+      <div class="auth-divider"><span>or</span></div>
+
+      <!-- Phone Sign In -->
+      <button class="social-btn phone-btn" id="phone-signin-btn" type="button">
+        <span>&#128222;</span> Continue with Phone
+      </button>
+
+      <!-- Phone OTP Panel (hidden by default) -->
+      <div class="phone-panel" id="phone-panel" style="display:none">
+        <div class="auth-field">
+          <label>Phone number</label>
+          <div class="phone-input-row">
+            <select class="country-select" id="country-code">
+              <option value="+91">&#127470;&#127475; +91</option>
+              <option value="+1">&#127482;&#127480; +1</option>
+              <option value="+44">&#127468;&#127463; +44</option>
+              <option value="+61">&#127462;&#127482; +61</option>
+              <option value="+971">&#127462;&#127466; +971</option>
+              <option value="+65">&#127480;&#127468; +65</option>
+              <option value="+49">&#127465;&#127466; +49</option>
+              <option value="+33">&#127467;&#127479; +33</option>
+            </select>
+            <input type="tel" id="phone-number" placeholder="98765 43210" autocomplete="tel" class="phone-input">
+          </div>
+        </div>
+        <button type="button" class="auth-submit" id="send-otp-btn" style="margin-top:0.5rem">
+          <div class="spinner"></div>
+          <span class="btn-label">Send OTP &rarr;</span>
+        </button>
+        <div class="auth-field" id="otp-field" style="display:none;margin-top:0.8rem">
+          <label>Enter OTP sent to your phone</label>
+          <input type="text" id="otp-input" placeholder="&#8212; &#8212; &#8212; &#8212; &#8212; &#8212;" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+          <button type="button" class="auth-submit" id="verify-otp-btn" style="margin-top:0.5rem">
+            <div class="spinner"></div>
+            <span class="btn-label">Verify &amp; Sign In &rarr;</span>
+          </button>
+        </div>
+      </div>
+
       <p class="auth-footer">
-        Don't have an account? <a href="signup.html">Sign up free</a>
+        Don&rsquo;t have an account? <a href="signup.html">Sign up free</a>
       </p>
 
       <p class="auth-terms">
@@ -91,28 +137,41 @@
     </div>
   </div>
 
-  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/auth.js"></script>
 
   <script>
-    // ── Login Logic ───────────────────────────────────────────────────────────
-    const form    = document.getElementById('login-form');
-    const btn     = document.getElementById('login-btn');
-    const alert   = document.getElementById('auth-alert');
+    const form        = document.getElementById('login-form');
+    const btn         = document.getElementById('login-btn');
+    const alertEl     = document.getElementById('auth-alert');
 
+    // ── Helpers ────────────────────────────────────────────────────────────────
     function showAlert(msg, type = 'error') {
-      alert.textContent = msg;
-      alert.className = `auth-alert ${type}`;
+      alertEl.textContent = msg;
+      alertEl.className   = `auth-alert ${type}`;
+      alertEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    function hideAlert() {
-      alert.className = 'auth-alert';
-    }
-    function setLoading(on) {
-      btn.disabled = on;
-      btn.classList.toggle('loading', on);
+    function hideAlert() { alertEl.className = 'auth-alert'; }
+    function setLoading(btnEl, on) {
+      btnEl.disabled = on;
+      btnEl.classList.toggle('loading', on);
     }
 
+    // ── Show confirm_expired message ─────────────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('msg') === 'confirm_expired') {
+      showAlert('&#9888;&#65039; Your confirmation link expired. Please log in or sign up again.');
+    }
+
+    // ── Password visibility toggle ────────────────────────────────────────────
+    document.getElementById('pw-toggle-login').addEventListener('click', function() {
+      const inp = document.getElementById('login-password');
+      const isText = inp.type === 'text';
+      inp.type = isText ? 'password' : 'text';
+      this.textContent = isText ? '\uD83D\uDC41' : '\uD83D\uDC41\uFE0F';
+    });
+
+    // ── Email/Password login ───────────────────────────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       hideAlert();
@@ -120,33 +179,82 @@
       const email    = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
 
-      if (!email || !password) {
-        showAlert('Please fill in both fields.');
-        return;
-      }
+      if (!email || !password) { showAlert('Please fill in both fields.'); return; }
 
-      setLoading(true);
-
+      setLoading(btn, true);
       try {
         const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
-
         if (error) throw error;
-
-        // Success — redirect to builder or dashboard
         const redirect = new URLSearchParams(window.location.search).get('redirect') || 'dashboard.html';
         window.location.href = redirect;
-
       } catch (err) {
         showAlert(err.message || 'Login failed. Please try again.');
-        setLoading(false);
+        setLoading(btn, false);
       }
     });
 
-    // ── Show message from auth callback ──────────────────────────────────────
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('msg') === 'confirm_expired') {
-      showAlert('⚠️ Your confirmation link expired. Please log in or sign up again.');
-    }
+    // ── Google OAuth ──────────────────────────────────────────────────────────
+    document.getElementById('google-btn').addEventListener('click', async () => {
+      try {
+        const { error } = await window._supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: { redirectTo: window.location.origin + '/dashboard.html' }
+        });
+        if (error) throw error;
+      } catch (err) {
+        showAlert('Google sign-in failed: ' + (err.message || 'Please try again.'));
+      }
+    });
+
+    // ── Phone sign-in toggle ──────────────────────────────────────────────────
+    document.getElementById('phone-signin-btn').addEventListener('click', function() {
+      const panel = document.getElementById('phone-panel');
+      const visible = panel.style.display !== 'none';
+      panel.style.display = visible ? 'none' : 'block';
+      this.textContent = visible ? '\uD83D\uDCDE Continue with Phone' : '\u2715 Cancel';
+    });
+
+    // ── Send OTP ──────────────────────────────────────────────────────────────
+    let _phoneForOTP = '';
+    document.getElementById('send-otp-btn').addEventListener('click', async () => {
+      const cc    = document.getElementById('country-code').value;
+      const num   = document.getElementById('phone-number').value.trim().replace(/\s+/g,'');
+      const phone = cc + num;
+      if (!num || num.length < 7) { showAlert('Enter a valid phone number.'); return; }
+
+      const otpBtn = document.getElementById('send-otp-btn');
+      setLoading(otpBtn, true);
+      try {
+        const { error } = await window._supabase.auth.signInWithOtp({ phone });
+        if (error) throw error;
+        _phoneForOTP = phone;
+        document.getElementById('otp-field').style.display = 'block';
+        showAlert('OTP sent! Check your SMS.', 'success');
+      } catch (err) {
+        showAlert(err.message || 'Failed to send OTP. Enable Phone auth in Supabase dashboard.');
+      } finally {
+        setLoading(otpBtn, false);
+      }
+    });
+
+    // ── Verify OTP ────────────────────────────────────────────────────────────
+    document.getElementById('verify-otp-btn').addEventListener('click', async () => {
+      const token  = document.getElementById('otp-input').value.trim();
+      if (!token || token.length < 4) { showAlert('Enter the OTP from your SMS.'); return; }
+
+      const verBtn = document.getElementById('verify-otp-btn');
+      setLoading(verBtn, true);
+      try {
+        const { error } = await window._supabase.auth.verifyOtp({
+          phone: _phoneForOTP, token, type: 'sms'
+        });
+        if (error) throw error;
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        showAlert(err.message || 'Invalid OTP. Please try again.');
+        setLoading(verBtn, false);
+      }
+    });
   </script>
 
 </body>
