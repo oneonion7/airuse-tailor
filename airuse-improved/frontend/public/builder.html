@@ -91,8 +91,8 @@
         </div>
 
         <!-- Upload Zone -->
-        <div class="upload-zone" id="upload-zone">
-          <input type="file" id="f-resume-file" accept="application/pdf">
+        <div class="upload-zone" id="upload-zone" onclick="document.getElementById('f-resume-file').click()" style="cursor:pointer">
+          <input type="file" id="f-resume-file" accept="application/pdf" style="display:none">
           <div class="upload-icon">📄</div>
           <div class="upload-text" id="upload-btn-text">Drop PDF resume here or click to browse</div>
           <div class="upload-hint">Supports .pdf up to 10 MB — AI will auto-fill all fields</div>

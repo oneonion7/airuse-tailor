@@ -250,3 +250,18 @@
 [data-theme="light"] .auth-footer a { color: var(--red); }
 [data-theme="light"] .strength-bar { background: rgba(0,0,0,0.10); }
 
+/* ── Trust line below submit ─────────────────────────────────────────────── */
+.auth-trust {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.6rem;
+  opacity: 0.8;
+}
+
+/* ── Mobile: prevent iOS zoom on inputs (must be 16px+) ─────────────────── */
+@media (max-width: 600px) {
+  .auth-field input { font-size: 16px; }
+  .auth-submit { min-height: 48px; }
+  .auth-card { padding: 2rem 1.2rem; border-radius: 20px; }
+}

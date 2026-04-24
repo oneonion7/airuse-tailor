@@ -1,5 +1,5 @@
-/**
- * js/renderer.js — v2
+﻿/**
+ * js/renderer.js â€” v2
  * Renders resume HTML, PDF download, tailoring report,
  * and the NEW real ATS score panel.
  */
@@ -46,7 +46,7 @@ window.ResumeRenderer = (function () {
     }, 700);
   }
 
-  // ── Real ATS Score Panel ──────────────────────────────────────────────────
+  // â”€â”€ Real ATS Score Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async function fetchATSScore(resumeText, jobDescription) {
     const atsPanel = document.getElementById('ats-score-panel');
     if (!atsPanel) return;
@@ -55,7 +55,7 @@ window.ResumeRenderer = (function () {
     atsPanel.innerHTML = `
       <div class="ats-loading">
         <div class="ats-spinner"></div>
-        <span>Calculating ATS score…</span>
+        <span>Calculating ATS scoreâ€¦</span>
       </div>`;
     atsPanel.style.display = 'block';
 
@@ -69,7 +69,7 @@ window.ResumeRenderer = (function () {
       if (!res.ok) throw new Error(data.error || 'ATS scoring failed');
       renderATSPanel(data);
     } catch (err) {
-      atsPanel.innerHTML = `<div class="ats-error">⚠️ ATS scoring unavailable: ${esc(err.message)}</div>`;
+      atsPanel.innerHTML = `<div class="ats-error">âš ï¸ ATS scoring unavailable: ${esc(err.message)}</div>`;
     }
   }
 
@@ -102,7 +102,7 @@ window.ResumeRenderer = (function () {
 
     atsPanel.innerHTML = `
       <div class="ats-header">
-        <h3>🎯 ATS Score Analysis</h3>
+        <h3>ðŸŽ¯ ATS Score Analysis</h3>
         <p class="ats-sub">${esc(d.summary || 'Resume scored against job description')}</p>
       </div>
 
@@ -125,7 +125,7 @@ window.ResumeRenderer = (function () {
 
       ${missing.length ? `
       <div class="ats-missing">
-        <h4>⚠️ Missing Keywords</h4>
+        <h4>âš ï¸ Missing Keywords</h4>
         <div class="ats-tags">
           ${missing.map(k => `<span class="ats-tag missing">${esc(k)}</span>`).join('')}
         </div>
@@ -133,7 +133,7 @@ window.ResumeRenderer = (function () {
 
       ${quickWins.length ? `
       <div class="ats-wins">
-        <h4>⚡ Quick Wins</h4>
+        <h4>âš¡ Quick Wins</h4>
         <ul>${quickWins.map(w => `<li>${esc(w)}</li>`).join('')}</ul>
       </div>` : ''}
     `;
@@ -155,7 +155,7 @@ window.ResumeRenderer = (function () {
     return 'D';
   }
 
-  // ── Tailoring Report ──────────────────────────────────────────────────────
+  // â”€â”€ Tailoring Report â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function renderTailoringReport(tailoring, resumeHTML) {
     const reportEl = document.getElementById('tailoring-report');
     if (!reportEl) return;
@@ -179,7 +179,7 @@ window.ResumeRenderer = (function () {
     if (checklistEl) {
       checklistEl.innerHTML = sections.map(s => `
         <div class="checklist-item ${s.present ? 'pass' : 'fail'}">
-          <span class="check-icon">${s.present ? '✅' : '❌'}</span>
+          <span class="check-icon">${s.present ? 'âœ…' : 'âŒ'}</span>
           <span>${s.name}</span>
         </div>`).join('');
     }
@@ -201,22 +201,33 @@ window.ResumeRenderer = (function () {
     reportEl.style.display = 'block';
   }
 
-  // ── PDF Download ──────────────────────────────────────────────────────────
+  // â”€â”€ PDF Download â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function downloadPDF(candidateName) {
     const resumeEl = document.getElementById('resume-output');
-    if (!resumeEl || resumeEl.style.display === 'none') {
-      alert('Please generate your resume first.');
+    if (!resumeEl || resumeEl.style.display === 'none' || !resumeEl.innerHTML.trim()) {
+      alert('Please generate your resume first before downloading.');
       return;
     }
 
-    const name = candidateName || 'Resume';
-    const win  = window.open('', '_blank');
+    const name    = candidateName || 'Resume';
+    const content = resumeEl.innerHTML;
 
-    win.document.write(`<!DOCTYPE html>
+    // Use iframe (never blocked by popup blockers, works on all browsers)
+    let printFrame = document.getElementById('pdf-print-frame');
+    if (printFrame) printFrame.remove();
+
+    printFrame = document.createElement('iframe');
+    printFrame.id = 'pdf-print-frame';
+    printFrame.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:0;height:0;border:none;';
+    document.body.appendChild(printFrame);
+
+    const doc = printFrame.contentDocument || printFrame.contentWindow.document;
+    doc.open();
+    doc.write(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>${esc(name)} – ATS Resume</title>
+  <title>${esc(name)} - ATS Resume</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -227,83 +238,46 @@ window.ResumeRenderer = (function () {
       line-height: 1.25;
     }
     .sh-header { margin-bottom: 4px; }
-    .sh-header h1 {
-      font-size: 20pt;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 2px;
-    }
-    .sh-contact {
-      text-align: center;
-      font-size: 9.5pt;
-      margin-bottom: 4px;
-    }
+    .sh-header h1 { font-size: 20pt; font-weight: bold; text-align: center; margin-bottom: 2px; }
+    .sh-contact { text-align: center; font-size: 9.5pt; margin-bottom: 4px; }
     .sh-section { margin-bottom: 6px; }
     h2.sh-section-title {
-      font-size: 11pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-bottom: 1.5px solid #000;
-      padding-bottom: 1px;
-      margin-bottom: 4px;
+      font-size: 11pt; font-weight: bold; text-transform: uppercase;
+      border-bottom: 1.5px solid #000; padding-bottom: 1px; margin-bottom: 4px;
     }
-    .sh-summary {
-      font-size: 10.5pt;
-      text-align: justify;
-      line-height: 1.3;
-      margin-bottom: 2px;
-    }
+    .sh-summary { font-size: 10.5pt; text-align: justify; line-height: 1.3; margin-bottom: 2px; }
     .sh-job { margin-bottom: 4px; }
-    .sh-job-header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2px;
-      margin-bottom: 1px;
-    }
-    .sh-job-title  { font-weight: bold; font-size: 10.5pt; }
-    .sh-job-dates  { font-weight: bold; font-size: 10pt; white-space: nowrap; }
+    .sh-job-header { display:flex; justify-content:space-between; flex-wrap:wrap; gap:2px; margin-bottom:1px; }
+    .sh-job-title { font-weight: bold; font-size: 10.5pt; }
+    .sh-job-dates { font-weight: bold; font-size: 10pt; white-space: nowrap; }
     .sh-project { margin-bottom: 4px; }
-    .sh-project-name {
-      font-weight: bold;
-      font-size: 10.5pt;
-      margin-bottom: 1px;
-    }
-    .sh-bullets {
-      list-style-type: disc;
-      padding-left: 22px;
-      margin-top: 1px;
-    }
-    .sh-bullets li {
-      font-size: 10pt;
-      margin-bottom: 1px;
-      line-height: 1.25;
-      text-align: justify;
-    }
-    .sh-skill-list {
-      list-style-type: disc;
-      padding-left: 22px;
-    }
-    .sh-skill-list li {
-      font-size: 10pt;
-      margin-bottom: 1px;
-      line-height: 1.3;
-    }
-    .sh-edu-item {
-      margin-bottom: 3px;
-      font-size: 10.5pt;
-      line-height: 1.3;
-    }
+    .sh-project-name { font-weight: bold; font-size: 10.5pt; margin-bottom: 1px; }
+    .sh-bullets { list-style-type: disc; padding-left: 22px; margin-top: 1px; }
+    .sh-bullets li { font-size: 10pt; margin-bottom: 1px; line-height: 1.25; text-align: justify; }
+    .sh-skill-list { list-style-type: disc; padding-left: 22px; }
+    .sh-skill-list li { font-size: 10pt; margin-bottom: 1px; line-height: 1.3; }
+    .sh-edu-item { margin-bottom: 3px; font-size: 10.5pt; line-height: 1.3; }
     @media print {
       body { padding: 0; }
       @page { margin: 0.5in 0.6in; size: A4; }
     }
   </style>
 </head>
-<body>${resumeEl.innerHTML}</body>
+<body>${content}</body>
 </html>`);
-    win.document.close();
-    win.onload = () => { win.focus(); win.print(); };
+    doc.close();
+
+    // Give the iframe a moment to render, then print
+    setTimeout(() => {
+      try {
+        printFrame.contentWindow.focus();
+        printFrame.contentWindow.print();
+      } catch (e) {
+        alert('Could not open print dialog. Please try again or use Ctrl+P after the resume appears.');
+      }
+      // Clean up after print dialog closes
+      setTimeout(() => { if (printFrame) printFrame.remove(); }, 3000);
+    }, 400);
   }
 
   function esc(str) {

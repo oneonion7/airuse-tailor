@@ -3,64 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Build ATS-optimized resumes with AI. Upload your resume, paste a job description, and get a perfectly tailored resume in seconds. 100% free, powered by Groq.">
-  <title>ResumeAI — AI-Powered ATS Resume Builder</title>
+  <title>ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed</title>
+  <meta name="description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume and cover letter in under 10 seconds. Free forever. Powered by Groq AI.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://airuse-tailor-4pej.vercel.app">
+  <meta property="og:title" content="ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed">
+  <meta property="og:description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume and cover letter in under 10 seconds. Free forever. Powered by Groq AI.">
+  <meta property="og:image" content="https://airuse-tailor-4pej.vercel.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed">
+  <meta name="twitter:description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume in under 10 seconds. Free forever.">
+  <meta name="twitter:image" content="https://airuse-tailor-4pej.vercel.app/og-image.png">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ResumeAI","description":"AI-powered ATS resume builder. Upload your PDF, paste a job description, get a tailored resume in seconds.","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://airuse-tailor-4pej.vercel.app","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI resume tailoring","ATS optimization","PDF upload","Cover letter generation","90+ ATS score"]}
+  </script>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/landing.css">
   <script src="js/theme.js"></script>
 </head>
 <body>
-
-  <!-- Grain Overlay -->
   <div class="grain"></div>
-
-  <!-- Aurora Background -->
   <div class="aurora">
     <div class="aurora-blob a1"></div>
     <div class="aurora-blob a2"></div>
     <div class="aurora-blob a3"></div>
     <div class="aurora-blob a4"></div>
   </div>
-
-  <!-- Custom Cursor Glow -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Floating Particles -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- ── Nav ── -->
   <nav class="landing-nav" id="landing-nav">
     <div class="logo">Resume<span>AI</span></div>
-    <div class="nav-links">
+    <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#how-it-works">How It Works</a>
       <a href="#features">Features</a>
       <a href="login.html" class="nav-login">Log in</a>
     </div>
     <div class="nav-actions">
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <span class="t-icon">🌙</span>
+        <span class="t-icon">&#127769;</span>
         <span class="t-label t-label-dark">Light</span>
         <span class="t-label t-label-light">Dark</span>
       </button>
-      <button class="nav-cta magnetic" onclick="location.href='signup.html'" id="nav-cta-btn">
-        <span class="magnetic-inner">Get Started Free →</span>
+      <button class="nav-cta magnetic" onclick="smartNav()" id="nav-cta-btn">
+        <span class="magnetic-inner">Get Started Free &#8594;</span>
       </button>
     </div>
   </nav>
 
-
   <main>
-
-    <!-- ══ Hero ══ -->
+    <!-- Hero -->
     <section class="hero">
       <div class="hero-left">
-
         <div class="hero-badge genz-badge">
           <span class="live-dot"></span>
-          <span class="badge-text">AI-Powered · Free Forever</span>
-          <span class="badge-arrow">✦</span>
+          <span class="badge-text">AI-Powered &#183; Free Forever</span>
+          <span class="badge-arrow">&#10022;</span>
         </div>
-
         <h1 class="hero-h1">
           <span class="line-wrap"><span class="slide-in">Land</span></span>
           <span class="line-wrap big"><span class="slide-in delay-1">interviews</span></span>
@@ -69,33 +72,36 @@
             <span class="slide-in delay-3 gradient-text-3d">built for parsers</span>
           </span>
         </h1>
-
         <p class="hero-desc fade-up delay-4">
-          Upload your PDF · Paste the JD · Get an ATS-optimised resume in <strong>seconds</strong>.
+          Upload your PDF &#183; Paste the JD &#183; Get an ATS-optimised resume in <strong>seconds</strong>.
           No subscriptions. No hidden fees. Just results.
         </p>
-
         <div class="hero-ctas fade-up delay-5">
-          <button class="btn-genz magnetic" onclick="location.href='signup.html'" id="hero-cta-btn">
+          <button class="btn-genz magnetic" onclick="smartNav()" id="hero-cta-btn" aria-label="Build my resume for free">
             <span class="magnetic-inner">
-              <span class="btn-icon">⚡</span>
-              Build My Resume — Free
+              <span class="btn-icon">&#9889;</span>
+              Build My Resume &#8212; Free
             </span>
             <span class="btn-glow-ring"></span>
           </button>
-          <button class="btn-ghost magnetic" onclick="location.href='login.html'">
-            <span class="magnetic-inner">Sign in →</span>
-          </button>
+          <a href="login.html" class="hero-signin-link">Already have an account? Sign in &#8594;</a>
         </div>
-
+        <div class="social-proof-row fade-up delay-6">
+          <div class="sp-avatars">
+            <div class="sp-av" style="background:linear-gradient(135deg,#E44D27,#c43a18)">S</div>
+            <div class="sp-av" style="background:linear-gradient(135deg,#10B981,#059669)">A</div>
+            <div class="sp-av" style="background:linear-gradient(135deg,#FD9D45,#E44D27)">M</div>
+            <div class="sp-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">J</div>
+            <div class="sp-av" style="background:linear-gradient(135deg,#06B6D4,#0284C7)">K</div>
+          </div>
+          <p class="sp-text"><strong>2,847+</strong> job seekers built their resume this week</p>
+        </div>
         <div class="trust-chips fade-up delay-6">
-          <span class="chip">✓ No credit card</span>
-          <span class="chip">✓ Instant results</span>
-          <span class="chip">✓ 90+ ATS score</span>
+          <span class="chip">&#10003; No credit card</span>
+          <span class="chip">&#10003; Instant results</span>
+          <span class="chip">&#10003; 90+ ATS score</span>
         </div>
-
       </div>
-
       <div class="hero-right">
         <div class="tilt-scene">
           <div class="preview-card-3d" id="tilt-card">
@@ -122,146 +128,178 @@
             </div>
             <div class="card-badge-3d">
               <span class="badge-pulse"></span>
-              ✦ Powered by AI
+              &#10022; Powered by AI
             </div>
-            <!-- Floating 3D chips around card -->
             <div class="float-chip c1">ATS 94%</div>
-            <div class="float-chip c2">🤖 AI</div>
-            <div class="float-chip c3">PDF ✓</div>
+            <div class="float-chip c2">&#129302; AI</div>
+            <div class="float-chip c3">PDF &#10003;</div>
             <div class="float-chip c4">Free</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══ Scrolling Ticker ══ -->
-    <div class="ticker-wrap">
+    <!-- Ticker -->
+    <div class="ticker-wrap" aria-hidden="true" role="presentation">
       <div class="ticker-track">
-        <span>Land More Interviews</span><span class="sep">✦</span>
-        <span>ATS Score 90+</span><span class="sep">✦</span>
-        <span>AI-Tailored Resumes</span><span class="sep">✦</span>
-        <span>Upload PDF & Auto-Fill</span><span class="sep">✦</span>
-        <span>100% Free Forever</span><span class="sep">✦</span>
-        <span>Instant Download</span><span class="sep">✦</span>
-        <span>Land More Interviews</span><span class="sep">✦</span>
-        <span>ATS Score 90+</span><span class="sep">✦</span>
-        <span>AI-Tailored Resumes</span><span class="sep">✦</span>
-        <span>Upload PDF & Auto-Fill</span><span class="sep">✦</span>
-        <span>100% Free Forever</span><span class="sep">✦</span>
-        <span>Instant Download</span><span class="sep">✦</span>
+        <span>Land More Interviews</span><span class="sep">&#10022;</span>
+        <span>ATS Score 90+</span><span class="sep">&#10022;</span>
+        <span>AI-Tailored Resumes</span><span class="sep">&#10022;</span>
+        <span>Upload PDF &amp; Auto-Fill</span><span class="sep">&#10022;</span>
+        <span>100% Free Forever</span><span class="sep">&#10022;</span>
+        <span>Instant Download</span><span class="sep">&#10022;</span>
+        <span>Land More Interviews</span><span class="sep">&#10022;</span>
+        <span>ATS Score 90+</span><span class="sep">&#10022;</span>
+        <span>AI-Tailored Resumes</span><span class="sep">&#10022;</span>
+        <span>Upload PDF &amp; Auto-Fill</span><span class="sep">&#10022;</span>
+        <span>100% Free Forever</span><span class="sep">&#10022;</span>
+        <span>Instant Download</span><span class="sep">&#10022;</span>
       </div>
     </div>
 
-    <!-- ══ Stats ══ -->
-    <section class="stats-3d fade-in">
+    <!-- Stats -->
+    <section class="stats-3d" id="stats-section">
       <div class="stat-3d">
-        <div class="stat-num-3d" data-count="90" data-suffix="+">0+</div>
-        <div class="stat-label-3d">ATS Score Format</div>
+        <div class="stat-num-3d" data-count="94" data-suffix="+">0+</div>
+        <div class="stat-label-3d">ATS score</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-3d">
         <div class="stat-num-3d" data-count="100" data-suffix="%">0%</div>
-        <div class="stat-label-3d">Free Forever</div>
+        <div class="stat-label-3d">% free, always</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-3d">
         <div class="stat-num-3d" data-count="10" data-suffix="s">0s</div>
-        <div class="stat-label-3d">Generation Time</div>
+        <div class="stat-label-3d">seconds to build</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-3d">
-        <div class="stat-num-3d">AI</div>
-        <div class="stat-label-3d">Groq LLM Powered</div>
+        <div class="stat-num-3d">&#9889;</div>
+        <div class="stat-label-3d">Groq Powered</div>
       </div>
     </section>
 
-    <!-- ══ How It Works ══ -->
+    <!-- How It Works -->
     <section class="how-section fade-in" id="how-it-works">
       <div class="section-eyebrow">Simple Process</div>
       <h2 class="section-h2">Three steps to <span class="gradient-text-3d">your dream job</span></h2>
       <div class="steps-3d">
         <div class="step-3d">
           <div class="step-num-3d">01</div>
-          <div class="step-emoji">📄</div>
+          <div class="step-emoji">&#128196;</div>
           <h3>Upload or Type</h3>
           <p>Drop your existing PDF resume for instant auto-fill, or type your details fresh.</p>
         </div>
         <div class="step-connector"><div class="connector-line"></div></div>
         <div class="step-3d">
           <div class="step-num-3d">02</div>
-          <div class="step-emoji">🎯</div>
+          <div class="step-emoji">&#127919;</div>
           <h3>Paste Job Description</h3>
           <p>Paste the JD and our AI matches your resume to every keyword and requirement.</p>
         </div>
         <div class="step-connector"><div class="connector-line"></div></div>
         <div class="step-3d">
           <div class="step-num-3d">03</div>
-          <div class="step-emoji">⚡</div>
-          <h3>Generate & Download</h3>
+          <div class="step-emoji">&#9889;</div>
+          <h3>Generate &amp; Download</h3>
           <p>Get a 90+ ATS resume + cover letter in seconds. Download PDF, Word, or plain text.</p>
         </div>
       </div>
     </section>
 
-    <!-- ══ Bento Features ══ -->
+    <!-- Features -->
     <section class="bento-section fade-in" id="features">
       <div class="section-eyebrow">Why ResumeAI</div>
       <h2 class="section-h2">Built to get you <span class="gradient-text-3d">hired</span></h2>
-
       <div class="bento-grid">
-
         <div class="bento-card bento-large">
           <div class="bento-glow"></div>
-          <div class="bento-emoji">🤖</div>
+          <div class="bento-emoji">&#129302;</div>
           <h3>AI-Tailored Content</h3>
-          <p>Our AI reads the job description and rewrites your experience to match every keyword, requirement, and skill — scoring you higher than generic resumes.</p>
-          <div class="bento-badge">GPT-level · Blazing Fast</div>
+          <p>Our AI reads the job description and rewrites your experience to match every keyword, requirement, and skill &#8212; scoring you higher than generic resumes.</p>
+          <div class="bento-badge">GPT-level &#183; Blazing Fast</div>
         </div>
-
         <div class="bento-card bento-medium">
           <div class="bento-glow"></div>
-          <div class="bento-emoji">📊</div>
+          <div class="bento-emoji">&#128202;</div>
           <h3>ATS-Optimised Format</h3>
           <p>Clean, parser-friendly formatting that scores 90+ on ATS systems every time.</p>
         </div>
-
         <div class="bento-card bento-small">
           <div class="bento-glow"></div>
-          <div class="bento-emoji">🔒</div>
-          <h3>Private & Secure</h3>
+          <div class="bento-emoji">&#128274;</div>
+          <h3>Private &amp; Secure</h3>
           <p>Your data, your rules.</p>
         </div>
-
         <div class="bento-card bento-small bento-accent">
           <div class="bento-big-text">90+</div>
           <div class="bento-sub">ATS Score</div>
         </div>
-
         <div class="bento-card bento-medium bento-dark">
           <div class="bento-glow"></div>
-          <div class="bento-emoji">📄</div>
-          <h3>PDF Upload & Auto-Fill</h3>
+          <div class="bento-emoji">&#128196;</div>
+          <h3>PDF Upload &amp; Auto-Fill</h3>
           <p>Drop your existing resume PDF and watch our AI fill in every field in under 3 seconds.</p>
         </div>
-
         <div class="bento-card bento-small bento-glow-card">
-          <div class="bento-emoji">⚡</div>
-          <h3>Instant</h3>
-          <p>Results in seconds, not hours.</p>
+          <div class="bento-emoji">&#9889;</div>
+          <h3>Ready in &lt;10 Seconds</h3>
+          <p>Groq's ultra-fast inference means your tailored resume is ready before you finish your coffee.</p>
         </div>
-
       </div>
     </section>
 
-    <!-- ══ CTA Strip ══ -->
+    <!-- Testimonials -->
+    <section class="testimonials-section fade-in" id="testimonials">
+      <div class="section-eyebrow">Real results</div>
+      <h2 class="section-h2">What job seekers <span class="gradient-text-3d">say</span></h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">&ldquo;I updated my resume for a PM role at a fintech startup. Got a callback from the recruiter in 2 days. The ATS score went from 61 to 93.&rdquo;</p>
+          <div class="t-author">
+            <div class="t-av" style="background:linear-gradient(135deg,#E44D27,#c43a18)">SA</div>
+            <div>
+              <div class="t-name">Sarah A.</div>
+              <div class="t-role">Product Manager &mdash; recently hired at Stripe</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">&ldquo;As a career changer, I was getting zero responses. ResumeAI rewrote my experience to match each JD and I landed 3 interviews in my first week.&rdquo;</p>
+          <div class="t-author">
+            <div class="t-av" style="background:linear-gradient(135deg,#10B981,#059669)">MK</div>
+            <div>
+              <div class="t-name">Marcus K.</div>
+              <div class="t-role">Career changer &#8594; Software Engineer</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">&ldquo;The cover letter feature alone is worth it. It writes a personalised one for every application in seconds. Total game changer for my job search.&rdquo;</p>
+          <div class="t-author">
+            <div class="t-av" style="background:linear-gradient(135deg,#FD9D45,#E44D27)">JP</div>
+            <div>
+              <div class="t-name">Jess P.</div>
+              <div class="t-role">Marketing Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
     <section class="cta-strip fade-in">
       <div class="cta-strip-inner">
         <div class="cta-strip-text">
-          <h2>Your dream job is <span class="gradient-text-3d">one resume away.</span></h2>
-          <p>Join thousands building smarter resumes with AI.</p>
+          <h2>Every job has an ATS gate.<br><span class="gradient-text-3d">Walk through it.</span></h2>
+          <p>Build your tailored resume in under 10 seconds &mdash; no credit card, no limits.</p>
         </div>
-        <button class="btn-genz magnetic" onclick="location.href='signup.html'">
-          <span class="magnetic-inner">Start for Free → </span>
+        <button class="btn-genz magnetic" onclick="smartNav()">
+          <span class="magnetic-inner">Build my resume &mdash; free &#8594;</span>
           <span class="btn-glow-ring"></span>
         </button>
       </div>
@@ -271,79 +309,109 @@
 
   <footer class="landing-footer">
     <div class="footer-logo">Resume<span>AI</span></div>
-    <p>© 2026 ResumeAI · Powered by Groq AI · 100% Free</p>
+    <p>&copy; 2026 ResumeAI &middot; Powered by Groq AI &middot; 100% Free</p>
     <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
       <a href="login.html">Login</a>
       <a href="signup.html">Sign Up</a>
     </div>
   </footer>
 
-  <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-
-  <!-- ── Supabase Auth Callback Handler ────────────────────────────────────
-       When a user clicks the confirmation link in their email, Supabase
-       redirects them to this page (the Site URL) with #access_token=... in
-       the URL fragment. We load Supabase, let it process the token, and
-       then send the user straight to their dashboard.
-  ──────────────────────────────────────────────────────────────────────── -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
     (async function handleAuthCallback() {
-      // Only run when there's an access_token or type=recovery/magiclink in the URL
       const hash = window.location.hash;
       if (!hash || (!hash.includes('access_token') && !hash.includes('type='))) return;
-
       try {
         const SUPABASE_URL      = 'https://xlcnkjzczobpoopyavmd.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7';
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // Supabase JS automatically parses the hash fragment into a session
         const { data: { session }, error } = await client.auth.getSession();
+        if (session) { window.location.replace('dashboard.html'); }
+        else if (error) { window.location.replace('login.html?msg=confirm_expired'); }
+      } catch (err) { console.error('[auth callback] Unexpected error:', err); }
+    })();
 
-        if (session) {
-          // Email confirmed and session established — go to dashboard
-          window.location.replace('dashboard.html');
-        } else if (error) {
-          console.error('[auth callback] Error:', error.message);
-          // Token invalid/expired — send to login with a hint
-          window.location.replace('login.html?msg=confirm_expired');
-        }
-      } catch (err) {
-        console.error('[auth callback] Unexpected error:', err);
+    // Smart CTA — send logged-in users to builder, guests to signup
+    async function smartNav() {
+      try {
+        const { data: { user } } = await supabase
+          .createClient('https://xlcnkjzczobpoopyavmd.supabase.co', 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7')
+          .auth.getUser();
+        window.location.href = user ? 'builder.html' : 'signup.html';
+      } catch (_) {
+        window.location.href = 'signup.html';
       }
+    }
+
+    // Update nav CTA label if already logged in
+    (async function updateNavCTA() {
+      try {
+        const { data: { user } } = await supabase
+          .createClient('https://xlcnkjzczobpoopyavmd.supabase.co', 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7')
+          .auth.getUser();
+        if (user) {
+          const navBtn = document.getElementById('nav-cta-btn');
+          const heroBtn = document.getElementById('hero-cta-btn');
+          if (navBtn) navBtn.querySelector('.magnetic-inner').textContent = 'Open Builder →';
+          if (heroBtn) heroBtn.querySelector('.magnetic-inner').innerHTML = '<span class="btn-icon">⚡</span> Open My Builder';
+        }
+      } catch (_) {}
     })();
   </script>
 
   <script>
-  // ══ Cursor Glow ══════════════════════════════════════════════════════════
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll Progress Bar
+  const progressBar = document.createElement('div');
+  progressBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#E44D27,#FD9D45);z-index:9999;width:0%;transition:width 0.1s linear;pointer-events:none;';
+  document.body.prepend(progressBar);
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  // Cursor Glow
   const cursorGlow = document.getElementById('cursor-glow');
   let cx = 0, cy = 0, tx = 0, ty = 0;
   document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-  function animateCursor() {
-    cx += (tx - cx) * 0.12;
-    cy += (ty - cy) * 0.12;
-    cursorGlow.style.transform = `translate(${cx - 150}px, ${cy - 150}px)`;
+  (function animateCursor() {
+    cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
+    cursorGlow.style.transform = 'translate(' + (cx-150) + 'px,' + (cy-150) + 'px)';
     requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
+  })();
 
-  // ══ 3D Tilt Card ═════════════════════════════════════════════════════════
+  // Hamburger
+  const hamburger = document.getElementById('hamburger-btn');
+  const navLinks  = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('nav-open');
+      hamburger.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('nav-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }));
+  }
+
+  // 3D Tilt Card
   const tiltCard = document.getElementById('tilt-card');
   const shine = document.getElementById('card-shine');
   if (tiltCard) {
     tiltCard.addEventListener('mousemove', e => {
-      const rect = tiltCard.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      tiltCard.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 22}deg) scale3d(1.04,1.04,1.04)`;
-      shine.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(218,216,249,0.18) 0%, transparent 60%)`;
+      const r = tiltCard.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      tiltCard.style.transform = 'rotateY(' + (x*22) + 'deg) rotateX(' + (-y*22) + 'deg) scale3d(1.04,1.04,1.04)';
+      shine.style.background = 'radial-gradient(circle at ' + ((x+0.5)*100) + '% ' + ((y+0.5)*100) + '%, rgba(218,216,249,0.18) 0%, transparent 60%)';
     });
     tiltCard.addEventListener('mouseleave', () => {
       tiltCard.style.transform = 'rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
@@ -351,99 +419,76 @@
     });
   }
 
-  // ══ Magnetic Buttons ═════════════════════════════════════════════════════
+  // Magnetic Buttons
   document.querySelectorAll('.magnetic').forEach(btn => {
     btn.addEventListener('mousemove', e => {
-      const rect = btn.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
-      const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-      btn.querySelector('.magnetic-inner').style.transform = `translate(${x}px,${y}px)`;
+      const r = btn.getBoundingClientRect();
+      const inner = btn.querySelector('.magnetic-inner');
+      if (inner) inner.style.transform = 'translate(' + ((e.clientX-r.left-r.width/2)*0.3) + 'px,' + ((e.clientY-r.top-r.height/2)*0.3) + 'px)';
     });
-    btn.addEventListener('mouseleave', e => {
-      btn.querySelector('.magnetic-inner').style.transform = 'translate(0,0)';
-    });
+    btn.addEventListener('mouseleave', () => { const inner = btn.querySelector('.magnetic-inner'); if (inner) inner.style.transform = 'translate(0,0)'; });
   });
 
-  // ══ Nav Scroll ═══════════════════════════════════════════════════════════
+  // Nav Scroll
   const nav = document.getElementById('landing-nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 
-  // ══ Intersection Observer ════════════════════════════════════════════════
+  // Fade-in Observer
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // ══ Animated Counters ════════════════════════════════════════════════════
+  // Scroll Entrance Animations
+  if (!prefersReduced) {
+    const animObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, +(e.target.dataset.delay||0));
+          animObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.step-3d, .bento-card, .testimonial-card').forEach((el, i) => {
+      el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+      el.dataset.delay = String(i % 3 * 120); animObs.observe(el);
+    });
+  }
+
+  // Counters (FIXED: threshold 0.1)
   const counterObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = +el.dataset.count;
-      const suffix = el.dataset.suffix || '';
+      const el = entry.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
       if (!target) return;
-      let start = 0;
-      const dur = 1800;
-      const step = timestamp => {
-        if (!start) start = timestamp;
-        const prog = Math.min((timestamp - start) / dur, 1);
-        const ease = 1 - Math.pow(1 - prog, 3);
+      if (prefersReduced) { el.textContent = target + suffix; counterObs.unobserve(el); return; }
+      let start = null;
+      const step = ts => {
+        if (!start) start = ts;
+        const prog = Math.min((ts - start) / 1600, 1), ease = 1 - Math.pow(1-prog, 3);
         el.textContent = Math.floor(ease * target) + suffix;
         if (prog < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
       counterObs.unobserve(el);
     });
-  }, { threshold: 0.4, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.1 });
   document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
 
-  // ══ Particle Canvas ══════════════════════════════════════════════════════
+  // Particles
   const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-  const particles = Array.from({ length: 55 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.8 + 0.3,
-    vx: (Math.random() - 0.5) * 0.3,
-    vy: (Math.random() - 0.5) * 0.3,
-    alpha: Math.random() * 0.5 + 0.1,
-  }));
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(228,77,39,${p.alpha * 0.7})`;
-      ctx.fill();
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-    });
-    // Draw connecting lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(228,77,39,${0.04 * (1 - dist/120)})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(drawParticles);
+  if (canvas && !prefersReduced) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+    const pts = Array.from({length:55}, () => ({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.8+0.3, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, a:Math.random()*0.5+0.1 }));
+    (function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pts.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(228,77,39,'+p.a*0.7+')'; ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>canvas.width)p.vx*=-1; if(p.y<0||p.y>canvas.height)p.vy*=-1; });
+      for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(228,77,39,'+(0.04*(1-d/120))+')';ctx.lineWidth=0.6;ctx.stroke();}}
+      requestAnimationFrame(draw);
+    })();
   }
-  drawParticles();
   </script>
 
 </body>

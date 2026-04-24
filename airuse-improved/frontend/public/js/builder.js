@@ -66,6 +66,11 @@
   const docxBtn = document.getElementById('download-docx-btn');
   if (docxBtn) {
     docxBtn.addEventListener('click', async () => {
+      // Guard: must generate first
+      if (!_currentResume) {
+        showToast('Generate your resume first, then download.');
+        return;
+      }
       docxBtn.textContent = '⏳ Generating…';
       docxBtn.disabled = true;
       try {
@@ -107,6 +112,11 @@
   const txtBtn = document.getElementById('download-txt-btn');
   if (txtBtn) {
     txtBtn.addEventListener('click', async () => {
+      // Guard: must generate first
+      if (!_currentResume) {
+        showToast('Generate your resume first, then download.');
+        return;
+      }
       txtBtn.textContent = '⏳ Preparing…';
       txtBtn.disabled = true;
       try {
