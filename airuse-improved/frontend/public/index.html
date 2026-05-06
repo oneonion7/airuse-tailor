@@ -49,7 +49,7 @@
         <span class="t-label t-label-dark">Light</span>
         <span class="t-label t-label-light">Dark</span>
       </button>
-      <button class="nav-cta magnetic" onclick="smartNav()" id="nav-cta-btn">
+      <button class="nav-cta magnetic" id="nav-cta-btn">
         <span class="magnetic-inner">Get Started Free &#8594;</span>
       </button>
     </div>
@@ -77,7 +77,7 @@
           No subscriptions. No hidden fees. Just results.
         </p>
         <div class="hero-ctas fade-up delay-5">
-          <button class="btn-genz magnetic" onclick="smartNav()" id="hero-cta-btn" aria-label="Build my resume for free">
+          <button class="btn-genz magnetic" id="hero-cta-btn" aria-label="Build my resume for free">
             <span class="magnetic-inner">
               <span class="btn-icon">&#9889;</span>
               Build My Resume &#8212; Free
@@ -298,7 +298,7 @@
           <h2>Every job has an ATS gate.<br><span class="gradient-text-3d">Walk through it.</span></h2>
           <p>Build your tailored resume in under 10 seconds &mdash; no credit card, no limits.</p>
         </div>
-        <button class="btn-genz magnetic" onclick="smartNav()">
+        <button class="btn-genz magnetic" id="cta-strip-btn">
           <span class="magnetic-inner">Build my resume &mdash; free &#8594;</span>
           <span class="btn-glow-ring"></span>
         </button>
@@ -345,6 +345,14 @@
       }
     }
 
+    // Wire up all CTA buttons via addEventListener (avoids CSP inline-handler blocks)
+    document.addEventListener('DOMContentLoaded', function() {
+      ['nav-cta-btn', 'hero-cta-btn', 'cta-strip-btn'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('click', smartNav);
+      });
+    });
+
     // Update nav CTA label if already logged in
     (async function updateNavCTA() {
       try {
@@ -352,8 +360,8 @@
         if (user) {
           const navBtn = document.getElementById('nav-cta-btn');
           const heroBtn = document.getElementById('hero-cta-btn');
-          if (navBtn) navBtn.querySelector('.magnetic-inner').textContent = 'Open Builder →';
-          if (heroBtn) heroBtn.querySelector('.magnetic-inner').innerHTML = '<span class="btn-icon">⚡</span> Open My Builder';
+          if (navBtn) navBtn.querySelector('.magnetic-inner').textContent = 'Open Builder \u2192';
+          if (heroBtn) heroBtn.querySelector('.magnetic-inner').innerHTML = '<span class="btn-icon">&#9889;</span> Open My Builder';
         }
       } catch (_) {}
     })();
