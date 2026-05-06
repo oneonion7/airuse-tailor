@@ -323,15 +323,13 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/auth.js"></script>
   <script>
     (async function handleAuthCallback() {
       const hash = window.location.hash;
       if (!hash || (!hash.includes('access_token') && !hash.includes('type='))) return;
       try {
-        const SUPABASE_URL      = 'https://xlcnkjzczobpoopyavmd.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7';
-        const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        const { data: { session }, error } = await client.auth.getSession();
+        const { data: { session }, error } = await window._supabase.auth.getSession();
         if (session) { window.location.replace('dashboard.html'); }
         else if (error) { window.location.replace('login.html?msg=confirm_expired'); }
       } catch (err) { console.error('[auth callback] Unexpected error:', err); }
@@ -340,9 +338,7 @@
     // Smart CTA — send logged-in users to builder, guests to signup
     async function smartNav() {
       try {
-        const { data: { user } } = await supabase
-          .createClient('https://xlcnkjzczobpoopyavmd.supabase.co', 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7')
-          .auth.getUser();
+        const user = await window._auth.getUser();
         window.location.href = user ? 'builder.html' : 'signup.html';
       } catch (_) {
         window.location.href = 'signup.html';
@@ -352,9 +348,7 @@
     // Update nav CTA label if already logged in
     (async function updateNavCTA() {
       try {
-        const { data: { user } } = await supabase
-          .createClient('https://xlcnkjzczobpoopyavmd.supabase.co', 'sb_publishable_or_gpfHZ5_dkIndoWT8zCQ_n_8FmWs7')
-          .auth.getUser();
+        const user = await window._auth.getUser();
         if (user) {
           const navBtn = document.getElementById('nav-cta-btn');
           const heroBtn = document.getElementById('hero-cta-btn');
