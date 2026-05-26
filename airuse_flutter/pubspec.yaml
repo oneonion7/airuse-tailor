@@ -1,0 +1,52 @@
+name: airuse
+description: AirUse - AI-Powered ATS Resume Tailor. Works on iOS, Android & Web.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Supabase auth + database
+  supabase_flutter: ^2.5.6
+  # Google Sign-In
+  google_sign_in: ^6.2.1
+  # HTTP requests
+  http: ^1.2.1
+  # Secure storage for tokens
+  flutter_secure_storage: ^9.0.0
+  # File download
+  path_provider: ^2.1.3
+  # URL launcher
+  url_launcher: ^6.3.0
+  # Navigation / routing
+  go_router: ^14.2.0
+  # Code font
+  google_fonts: ^6.2.1
+  # Webview for resume preview
+  webview_flutter: ^4.8.0
+  webview_flutter_web: ^0.2.3
+  # File saver (web + mobile)
+  universal_html: ^2.2.4
+  # Animations
+  flutter_animate: ^4.5.0
+  # Google Fonts
+  google_fonts: ^6.2.1
+  # Icons
+  cupertino_icons: ^1.0.8
+  # Shared preferences
+  shared_preferences: ^2.2.3
+  # Dotted border
+  dotted_border: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
