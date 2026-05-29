@@ -140,8 +140,11 @@
     document.getElementById('preview-date').textContent  = formatDate(r.created_at);
 
     const content = document.getElementById('preview-resume-content');
+
+    // Sanitize AI-generated HTML before rendering — prevents XSS (#1)
+    const purify = window.DOMPurify || { sanitize: (s) => s };
     if (r.resume_html) {
-      content.innerHTML = r.resume_html;
+      content.innerHTML = purify.sanitize(r.resume_html, { FORCE_BODY: true });
     } else if (r.plain_text) {
       content.innerHTML = `<pre style="white-space:pre-wrap;font-family:'Times New Roman',serif;font-size:10.5pt;line-height:1.4;color:#111">${escHtml(r.plain_text)}</pre>`;
     } else {

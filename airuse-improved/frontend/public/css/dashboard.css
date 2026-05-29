@@ -404,8 +404,32 @@
 @media (max-width: 640px) {
   .preview-panel { width: 100vw; }
   .preview-header { padding: 1rem; }
-  .preview-body { padding: 1rem; }
-  .preview-resume-content { padding: 0.4in 0.4in; }
+  .preview-body { padding: 1rem; -webkit-overflow-scrolling: touch; }
+  .preview-resume-wrap { max-width: 100%; }
+  .preview-resume-content {
+    padding: 0.3in 0.25in;
+    font-size: 9pt;
+    min-height: auto;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+  .preview-resume-content .sh-header h1 { font-size: 14pt; }
+  .preview-resume-content h2.sh-section-title { font-size: 10pt; }
+  .preview-resume-content .sh-bullets li,
+  .preview-resume-content .sh-summary,
+  .preview-resume-content .sh-job-title,
+  .preview-resume-content .sh-job-company,
+  .preview-resume-content .sh-job-dates,
+  .preview-resume-content .sh-contact { font-size: 9pt; }
   .preview-action-btn { padding: 0.45rem 0.7rem; font-size: 0.72rem; }
   .preview-header-actions { gap: 0.3rem; }
+}
+@media (max-width: 400px) {
+  .preview-body { padding: 0.5rem; }
+  .preview-resume-content {
+    padding: 0.2in 0.18in;
+    font-size: 8.5pt;
+    border-radius: 4px;
+  }
+  .preview-resume-content .sh-header h1 { font-size: 13pt; }
+  .preview-action-btn { padding: 0.35rem 0.5rem; font-size: 0.68rem; }
 }

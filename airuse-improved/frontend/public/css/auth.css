@@ -453,3 +453,59 @@
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(228,77,39,0.12);
 }
+
+/* ── Password Criteria Checklist (#13) ───────────────────────────────────── */
+.pw-criteria {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 0.8rem;
+}
+.pw-criteria li {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s ease;
+}
+.pw-criteria li::before {
+  content: '✗';
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.pw-criteria li.met {
+  color: var(--success);
+}
+.pw-criteria li.met::before {
+  content: '✓';
+  color: var(--success);
+  opacity: 1;
+}
+
+/* ── Social Button Loading State (#17) ───────────────────────────────────── */
+.social-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+.social-btn.loading .google-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+[data-theme="light"] .social-btn.loading .google-spinner {
+  border-color: rgba(0,0,0,0.12);
+  border-top-color: #333;
+}

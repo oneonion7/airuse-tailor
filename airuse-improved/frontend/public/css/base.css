@@ -245,8 +245,8 @@ a:hover { color: var(--text-primary); }
 
 /* ── Toast ────────────────────────────────────────────────────────────────── */
 .toast {
-  position: fixed; bottom: 1.5rem; left: 50%;
-  transform: translateX(-50%) translateY(100px);
+  position: fixed; top: 1.5rem; left: 50%;
+  transform: translateX(-50%) translateY(-100px);
   background: var(--bg-card); backdrop-filter: blur(20px);
   color: var(--text-primary);
   padding: 0.9rem 1.8rem; border-radius: var(--radius);

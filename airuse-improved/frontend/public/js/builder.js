@@ -220,10 +220,15 @@
 
     setLoading(true);
 
+    // ── 30-second request timeout (#3) ─────────────────────────────────────
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), 30_000);
+
     try {
       const res = await fetch('/api/generate', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal:  controller.signal,
         body:    JSON.stringify({
           name, role, email, phone, city, linkedin,
           experience, education, certifications: certs,
@@ -231,6 +236,7 @@
         }),
       });
 
+      clearTimeout(timeoutId);
       const data = await res.json();
 
       if (!res.ok || !data.success) {
@@ -245,6 +251,12 @@
         resumeInfo: { name, role, email, phone, city, linkedin },
         plainText:  data.resumePlainText || null,
       };
+
+      // ── Scroll output into view on mobile (#4) ─────────────────────────────
+      if (window.innerWidth < 900) {
+        const outputEl = document.querySelector('.builder-output');
+        if (outputEl) outputEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
 
       // ── Auto-save to Supabase if user is logged in ─────────────────────────
       if (window._auth) {
@@ -277,13 +289,19 @@
       }
 
     } catch (err) {
+      clearTimeout(timeoutId);
       console.error('[builder] generate error:', err);
 
-      outputEmpty.style.display = 'flex';
-      outputEmpty.querySelector('h3').textContent = 'Something went wrong';
-      outputEmpty.querySelector('p').textContent  = err.message || 'Unexpected error. Check the console.';
+      // Friendly timeout message (#3)
+      const msg = err.name === 'AbortError'
+        ? 'Request timed out after 30 seconds. Please try again.'
+        : (err.message || 'Generation failed.');
 
-      showToast(err.message || 'Generation failed.');
+      outputEmpty.style.display = 'flex';
+      outputEmpty.querySelector('h3').textContent = err.name === 'AbortError' ? 'Request timed out' : 'Something went wrong';
+      outputEmpty.querySelector('p').textContent  = msg;
+
+      showToast(msg);
     } finally {
       setLoading(false);
     }

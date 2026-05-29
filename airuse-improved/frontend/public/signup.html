@@ -64,8 +64,8 @@
           </div>
         </div>
 
-        <!-- Phone with country code (from wireframe) -->
-        <div class="auth-field">
+        <!-- Phone with country code — hidden until SMS provider is configured (#18) -->
+        <div class="auth-field" id="signup-phone-field" style="display:none">
           <label for="signup-phone">Phone number <span class="optional-tag">optional</span></label>
           <div class="phone-input-row">
             <select class="country-select" id="signup-country-code">
@@ -105,6 +105,13 @@
             <div class="strength-bar" id="bar-4"></div>
           </div>
           <span class="strength-label" id="strength-label"></span>
+          <!-- Password criteria checklist (#13) -->
+          <ul class="pw-criteria" id="pw-criteria" style="display:none">
+            <li id="pw-crit-length">At least 8 characters</li>
+            <li id="pw-crit-upper">One uppercase letter</li>
+            <li id="pw-crit-lower">One lowercase letter</li>
+            <li id="pw-crit-num">Number or special char</li>
+          </ul>
         </div>
 
         <div class="auth-field">
@@ -124,42 +131,16 @@
 
       </form>
 
-      <!-- Divider -->
+      <!-- Phone OTP: hidden until SMS provider is configured (#18) -->
+      <!--
       <div class="auth-divider"><span>or</span></div>
-
-      <!-- Phone Sign Up -->
       <button class="social-btn phone-btn" id="phone-signup-btn" type="button">
         <span>&#128222;</span> Sign up with Phone
       </button>
-
-      <!-- Phone OTP Panel -->
       <div class="phone-panel" id="phone-signup-panel" style="display:none">
-        <div class="auth-field" style="margin-top:0.6rem">
-          <label>Enter your phone number</label>
-          <div class="phone-input-row">
-            <select class="country-select" id="su-country-code">
-              <option value="+91">&#127470;&#127475; +91</option>
-              <option value="+1">&#127482;&#127480; +1</option>
-              <option value="+44">&#127468;&#127463; +44</option>
-              <option value="+971">&#127462;&#127466; +971</option>
-              <option value="+61">&#127462;&#127482; +61</option>
-            </select>
-            <input type="tel" id="su-phone-number" placeholder="98765 43210" autocomplete="tel" class="phone-input">
-          </div>
-        </div>
-        <button type="button" class="auth-submit" id="su-send-otp-btn" style="margin-top:0.5rem">
-          <div class="spinner"></div>
-          <span class="btn-label">Send OTP &rarr;</span>
-        </button>
-        <div class="auth-field" id="su-otp-field" style="display:none;margin-top:0.8rem">
-          <label>OTP sent to your phone</label>
-          <input type="text" id="su-otp-input" placeholder="&#8212; &#8212; &#8212; &#8212; &#8212; &#8212;" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
-          <button type="button" class="auth-submit" id="su-verify-otp-btn" style="margin-top:0.5rem">
-            <div class="spinner"></div>
-            <span class="btn-label">Verify &amp; Create Account &rarr;</span>
-          </button>
-        </div>
+        ...
       </div>
+      -->
 
       <p class="auth-footer">
         Already have an account? <a href="login.html">Log in</a>
@@ -214,20 +195,38 @@
       if (/[0-9]/.test(pw) || /[^A-Za-z0-9]/.test(pw)) s++;
       return s;
     }
+    // Password criteria elements (#13)
+    const pwCriteria = document.getElementById('pw-criteria');
+    const critLength = document.getElementById('pw-crit-length');
+    const critUpper  = document.getElementById('pw-crit-upper');
+    const critLower  = document.getElementById('pw-crit-lower');
+    const critNum    = document.getElementById('pw-crit-num');
+
     pwInput.addEventListener('input', () => {
       const pw = pwInput.value;
-      if (!pw) { pwStrength.style.display='none'; strengthLbl.textContent=''; return; }
+      if (!pw) { pwStrength.style.display='none'; strengthLbl.textContent=''; pwCriteria.style.display='none'; return; }
       pwStrength.style.display = 'flex';
+      pwCriteria.style.display = 'grid';
       const score = getStrength(pw);
       const labels = ['','Weak','Fair','Good','Strong'];
       const cls    = score<=1?'weak':score<=2?'medium':'strong';
       bars.forEach((bar,i) => { bar.className='strength-bar'; if(i<score)bar.classList.add(cls); });
       strengthLbl.textContent = labels[score]||'';
       strengthLbl.style.color = score<=1?'var(--error)':score<=2?'var(--warning)':'var(--success)';
+
+      // Update criteria checklist (#13)
+      critLength.classList.toggle('met', pw.length >= 8);
+      critUpper.classList.toggle('met', /[A-Z]/.test(pw));
+      critLower.classList.toggle('met', /[a-z]/.test(pw));
+      critNum.classList.toggle('met', /[0-9]/.test(pw) || /[^A-Za-z0-9]/.test(pw));
     });
 
     // ── Google OAuth ──────────────────────────────────────────────────────────
-    document.getElementById('google-signup-btn').addEventListener('click', async () => {
+    // Google OAuth with loading state (#17)
+    const googleSignupBtn = document.getElementById('google-signup-btn');
+    googleSignupBtn.addEventListener('click', async () => {
+      googleSignupBtn.classList.add('loading');
+      googleSignupBtn.innerHTML = '<span class="google-spinner"></span> Redirecting to Google…';
       try {
         const { error } = await window._supabase.auth.signInWithOAuth({
           provider: 'google',
@@ -236,12 +235,26 @@
         if (error) throw error;
       } catch (err) {
         showAlert('Google sign-up failed: ' + (err.message || 'Please try again.'));
+        googleSignupBtn.classList.remove('loading');
+        googleSignupBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
       }
+      // Fallback re-enable after 6s if redirect didn't happen
+      setTimeout(() => {
+        if (googleSignupBtn.classList.contains('loading')) {
+          googleSignupBtn.classList.remove('loading');
+          googleSignupBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+        }
+      }, 6000);
     });
 
     // ── Email/Password signup ─────────────────────────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Lock immediately — prevents double-submit (#5)
+      if (btn.disabled) return;
+      btn.disabled = true;
+
       hideAlert();
 
       const name     = document.getElementById('signup-name').value.trim();
@@ -252,11 +265,21 @@
       const phoneNum = document.getElementById('signup-phone').value.trim().replace(/\s+/g,'');
       const phone    = phoneNum ? cc + phoneNum : null;
 
-      if (!name || !email || !password || !confirm) { showAlert('Please fill in all required fields.'); return; }
-      if (password.length < 8) { showAlert('Password must be at least 8 characters.'); return; }
+      if (!name || !email || !password || !confirm) {
+        showAlert('Please fill in all required fields.');
+        btn.disabled = false;
+        return;
+      }
+      if (password.length < 8) {
+        showAlert('Password must be at least 8 characters.');
+        btn.disabled = false;
+        return;
+      }
       if (password !== confirm) {
         showAlert('Passwords do not match.');
-        document.getElementById('signup-confirm').classList.add('error'); return;
+        document.getElementById('signup-confirm').classList.add('error');
+        btn.disabled = false;
+        return;
       }
 
       setLoading(btn, true);
@@ -267,10 +290,16 @@
         });
         if (error) throw error;
         showAlert('&#9989; Account created! Check your email to confirm, then log in.', 'success');
+        // Keep button locked permanently on success — account already created
+        const labelEl = btn.querySelector('.btn-label');
+        if (labelEl) labelEl.textContent = '✓ Account created';
+        btn.classList.remove('loading');
+        btn.querySelector('.spinner').style.display = 'none';
         btn.disabled = true;
       } catch (err) {
         showAlert(err.message || 'Signup failed. Please try again.');
         setLoading(btn, false);
+        btn.disabled = false;
       }
     });
 
@@ -279,55 +308,8 @@
       this.classList.remove('error');
     });
 
-    // ── Phone Sign Up toggle ──────────────────────────────────────────────────
-    document.getElementById('phone-signup-btn').addEventListener('click', function() {
-      const panel = document.getElementById('phone-signup-panel');
-      const visible = panel.style.display !== 'none';
-      panel.style.display = visible ? 'none' : 'block';
-      this.textContent = visible ? '\uD83D\uDCDE Sign up with Phone' : '\u2715 Cancel';
-    });
-
-    // ── Send OTP (signup) ─────────────────────────────────────────────────────
-    let _suPhone = '';
-    document.getElementById('su-send-otp-btn').addEventListener('click', async () => {
-      const cc    = document.getElementById('su-country-code').value;
-      const num   = document.getElementById('su-phone-number').value.trim().replace(/\s+/g,'');
-      const phone = cc + num;
-      if (!num || num.length < 7) { showAlert('Enter a valid phone number.'); return; }
-
-      const otpBtn = document.getElementById('su-send-otp-btn');
-      setLoading(otpBtn, true);
-      try {
-        const { error } = await window._supabase.auth.signInWithOtp({ phone });
-        if (error) throw error;
-        _suPhone = phone;
-        document.getElementById('su-otp-field').style.display = 'block';
-        showAlert('OTP sent! Check your SMS.', 'success');
-      } catch (err) {
-        showAlert(err.message || 'Failed to send OTP. Enable Phone auth in Supabase dashboard.');
-      } finally {
-        setLoading(otpBtn, false);
-      }
-    });
-
-    // ── Verify OTP (signup) ───────────────────────────────────────────────────
-    document.getElementById('su-verify-otp-btn').addEventListener('click', async () => {
-      const token  = document.getElementById('su-otp-input').value.trim();
-      if (!token || token.length < 4) { showAlert('Enter the OTP from your SMS.'); return; }
-
-      const verBtn = document.getElementById('su-verify-otp-btn');
-      setLoading(verBtn, true);
-      try {
-        const { error } = await window._supabase.auth.verifyOtp({
-          phone: _suPhone, token, type: 'sms'
-        });
-        if (error) throw error;
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        showAlert(err.message || 'Invalid OTP. Please try again.');
-        setLoading(verBtn, false);
-      }
-    });
+    // ── Phone Sign Up — disabled (#18: no SMS provider configured) ───────────
+    // Phone OTP JS removed. Re-enable when SMS provider (Twilio) is set up.
   </script>
 
 </body>

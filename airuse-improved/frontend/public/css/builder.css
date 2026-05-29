@@ -560,11 +560,30 @@ textarea { min-height: 100px; line-height: 1.6; }
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .builder-body    { grid-template-columns: 1fr; }
-  .builder-form    { max-height: none; overflow-y: visible; border-right: none; }
-  .builder-output  { max-height: none; border-top: 1px solid var(--border); }
+  .builder-form    { max-height: none; overflow-y: visible; border-right: none; padding: 1.5rem; }
+  .builder-output  {
+    max-height: none;
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    /* Anchor for scrollIntoView — clears sticky nav (#4) */
+    scroll-margin-top: 56px;
+  }
   .form-row        { grid-template-columns: 1fr; }
   .builder-nav     { padding: 0.8rem 1rem; }
   .tailoring-subtitle { margin-left: 0; }
+  .ats-checklist   { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .builder-form    { padding: 1rem; }
+  .builder-output  { padding: 1rem; }
+  .progress-bar-container { padding: 0 1rem; }
+  .builder-form h2 { font-size: 1.3rem; }
+  .builder-form > p { margin-bottom: 1.2rem; }
+  .form-section    { padding: 1rem; }
+  .generate-btn    { font-size: 0.92rem; }
+  .output-actions  { gap: 0.5rem; }
+  .action-btn      { font-size: 0.78rem; padding: 0.55rem 0.8rem; }
 }
 
 /* ── ATS Score Panel ──────────────────────────────────────────────────────── */

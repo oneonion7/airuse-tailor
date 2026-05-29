@@ -1,4 +1,4 @@
-﻿/**
+/**
  * js/renderer.js â€” v2
  * Renders resume HTML, PDF download, tailoring report,
  * and the NEW real ATS score panel.
@@ -16,12 +16,16 @@ window.ResumeRenderer = (function () {
     _lastResumePlainText = resumePlainText || '';
     _lastJobDescription  = (document.getElementById('f-jd')?.value || '').trim();
 
-    resumeEl.innerHTML     = resumeHTML;
+    // Sanitize AI-generated HTML before rendering — prevents XSS (#1)
+    const purify = window.DOMPurify || { sanitize: (s) => s };
+    const safeResumeHTML = purify.sanitize(resumeHTML, { FORCE_BODY: true });
+
+    resumeEl.innerHTML     = safeResumeHTML;
     resumeEl.style.display = 'block';
     resumeEl.classList.add('resume-reveal');
 
     if (coverHTML) {
-      coverEl.innerHTML      = `<div class="cover-letter-title">Cover Letter</div>${coverHTML}`;
+      coverEl.innerHTML      = `<div class="cover-letter-title">Cover Letter</div>${purify.sanitize(coverHTML, { FORCE_BODY: true })}`;
       coverEl.style.display  = 'block';
       coverEl.classList.add('resume-reveal');
     } else {
