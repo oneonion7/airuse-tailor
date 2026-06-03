@@ -35,6 +35,8 @@ app.use(helmet({
 const ALLOWED_ORIGINS = [
   'http://localhost:3001',
   'http://localhost:5173',
+  'https://tailoresumeai.xyz',
+  'https://www.tailoresumeai.xyz',
   process.env.FRONTEND_URL, // optional: set a specific domain in Vercel env vars
 ].filter(Boolean);
 
