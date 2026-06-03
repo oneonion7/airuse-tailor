@@ -237,6 +237,13 @@
       });
 
       clearTimeout(timeoutId);
+
+      // Guard: if server returned HTML instead of JSON, show a clear error
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) {
+        throw new Error('Server returned an unexpected response. Please try again.');
+      }
+
       const data = await res.json();
 
       if (!res.ok || !data.success) {

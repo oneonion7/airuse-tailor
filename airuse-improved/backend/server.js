@@ -87,6 +87,15 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// ── API error handler — ensures /api/* errors always return JSON ────────────
+// Must be defined AFTER API routes but BEFORE the catch-all HTML fallback.
+app.use('/api', (err, req, res, next) => {
+  console.error(`[api error] ${req.method} ${req.originalUrl}:`, err.message || err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal server error.',
+  });
+});
+
 // ── Fallback — serve frontend for all non-API routes ───────────────────────
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/public/index.html'));

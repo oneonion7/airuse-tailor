@@ -69,7 +69,7 @@ window._auth = {
    */
   async apiFetch(url, options = {}) {
     const token = await this.getToken();
-    return fetch(url, {
+    const res = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -77,6 +77,32 @@ window._auth = {
         ...(options.headers || {}),
       },
     });
+
+    // If session expired / invalid, redirect to login
+    if (res.status === 401) {
+      console.warn('[auth] Session expired — redirecting to login.');
+      const currentPage = encodeURIComponent(window.location.pathname.split('/').pop());
+      window.location.href = `login.html?redirect=${currentPage}`;
+      // Return a synthetic response so callers don't crash
+      return new Response(JSON.stringify({ error: 'Session expired' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Guard: if the server returned HTML instead of JSON (e.g. catch-all fallback),
+    // wrap it in a JSON error response so callers don't crash on .json()
+    const ct = res.headers.get('content-type') || '';
+    if (!ct.includes('application/json') && !ct.includes('application/octet-stream')
+        && !ct.includes('application/vnd.')) {
+      console.error(`[auth] apiFetch expected JSON but got "${ct}" from ${url}`);
+      return new Response(JSON.stringify({ error: 'Unexpected server response (not JSON).' }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return res;
   },
 
 };

@@ -31,10 +31,13 @@
   async function loadResumes() {
     try {
       const res  = await window._auth.apiFetch('/api/resumes');
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Server error (${res.status})`);
+      }
+
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || 'Failed to load resumes');
-
       allResumes = data.resumes || [];
       renderResumes(allResumes);
     } catch (err) {
