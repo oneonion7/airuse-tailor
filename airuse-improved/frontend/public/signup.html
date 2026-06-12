@@ -4,155 +4,138 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Create a free ResumeAI account to save and manage your AI-generated ATS-optimized resumes.">
-  <title>Sign Up Free &mdash; ResumeAI</title>
+  <title>Sign Up Free — ResumeAI</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/auth.css">
   <script src="js/theme.js"></script>
 </head>
 <body>
 
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+  <div class="auth-shell">
 
-  <a href="index.html" class="auth-back">&#8592; Back to home</a>
+    <!-- ── Brand panel ── -->
+    <aside class="auth-brand" aria-hidden="true">
+      <a href="index.html" class="logo">
+        <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5h6L10 22l8.5-11.5h-6L13 2z" fill="#fff"/></svg></span>
+        Resume<span>AI</span>
+      </a>
 
-  <div class="auth-theme-wrap">
-    <button class="theme-toggle" aria-label="Toggle theme">
-      <span class="t-icon">&#127769;</span>
-      <span class="t-label t-label-dark">Light</span>
-      <span class="t-label t-label-light">Dark</span>
-    </button>
-  </div>
-
-  <div class="auth-page">
-    <div class="auth-card">
-
-      <!-- Logo -->
-      <div class="auth-logo">
-        <div class="logo">Resume<span>AI</span></div>
-        <span class="tagline">AI-Powered ATS Resume Builder</span>
+      <div class="auth-brand-mid">
+        <h2>Stop getting ghosted<br>by resume bots.</h2>
+        <p>Join thousands of job seekers whose resumes now clear the ATS screen — for free.</p>
+        <ul class="auth-points">
+          <li><span class="pt-icon">💾</span><span><b>Auto-save every resume</b> you generate to your dashboard</span></li>
+          <li><span class="pt-icon">✉️</span><span><b>Tailored cover letter</b> generated with every resume</span></li>
+          <li><span class="pt-icon">🆓</span><span><b>Free forever</b> — no credit card, no trial countdown</span></li>
+        </ul>
       </div>
 
-      <h1 class="auth-heading">Create your account</h1>
-      <p class="auth-subheading">Free forever &middot; No credit card required</p>
+      <figure class="auth-brand-quote">
+        <blockquote>“I used to spend an hour tailoring each application. Now it's paste, generate, download.”</blockquote>
+        <figcaption><b>Maya K.</b> · Product Manager</figcaption>
+      </figure>
+    </aside>
 
-      <div class="auth-alert" id="auth-alert"></div>
+    <!-- ── Form panel ── -->
+    <main class="auth-main">
+      <div class="auth-topbar">
+        <a href="index.html" class="auth-back">← Back to home</a>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <span class="t-icon">🌙</span>
+          <span class="t-label t-label-dark">Light</span>
+          <span class="t-label t-label-light">Dark</span>
+        </button>
+      </div>
 
-      <!-- Google Sign Up -->
-      <button class="social-btn google-btn" id="google-signup-btn" type="button">
-        <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-          <path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/>
-          <path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/>
-          <path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/>
-          <path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/>
-        </svg>
-        Continue with Google
-      </button>
+      <div class="auth-card">
+        <h1 class="auth-heading">Create your account</h1>
+        <p class="auth-subheading">Free forever · No credit card required</p>
 
-      <!-- Divider -->
-      <div class="auth-divider"><span>or sign up with email</span></div>
+        <div class="auth-alert" id="auth-alert" role="alert"></div>
 
-      <!-- Signup Form -->
-      <form class="auth-form" id="signup-form" novalidate>
+        <button class="social-btn google-btn" id="google-signup-btn" type="button"></button>
 
-        <div class="auth-field">
-          <label for="signup-name">Full name</label>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#128100;</span>
+        <div class="auth-divider"><span>or sign up with email</span></div>
+
+        <form class="auth-form" id="signup-form" novalidate>
+
+          <div class="auth-field">
+            <label for="signup-name">Full name</label>
             <input type="text" id="signup-name" placeholder="Alex Chen" autocomplete="name" required>
           </div>
-        </div>
 
-        <!-- Phone with country code — hidden until SMS provider is configured (#18) -->
-        <div class="auth-field" id="signup-phone-field" style="display:none">
-          <label for="signup-phone">Phone number <span class="optional-tag">optional</span></label>
-          <div class="phone-input-row">
-            <select class="country-select" id="signup-country-code">
-              <option value="+91">&#127470;&#127475; +91</option>
-              <option value="+1">&#127482;&#127480; +1</option>
-              <option value="+44">&#127468;&#127463; +44</option>
-              <option value="+61">&#127462;&#127482; +61</option>
-              <option value="+971">&#127462;&#127466; +971</option>
-              <option value="+65">&#127480;&#127468; +65</option>
-              <option value="+49">&#127465;&#127466; +49</option>
-              <option value="+33">&#127467;&#127479; +33</option>
-            </select>
-            <input type="tel" id="signup-phone" placeholder="98765 43210" autocomplete="tel" class="phone-input">
+          <!-- Phone — hidden until an SMS provider is configured -->
+          <div class="auth-field" id="signup-phone-field" style="display:none">
+            <label for="signup-phone">Phone number <span class="optional-tag">optional</span></label>
+            <div class="phone-input-row">
+              <select class="country-select" id="signup-country-code">
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+971">🇦🇪 +971</option>
+                <option value="+65">🇸🇬 +65</option>
+                <option value="+49">🇩🇪 +49</option>
+                <option value="+33">🇫🇷 +33</option>
+              </select>
+              <input type="tel" id="signup-phone" placeholder="98765 43210" autocomplete="tel" class="phone-input">
+            </div>
           </div>
-        </div>
 
-        <div class="auth-field">
-          <label for="signup-email">Email address</label>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#9993;</span>
+          <div class="auth-field">
+            <label for="signup-email">Email address</label>
             <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required>
           </div>
-        </div>
 
-        <div class="auth-field">
-          <label for="signup-password">Password</label>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#128274;</span>
-            <input type="password" id="signup-password" placeholder="Min. 8 characters" autocomplete="new-password" required minlength="8">
-            <button type="button" class="pw-toggle" id="pw-toggle-signup" aria-label="Show password">&#128065;</button>
+          <div class="auth-field">
+            <label for="signup-password">Password</label>
+            <div class="pw-wrap">
+              <input type="password" id="signup-password" placeholder="Min. 8 characters" autocomplete="new-password" required minlength="8">
+              <button type="button" class="pw-toggle" id="pw-toggle-signup" aria-label="Show password">👁</button>
+            </div>
+            <div class="password-strength" id="pw-strength" style="display:none">
+              <div class="strength-bar" id="bar-1"></div>
+              <div class="strength-bar" id="bar-2"></div>
+              <div class="strength-bar" id="bar-3"></div>
+              <div class="strength-bar" id="bar-4"></div>
+            </div>
+            <span class="strength-label" id="strength-label"></span>
+            <ul class="pw-criteria" id="pw-criteria" style="display:none">
+              <li id="pw-crit-length">At least 8 characters</li>
+              <li id="pw-crit-upper">One uppercase letter</li>
+              <li id="pw-crit-lower">One lowercase letter</li>
+              <li id="pw-crit-num">Number or special char</li>
+            </ul>
           </div>
-          <!-- Password strength indicator -->
-          <div class="password-strength" id="pw-strength" style="display:none">
-            <div class="strength-bar" id="bar-1"></div>
-            <div class="strength-bar" id="bar-2"></div>
-            <div class="strength-bar" id="bar-3"></div>
-            <div class="strength-bar" id="bar-4"></div>
-          </div>
-          <span class="strength-label" id="strength-label"></span>
-          <!-- Password criteria checklist (#13) -->
-          <ul class="pw-criteria" id="pw-criteria" style="display:none">
-            <li id="pw-crit-length">At least 8 characters</li>
-            <li id="pw-crit-upper">One uppercase letter</li>
-            <li id="pw-crit-lower">One lowercase letter</li>
-            <li id="pw-crit-num">Number or special char</li>
-          </ul>
-        </div>
 
-        <div class="auth-field">
-          <label for="signup-confirm">Confirm password</label>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#128275;</span>
+          <div class="auth-field">
+            <label for="signup-confirm">Confirm password</label>
             <input type="password" id="signup-confirm" placeholder="Repeat your password" autocomplete="new-password" required>
           </div>
-        </div>
 
-        <button type="submit" class="auth-submit" id="signup-btn">
-          <div class="spinner"></div>
-          <span class="btn-label">Create account &rarr;</span>
-        </button>
+          <button type="submit" class="auth-submit" id="signup-btn">
+            <div class="spinner"></div>
+            <span class="btn-label">Create account →</span>
+          </button>
 
-        <p class="auth-trust">&#128274; 256-bit encrypted &middot; Never sold &middot; Delete anytime</p>
+          <p class="auth-trust">🔒 256-bit encrypted · Never sold · Delete anytime</p>
+        </form>
 
-      </form>
+        <p class="auth-footer">
+          Already have an account? <a href="login.html">Log in</a>
+        </p>
 
-      <!-- Phone OTP: hidden until SMS provider is configured (#18) -->
-      <!--
-      <div class="auth-divider"><span>or</span></div>
-      <button class="social-btn phone-btn" id="phone-signup-btn" type="button">
-        <span>&#128222;</span> Sign up with Phone
-      </button>
-      <div class="phone-panel" id="phone-signup-panel" style="display:none">
-        ...
+        <p class="auth-terms">
+          By signing up, you agree to our
+          <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+          We’ll never share your data.
+        </p>
       </div>
-      -->
-
-      <p class="auth-footer">
-        Already have an account? <a href="login.html">Log in</a>
-      </p>
-
-      <p class="auth-terms">
-        By signing up, you agree to our
-        <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
-        We&rsquo;ll never share your data.
-      </p>
-
-    </div>
+    </main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -162,6 +145,11 @@
     const form    = document.getElementById('signup-form');
     const btn     = document.getElementById('signup-btn');
     const alertEl = document.getElementById('auth-alert');
+
+    // ── Google button content (single source — restored after loading state) ──
+    const GOOGLE_BTN_HTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+    const googleSignupBtn = document.getElementById('google-signup-btn');
+    googleSignupBtn.innerHTML = GOOGLE_BTN_HTML;
 
     function showAlert(msg, type = 'error') {
       alertEl.textContent = msg;
@@ -174,18 +162,22 @@
       btnEl.classList.toggle('loading', on);
     }
 
-    // ── Password visibility toggle ────────────────────────────────────────────
-    document.getElementById('pw-toggle-signup').addEventListener('click', function() {
+    // ── Password visibility toggle ───────────────────────────────────────────
+    document.getElementById('pw-toggle-signup').addEventListener('click', function () {
       const inp = document.getElementById('signup-password');
-      const isText = inp.type === 'text';
-      inp.type = isText ? 'password' : 'text';
+      inp.type = inp.type === 'text' ? 'password' : 'text';
     });
 
-    // ── Password strength meter ───────────────────────────────────────────────
-    const pwInput    = document.getElementById('signup-password');
-    const pwStrength = document.getElementById('pw-strength');
-    const strengthLbl= document.getElementById('strength-label');
-    const bars       = [1,2,3,4].map(i => document.getElementById('bar-'+i));
+    // ── Password strength meter + criteria checklist ─────────────────────────
+    const pwInput     = document.getElementById('signup-password');
+    const pwStrength  = document.getElementById('pw-strength');
+    const strengthLbl = document.getElementById('strength-label');
+    const bars        = [1, 2, 3, 4].map(i => document.getElementById('bar-' + i));
+    const pwCriteria  = document.getElementById('pw-criteria');
+    const critLength  = document.getElementById('pw-crit-length');
+    const critUpper   = document.getElementById('pw-crit-upper');
+    const critLower   = document.getElementById('pw-crit-lower');
+    const critNum     = document.getElementById('pw-crit-num');
 
     function getStrength(pw) {
       let s = 0;
@@ -195,35 +187,31 @@
       if (/[0-9]/.test(pw) || /[^A-Za-z0-9]/.test(pw)) s++;
       return s;
     }
-    // Password criteria elements (#13)
-    const pwCriteria = document.getElementById('pw-criteria');
-    const critLength = document.getElementById('pw-crit-length');
-    const critUpper  = document.getElementById('pw-crit-upper');
-    const critLower  = document.getElementById('pw-crit-lower');
-    const critNum    = document.getElementById('pw-crit-num');
 
     pwInput.addEventListener('input', () => {
       const pw = pwInput.value;
-      if (!pw) { pwStrength.style.display='none'; strengthLbl.textContent=''; pwCriteria.style.display='none'; return; }
+      if (!pw) {
+        pwStrength.style.display = 'none';
+        strengthLbl.textContent  = '';
+        pwCriteria.style.display = 'none';
+        return;
+      }
       pwStrength.style.display = 'flex';
       pwCriteria.style.display = 'grid';
-      const score = getStrength(pw);
-      const labels = ['','Weak','Fair','Good','Strong'];
-      const cls    = score<=1?'weak':score<=2?'medium':'strong';
-      bars.forEach((bar,i) => { bar.className='strength-bar'; if(i<score)bar.classList.add(cls); });
-      strengthLbl.textContent = labels[score]||'';
-      strengthLbl.style.color = score<=1?'var(--error)':score<=2?'var(--warning)':'var(--success)';
+      const score  = getStrength(pw);
+      const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+      const cls    = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
+      bars.forEach((bar, i) => { bar.className = 'strength-bar'; if (i < score) bar.classList.add(cls); });
+      strengthLbl.textContent = labels[score] || '';
+      strengthLbl.style.color = score <= 1 ? 'var(--error)' : score <= 2 ? 'var(--warning)' : 'var(--success)';
 
-      // Update criteria checklist (#13)
       critLength.classList.toggle('met', pw.length >= 8);
       critUpper.classList.toggle('met', /[A-Z]/.test(pw));
       critLower.classList.toggle('met', /[a-z]/.test(pw));
       critNum.classList.toggle('met', /[0-9]/.test(pw) || /[^A-Za-z0-9]/.test(pw));
     });
 
-    // ── Google OAuth ──────────────────────────────────────────────────────────
-    // Google OAuth with loading state (#17)
-    const googleSignupBtn = document.getElementById('google-signup-btn');
+    // ── Google OAuth ─────────────────────────────────────────────────────────
     googleSignupBtn.addEventListener('click', async () => {
       googleSignupBtn.classList.add('loading');
       googleSignupBtn.innerHTML = '<span class="google-spinner"></span> Redirecting to Google…';
@@ -236,22 +224,21 @@
       } catch (err) {
         showAlert('Google sign-up failed: ' + (err.message || 'Please try again.'));
         googleSignupBtn.classList.remove('loading');
-        googleSignupBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+        googleSignupBtn.innerHTML = GOOGLE_BTN_HTML;
       }
-      // Fallback re-enable after 6s if redirect didn't happen
       setTimeout(() => {
         if (googleSignupBtn.classList.contains('loading')) {
           googleSignupBtn.classList.remove('loading');
-          googleSignupBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+          googleSignupBtn.innerHTML = GOOGLE_BTN_HTML;
         }
       }, 6000);
     });
 
-    // ── Email/Password signup ─────────────────────────────────────────────────
+    // ── Email/password signup ────────────────────────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Lock immediately — prevents double-submit (#5)
+      // Lock immediately — prevents double-submit
       if (btn.disabled) return;
       btn.disabled = true;
 
@@ -262,7 +249,7 @@
       const password = document.getElementById('signup-password').value;
       const confirm  = document.getElementById('signup-confirm').value;
       const cc       = document.getElementById('signup-country-code').value;
-      const phoneNum = document.getElementById('signup-phone').value.trim().replace(/\s+/g,'');
+      const phoneNum = document.getElementById('signup-phone').value.trim().replace(/\s+/g, '');
       const phone    = phoneNum ? cc + phoneNum : null;
 
       if (!name || !email || !password || !confirm) {
@@ -284,13 +271,13 @@
 
       setLoading(btn, true);
       try {
-        const { data, error } = await window._supabase.auth.signUp({
+        const { error } = await window._supabase.auth.signUp({
           email, password,
           options: { data: { full_name: name, phone: phone || '' } }
         });
         if (error) throw error;
-        showAlert('&#9989; Account created! Check your email to confirm, then log in.', 'success');
-        // Keep button locked permanently on success — account already created
+        showAlert('✅ Account created! Check your email to confirm, then log in.', 'success');
+        // Keep button locked on success — account already created
         const labelEl = btn.querySelector('.btn-label');
         if (labelEl) labelEl.textContent = '✓ Account created';
         btn.classList.remove('loading');
@@ -304,12 +291,9 @@
     });
 
     // Clear confirm error on re-type
-    document.getElementById('signup-confirm').addEventListener('input', function() {
+    document.getElementById('signup-confirm').addEventListener('input', function () {
       this.classList.remove('error');
     });
-
-    // ── Phone Sign Up — disabled (#18: no SMS provider configured) ───────────
-    // Phone OTP JS removed. Re-enable when SMS provider (Twilio) is set up.
   </script>
 
 </body>

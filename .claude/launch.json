@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "resumeai",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["backend/server.js"],
+      "cwd": "airuse-improved",
+      "port": 3001
+    }
+  ]
+}

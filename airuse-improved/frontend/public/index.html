@@ -3,514 +3,394 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed</title>
-  <meta name="description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume and cover letter in under 10 seconds. Free forever. Powered by Groq AI.">
+  <title>ResumeAI — Free AI Resume Builder | Beat the ATS, Land the Interview</title>
+  <meta name="description" content="Upload your resume, paste a job description, and get an ATS-optimized resume with a 91+ score in under 10 seconds. Cover letter included. Free forever.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://tailoresumeai.xyz/">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://airuse-tailor-4pej.vercel.app">
-  <meta property="og:title" content="ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed">
-  <meta property="og:description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume and cover letter in under 10 seconds. Free forever. Powered by Groq AI.">
-  <meta property="og:image" content="https://airuse-tailor-4pej.vercel.app/og-image.png">
+  <meta property="og:url" content="https://tailoresumeai.xyz/">
+  <meta property="og:title" content="ResumeAI — Free AI Resume Builder | Beat the ATS">
+  <meta property="og:description" content="Upload your resume, paste a job description, and get an ATS-optimized resume with a 91+ score in under 10 seconds. Free forever.">
+  <meta property="og:image" content="https://tailoresumeai.xyz/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ResumeAI — Free ATS Resume Builder | 90+ Score Guaranteed">
-  <meta name="twitter:description" content="Upload your resume PDF, paste a job description, and get an ATS-optimised resume in under 10 seconds. Free forever.">
-  <meta name="twitter:image" content="https://airuse-tailor-4pej.vercel.app/og-image.png">
+  <meta name="twitter:title" content="ResumeAI — Free AI Resume Builder | Beat the ATS">
+  <meta name="twitter:description" content="ATS-optimized resume + cover letter in under 10 seconds. Free forever.">
+  <meta name="twitter:image" content="https://tailoresumeai.xyz/og-image.png">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ResumeAI","description":"AI-powered ATS resume builder. Upload your PDF, paste a job description, get a tailored resume in seconds.","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://airuse-tailor-4pej.vercel.app","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI resume tailoring","ATS optimization","PDF upload","Cover letter generation","90+ ATS score"]}
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"ResumeAI","description":"AI-powered ATS resume builder. Upload your PDF, paste a job description, get a tailored resume in seconds.","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://tailoresumeai.xyz","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI resume tailoring","ATS optimization","PDF upload","Cover letter generation","91+ ATS score"]}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/landing-v2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/landing.css">
   <script src="js/theme.js"></script>
 </head>
-<body>
+<body class="landing">
 
-  <!-- Scroll Progress -->
-  <div id="scroll-progress"></div>
+  <!-- ── Ambient background ── -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
 
   <!-- ── Navigation ── -->
-  <nav class="v2-nav" id="v2-nav">
-    <div class="v2-nav-inner">
-      <div class="v2-logo">Resume<span>AI</span></div>
-      <div class="v2-nav-links" id="v2-nav-links">
-        <a href="#how-it-works">How It Works</a>
+  <nav class="site-nav" id="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="logo" aria-label="ResumeAI home">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5h6L10 22l8.5-11.5h-6L13 2z" fill="#fff"/></svg>
+        </span>
+        Resume<span>AI</span>
+      </a>
+      <div class="site-nav-links" id="nav-links">
+        <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#testimonials">Reviews</a>
-        <a href="login.html" class="v2-nav-login">Log in</a>
+        <a href="#faq">FAQ</a>
+        <a href="login.html" class="nav-link-login">Log in</a>
+        <a href="builder.html" class="btn btn-primary nav-cta-mobile">Build my resume →</a>
       </div>
-      <div class="v2-nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <div class="site-nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">
           <span class="t-icon">🌙</span>
           <span class="t-label t-label-dark">Light</span>
           <span class="t-label t-label-light">Dark</span>
         </button>
-        <button class="v2-nav-cta" id="nav-cta-btn">Get Started Free →</button>
-        <button class="v2-hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+        <a href="builder.html" class="btn btn-primary btn-sm nav-cta">Build my resume →</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- ── Hero Section: Split Panel ── -->
-  <section class="v2-hero" id="hero">
-    <!-- LEFT: Light Panel -->
-    <div class="v2-hero-left">
-      <div class="v2-hero-left-inner">
-        <div class="v2-eyebrow">
-          <span class="v2-live-dot"></span>
-          How AI is reshaping hiring
+  <!-- ── Hero ── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="badge hero-badge">
+          <span class="pulse-dot"></span> Free forever · No credit card
         </div>
-        <h1 class="v2-h1">
-          <span class="v2-h1-sub">Your Resume,</span>
-          <span class="v2-h1-main">Built for the<br>ATS Gate.</span>
+        <h1>
+          Beat the bots.<br>
+          <span class="grad-text">Land the interview.</span>
         </h1>
-        <p class="v2-hero-desc">
-          From PDF upload to AI-tailored resume — ResumeAI matches every keyword, 
-          boosts your ATS score past 90, and delivers results in seconds.
+        <p class="hero-sub">
+          75% of resumes are rejected by ATS software before a human ever reads them.
+          ResumeAI rewrites yours to match the job description — exact keywords,
+          quantified bullets, 91+ ATS score — in under 10 seconds.
         </p>
-
-        <!-- Tags -->
-        <div class="v2-tags">
-          <span class="v2-tag">Performance</span>
-          <span class="v2-tag">Availability</span>
-          <span class="v2-tag">ATS Score</span>
-          <span class="v2-tag">Cover Letter</span>
-          <span class="v2-tag">PDF Upload</span>
+        <div class="hero-actions">
+          <a href="builder.html" class="btn btn-primary btn-lg">Build my resume — free</a>
+          <a href="#how-it-works" class="btn btn-outline btn-lg">See how it works</a>
         </div>
-
-        <!-- CTA -->
-        <button class="v2-cta-btn" id="hero-cta-btn" aria-label="Build my resume for free">
-          <span class="v2-cta-spinner"></span>
-          Build My Resume — Free
-        </button>
-
-        <a href="login.html" class="v2-signin-link">Already have an account? Sign in →</a>
-
-        <!-- Social Proof -->
-        <div class="v2-social-proof">
-          <div class="v2-avatars">
-            <div class="v2-av" style="background:linear-gradient(135deg,#E44D27,#c43a18)">S</div>
-            <div class="v2-av" style="background:linear-gradient(135deg,#10B981,#059669)">A</div>
-            <div class="v2-av" style="background:linear-gradient(135deg,#FD9D45,#E44D27)">M</div>
-            <div class="v2-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">J</div>
-            <div class="v2-av" style="background:linear-gradient(135deg,#06B6D4,#0284C7)">K</div>
+        <div class="hero-proof">
+          <div class="avatars">
+            <span class="av" style="--av:#7c5cfc">S</span>
+            <span class="av" style="--av:#10b981">A</span>
+            <span class="av" style="--av:#f59e0b">M</span>
+            <span class="av" style="--av:#38bdf8">J</span>
+            <span class="av" style="--av:#ef4477">K</span>
           </div>
-          <p class="v2-av-text"><strong>2,847+</strong> resumes built this week</p>
+          <p><strong>2,400+ resumes</strong> tailored this month · ⭐ 4.9/5</p>
         </div>
       </div>
+
+      <!-- Hero visual: resume mockup + live ATS donut -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock-resume">
+          <div class="mr-head">
+            <div class="mr-name"></div>
+            <div class="mr-contact"></div>
+          </div>
+          <div class="mr-section">
+            <div class="mr-title"></div>
+            <div class="mr-line w-95"></div>
+            <div class="mr-line w-88"></div>
+            <div class="mr-line w-70 hl"></div>
+          </div>
+          <div class="mr-section">
+            <div class="mr-title"></div>
+            <div class="mr-line w-92 hl"></div>
+            <div class="mr-line w-85"></div>
+            <div class="mr-line w-90"></div>
+            <div class="mr-line w-60 hl"></div>
+          </div>
+          <div class="mr-section">
+            <div class="mr-title"></div>
+            <div class="mr-chiprow">
+              <span class="mr-chip"></span><span class="mr-chip wide"></span><span class="mr-chip"></span><span class="mr-chip wide"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ats-float">
+          <svg viewBox="0 0 100 100" class="ats-float-donut">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--ats-track)" stroke-width="9"/>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#10b981" stroke-width="9"
+              stroke-dasharray="240 264" stroke-dashoffset="66" stroke-linecap="round" class="donut-arc"/>
+          </svg>
+          <div class="ats-float-num"><strong>92</strong><span>ATS score</span></div>
+        </div>
+
+        <div class="kw-float kw-1">✓ React.js</div>
+        <div class="kw-float kw-2">✓ CI/CD pipelines</div>
+        <div class="kw-float kw-3">✓ Cross-functional</div>
+      </div>
     </div>
+  </header>
 
-    <!-- RIGHT: Dark Panel -->
-    <div class="v2-hero-right">
-      <div class="v2-hero-right-inner">
-        <!-- Header text -->
-        <div class="v2-right-headline">
-          <p class="v2-right-kicker">The Future Forged in Precision.</p>
-          <p class="v2-right-body">By merging AI with your career story, you unlock smarter applications that reduce rejections, enhance visibility, and land you the interviews you deserve.</p>
-        </div>
+  <!-- ── Stats strip ── -->
+  <section class="stats-strip reveal">
+    <div class="stat"><strong>91+</strong><span>average ATS score</span></div>
+    <div class="stat-div"></div>
+    <div class="stat"><strong>&lt;10s</strong><span>generation time</span></div>
+    <div class="stat-div"></div>
+    <div class="stat"><strong>3</strong><span>export formats</span></div>
+    <div class="stat-div"></div>
+    <div class="stat"><strong>$0</strong><span>forever</span></div>
+  </section>
 
-        <!-- Orbital Visualization -->
-        <div class="v2-orbital-wrap">
-          <div class="v2-orbital">
-            <div class="v2-ring v2-ring-1">
-              <div class="v2-ring-label v2-ring-active">ATS Match</div>
-            </div>
-            <div class="v2-ring v2-ring-2">
-              <div class="v2-ring-label">Keywords</div>
-            </div>
-            <div class="v2-ring v2-ring-3">
-              <div class="v2-ring-label">Score</div>
-            </div>
-            <div class="v2-ring v2-ring-4">
-              <div class="v2-ring-label">AI</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom action strip -->
-        <div class="v2-right-footer">
-          <div class="v2-certified">
-            <span class="v2-cert-dot">✔</span>
-            100% Free Forever
-          </div>
-          <button class="v2-right-cta" id="hero-right-cta">
-            Start Building →
-          </button>
-        </div>
+  <!-- ── How it works ── -->
+  <section class="section" id="how-it-works">
+    <div class="section-head reveal">
+      <span class="badge">How it works</span>
+      <h2>From job posting to tailored resume<br>in three steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Upload your resume</h3>
+        <p>Drop in your existing PDF — AI extracts and auto-fills your experience, education, and contact details. Or type it in manually.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <h3>Paste the job description</h3>
+        <p>AI analyzes the posting, extracts every required skill and keyword, and mirrors the exact job title — no paraphrasing.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <h3>Download &amp; apply</h3>
+        <p>Get a tailored resume plus matching cover letter. Export as PDF, Word, or plain-text — whichever the job portal prefers.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── Ticker ── -->
-  <div class="v2-ticker" aria-hidden="true" role="presentation">
-    <div class="v2-ticker-track">
-      <span>Land More Interviews</span><span class="v2-sep">✦</span>
-      <span>ATS Score 90+</span><span class="v2-sep">✦</span>
-      <span>AI-Tailored Resumes</span><span class="v2-sep">✦</span>
-      <span>Upload PDF & Auto-Fill</span><span class="v2-sep">✦</span>
-      <span>100% Free Forever</span><span class="v2-sep">✦</span>
-      <span>Instant Download</span><span class="v2-sep">✦</span>
-      <span>Cover Letter Included</span><span class="v2-sep">✦</span>
-      <span>Land More Interviews</span><span class="v2-sep">✦</span>
-      <span>ATS Score 90+</span><span class="v2-sep">✦</span>
-      <span>AI-Tailored Resumes</span><span class="v2-sep">✦</span>
-      <span>Upload PDF & Auto-Fill</span><span class="v2-sep">✦</span>
-      <span>100% Free Forever</span><span class="v2-sep">✦</span>
-      <span>Instant Download</span><span class="v2-sep">✦</span>
-      <span>Cover Letter Included</span><span class="v2-sep">✦</span>
+  <!-- ── Features ── -->
+  <section class="section" id="features">
+    <div class="section-head reveal">
+      <span class="badge">Features</span>
+      <h2>Everything you need to get past<br>the resume screen</h2>
     </div>
-  </div>
-
-  <!-- ── Stats ── -->
-  <section class="v2-stats">
-    <div class="v2-stats-inner">
-      <div class="v2-stat">
-        <div class="v2-stat-num" data-count="94" data-suffix="+">0+</div>
-        <div class="v2-stat-label">ATS score</div>
+    <div class="feature-grid">
+      <div class="feature reveal">
+        <div class="feature-icon">🎯</div>
+        <h3>Real ATS scoring</h3>
+        <p>Every resume is scored against the job description with a per-section breakdown — keywords, title match, formatting, metrics.</p>
       </div>
-      <div class="v2-stat-divider"></div>
-      <div class="v2-stat">
-        <div class="v2-stat-num" data-count="100" data-suffix="%">0%</div>
-        <div class="v2-stat-label">Free, always</div>
+      <div class="feature reveal" style="transition-delay:.06s">
+        <div class="feature-icon">🔑</div>
+        <h3>Verbatim keyword matching</h3>
+        <p>ATS bots match exact strings. ResumeAI keeps “React.js” as “React.js” and embeds 15–25 JD keywords across multiple sections.</p>
       </div>
-      <div class="v2-stat-divider"></div>
-      <div class="v2-stat">
-        <div class="v2-stat-num" data-count="10" data-suffix="s">0s</div>
-        <div class="v2-stat-label">Seconds to build</div>
+      <div class="feature reveal" style="transition-delay:.12s">
+        <div class="feature-icon">✉️</div>
+        <h3>Cover letter included</h3>
+        <p>A tailored, role-specific cover letter is generated alongside every resume — no extra clicks, no extra cost.</p>
       </div>
-      <div class="v2-stat-divider"></div>
-      <div class="v2-stat">
-        <div class="v2-stat-num">⚡</div>
-        <div class="v2-stat-label">Groq Powered</div>
+      <div class="feature reveal">
+        <div class="feature-icon">📄</div>
+        <h3>PDF, Word &amp; ATS text</h3>
+        <p>Download print-ready PDF, an editable .docx, or a plain-text version with the highest parse rate for strict job portals.</p>
+      </div>
+      <div class="feature reveal" style="transition-delay:.06s">
+        <div class="feature-icon">📊</div>
+        <h3>Personal dashboard</h3>
+        <p>Sign in to auto-save every resume you generate. Preview, re-download, and manage them from one place.</p>
+      </div>
+      <div class="feature reveal" style="transition-delay:.12s">
+        <div class="feature-icon">🔒</div>
+        <h3>Private by design</h3>
+        <p>Your data is encrypted, never sold, and deletable anytime. Guest mode works without an account at all.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── How It Works ── -->
-  <section class="v2-section v2-how" id="how-it-works">
-    <div class="v2-section-inner">
-      <div class="v2-section-eyebrow">Simple Process</div>
-      <h2 class="v2-section-h2">Three steps to <span class="v2-grad">your dream job</span></h2>
-      <div class="v2-steps">
-        <div class="v2-step v2-reveal">
-          <div class="v2-step-num">01</div>
-          <div class="v2-step-icon">📄</div>
-          <h3>Upload or Type</h3>
-          <p>Drop your existing PDF resume for instant auto-fill, or type your details fresh.</p>
-        </div>
-        <div class="v2-step-arrow">→</div>
-        <div class="v2-step v2-reveal" style="--delay:0.12s">
-          <div class="v2-step-num">02</div>
-          <div class="v2-step-icon">🎯</div>
-          <h3>Paste Job Description</h3>
-          <p>Paste the JD and our AI matches your resume to every keyword and requirement.</p>
-        </div>
-        <div class="v2-step-arrow">→</div>
-        <div class="v2-step v2-reveal" style="--delay:0.24s">
-          <div class="v2-step-num">03</div>
-          <div class="v2-step-icon">⚡</div>
-          <h3>Generate & Download</h3>
-          <p>Get a 90+ ATS resume + cover letter in seconds. Download PDF, Word, or plain text.</p>
-        </div>
+  <!-- ── ATS showcase ── -->
+  <section class="section showcase">
+    <div class="showcase-inner">
+      <div class="showcase-copy reveal">
+        <span class="badge">ATS Score Panel</span>
+        <h2>Know your score before the recruiter does</h2>
+        <p>
+          Most builders guess. ResumeAI scores your generated resume against the actual
+          job description — the same way tools like Jobscan do — and shows you exactly
+          what's missing and how to fix it.
+        </p>
+        <ul class="check-list">
+          <li>Per-section score breakdown</li>
+          <li>Missing keywords flagged instantly</li>
+          <li>Quick wins to push your score higher</li>
+          <li>Keyword highlighter on the rendered resume</li>
+        </ul>
+        <a href="builder.html" class="btn btn-primary">Try it on your resume →</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ── Features Bento ── -->
-  <section class="v2-section v2-features" id="features">
-    <div class="v2-section-inner">
-      <div class="v2-section-eyebrow">Why ResumeAI</div>
-      <h2 class="v2-section-h2">Built to get you <span class="v2-grad">hired</span></h2>
-
-      <!-- Split Card: mirrors the mockup's split white/dark card -->
-      <div class="v2-split-card v2-reveal">
-        <div class="v2-split-left">
-          <div class="v2-split-eyebrow">How AI</div>
-          <h3>Resume tailoring is reshaping job applications</h3>
-          <p>From keyword matching to tone calibration, AI-powered resume builders are driving a new era of hiring success, personalisation, and speed.</p>
-          <div class="v2-split-tags">
-            <span class="v2-tag">Performance</span>
-            <span class="v2-tag">ATS Parsing</span>
-            <span class="v2-tag">Keyword Match</span>
-            <span class="v2-tag">Speed</span>
-            <span class="v2-tag">Cover Letter</span>
-          </div>
-          <button class="v2-cta-btn v2-sm-cta" id="features-cta-btn">
-            <span class="v2-cta-spinner"></span>
-            Start Building
-          </button>
+      <div class="showcase-panel reveal" aria-hidden="true">
+        <div class="sp-head">
+          <span class="sp-title">🎯 ATS Score Analysis</span>
+          <span class="sp-grade">A+</span>
         </div>
-        <div class="v2-split-right">
-          <p class="v2-split-right-headline">The Future of Job Applications.</p>
-          <p class="v2-split-right-body">By merging your work history with AI intelligence, we generate resumes that get callbacks — not ignored.</p>
-          <!-- Concentric rings visual -->
-          <div class="v2-rings-vis">
-            <div class="v2-rings-group">
-              <div class="v2-cring v2-cring-active">
-                <span>ATS Match</span>
-              </div>
-              <div class="v2-cring">
-                <span>Keywords</span>
-              </div>
-              <div class="v2-cring">
-                <span>Score</span>
-              </div>
-              <div class="v2-cring">
-                <span>Speed</span>
-              </div>
-            </div>
+        <div class="sp-body">
+          <div class="sp-donut">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--ats-track)" stroke-width="10"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="10"
+                stroke-dasharray="228 251" stroke-dashoffset="62" stroke-linecap="round"/>
+              <text x="50" y="57" text-anchor="middle" fill="var(--text)" font-size="24" font-weight="700">91</text>
+            </svg>
           </div>
-          <div class="v2-split-right-footer">
-            <div class="v2-certified">
-              <span class="v2-cert-dot">✔</span>
-              Certified Secure
-            </div>
-            <button class="v2-outline-btn" id="cta-strip-btn">Advanced AI →</button>
+          <div class="sp-rows">
+            <div class="sp-row"><span>Keyword match</span><div class="sp-bar"><i style="width:94%"></i></div><b>34/36</b></div>
+            <div class="sp-row"><span>Title match</span><div class="sp-bar"><i style="width:100%"></i></div><b>15/15</b></div>
+            <div class="sp-row"><span>Formatting</span><div class="sp-bar"><i style="width:90%"></i></div><b>18/20</b></div>
+            <div class="sp-row"><span>Metrics</span><div class="sp-bar"><i style="width:82%;background:var(--warning)"></i></div><b>14/17</b></div>
           </div>
         </div>
-      </div>
-
-      <!-- Bento Grid -->
-      <div class="v2-bento">
-        <div class="v2-bcard v2-bcard-lg v2-reveal">
-          <div class="v2-bcard-icon">🤖</div>
-          <h3>AI-Tailored Content</h3>
-          <p>Our AI reads the job description and rewrites your experience to match every keyword, requirement, and skill — scoring you higher than generic resumes.</p>
-          <div class="v2-bcard-badge">GPT-level · Blazing Fast</div>
-        </div>
-        <div class="v2-bcard v2-reveal" style="--delay:0.1s">
-          <div class="v2-bcard-icon">📊</div>
-          <h3>ATS-Optimised Format</h3>
-          <p>Clean, parser-friendly formatting that scores 90+ on ATS systems every time.</p>
-        </div>
-        <div class="v2-bcard v2-bcard-accent v2-reveal" style="--delay:0.15s">
-          <div class="v2-bcard-bignum">90+</div>
-          <div class="v2-bcard-bsub">ATS Score</div>
-        </div>
-        <div class="v2-bcard v2-reveal" style="--delay:0.2s">
-          <div class="v2-bcard-icon">🔒</div>
-          <h3>Private & Secure</h3>
-          <p>Your data stays private. No selling, no sharing, delete anytime.</p>
-        </div>
-        <div class="v2-bcard v2-reveal" style="--delay:0.25s">
-          <div class="v2-bcard-icon">📎</div>
-          <h3>PDF Upload & Auto-Fill</h3>
-          <p>Drop your resume PDF and watch AI fill every field in under 3 seconds.</p>
-        </div>
-        <div class="v2-bcard v2-reveal" style="--delay:0.3s">
-          <div class="v2-bcard-icon">⚡</div>
-          <h3>Ready in &lt;10 Seconds</h3>
-          <p>Groq's ultra-fast inference means your tailored resume is ready instantly.</p>
+        <div class="sp-tags">
+          <span class="sp-tag">Kubernetes</span>
+          <span class="sp-tag">Terraform</span>
+          <span class="sp-tag ok">+ 23 matched</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── Testimonials ── -->
-  <section class="v2-section" id="testimonials">
-    <div class="v2-section-inner">
-      <div class="v2-section-eyebrow">Real results</div>
-      <h2 class="v2-section-h2">What job seekers <span class="v2-grad">say</span></h2>
-      <div class="v2-testimonials">
-        <div class="v2-tcard v2-reveal">
-          <div class="v2-tstars">★★★★★</div>
-          <p class="v2-tquote">"I updated my resume for a PM role at a fintech startup. Got a callback from the recruiter in 2 days. The ATS score went from 61 to 93."</p>
-          <div class="v2-tauthor">
-            <div class="v2-tav" style="background:linear-gradient(135deg,#E44D27,#c43a18)">SA</div>
-            <div>
-              <div class="v2-tname">Sarah A.</div>
-              <div class="v2-trole">Product Manager — recently hired at Stripe</div>
-            </div>
-          </div>
-        </div>
-        <div class="v2-tcard v2-reveal" style="--delay:0.12s">
-          <div class="v2-tstars">★★★★★</div>
-          <p class="v2-tquote">"As a career changer, I was getting zero responses. ResumeAI rewrote my experience to match each JD and I landed 3 interviews in my first week."</p>
-          <div class="v2-tauthor">
-            <div class="v2-tav" style="background:linear-gradient(135deg,#10B981,#059669)">MK</div>
-            <div>
-              <div class="v2-tname">Marcus K.</div>
-              <div class="v2-trole">Career changer → Software Engineer</div>
-            </div>
-          </div>
-        </div>
-        <div class="v2-tcard v2-reveal" style="--delay:0.24s">
-          <div class="v2-tstars">★★★★★</div>
-          <p class="v2-tquote">"The cover letter feature alone is worth it. It writes a personalised one for every application in seconds. Total game changer."</p>
-          <div class="v2-tauthor">
-            <div class="v2-tav" style="background:linear-gradient(135deg,#FD9D45,#E44D27)">JP</div>
-            <div>
-              <div class="v2-tname">Jess P.</div>
-              <div class="v2-trole">Marketing Director</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="section" id="testimonials">
+    <div class="section-head reveal">
+      <span class="badge">Reviews</span>
+      <h2>Interviews booked, offers signed</h2>
+    </div>
+    <div class="quote-grid">
+      <figure class="quote reveal">
+        <div class="quote-stars">★★★★★</div>
+        <blockquote>“My resume scored 46 on Jobscan. After ResumeAI it hit 93 — and I got callbacks from 3 of the next 5 applications.”</blockquote>
+        <figcaption><span class="av" style="--av:#7c5cfc">S</span><div><strong>Sneha R.</strong><span>Software Engineer, Bengaluru</span></div></figcaption>
+      </figure>
+      <figure class="quote reveal" style="transition-delay:.08s">
+        <div class="quote-stars">★★★★★</div>
+        <blockquote>“The PDF upload is magic. It parsed my whole resume, and the tailored version actually sounded like me — just sharper.”</blockquote>
+        <figcaption><span class="av" style="--av:#10b981">A</span><div><strong>Arjun M.</strong><span>Data Analyst, Pune</span></div></figcaption>
+      </figure>
+      <figure class="quote reveal" style="transition-delay:.16s">
+        <div class="quote-stars">★★★★★</div>
+        <blockquote>“I used to spend an hour tailoring each application. Now it's paste, generate, download. The cover letter alone saves me 30 minutes.”</blockquote>
+        <figcaption><span class="av" style="--av:#f59e0b">M</span><div><strong>Maya K.</strong><span>Product Manager, Remote</span></div></figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- ── CTA Strip ── -->
-  <section class="v2-cta-strip">
-    <div class="v2-cta-strip-inner v2-reveal">
-      <div class="v2-cta-strip-left">
-        <div class="v2-cta-strip-eyebrow">Every job has an ATS gate.</div>
-        <h2>Walk Through It <span class="v2-grad">with AI.</span></h2>
-        <p>Build your tailored resume in under 10 seconds — no credit card, no limits.</p>
-        <div class="v2-trust-chips">
-          <span>✓ No credit card</span>
-          <span>✓ Instant results</span>
-          <span>✓ 90+ ATS score</span>
-        </div>
-      </div>
-      <button class="v2-cta-btn v2-cta-lg" id="cta-final-btn">
-        <span class="v2-cta-spinner"></span>
-        Build my resume — free →
-      </button>
+  <!-- ── FAQ ── -->
+  <section class="section faq" id="faq">
+    <div class="section-head reveal">
+      <span class="badge">FAQ</span>
+      <h2>Questions, answered</h2>
     </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Is ResumeAI really free? <span class="faq-chevron">▾</span></summary>
+        <p>Yes — generating, scoring, and downloading resumes is free with no credit card required. An optional free account lets you save resumes to a dashboard.</p>
+      </details>
+      <details>
+        <summary>What is an ATS and why does my score matter? <span class="faq-chevron">▾</span></summary>
+        <p>An Applicant Tracking System is software that screens resumes before a recruiter sees them. If your resume doesn't contain the right keywords in a parseable format, it's auto-rejected. A 90+ score means you clear that gate.</p>
+      </details>
+      <details>
+        <summary>Will the AI make things up about my experience? <span class="faq-chevron">▾</span></summary>
+        <p>No. ResumeAI rewrites and restructures only what you provide — it optimizes wording, ordering, and keyword placement, but the facts stay yours. Always review the output before applying.</p>
+      </details>
+      <details>
+        <summary>What file formats can I download? <span class="faq-chevron">▾</span></summary>
+        <p>Print-ready PDF, editable Word (.docx), and a plain-text ATS version that achieves the highest parse rate on strict job portals like Workday and Taleo.</p>
+      </details>
+      <details>
+        <summary>Is my data safe? <span class="faq-chevron">▾</span></summary>
+        <p>Your data is transmitted over HTTPS and stored encrypted with Supabase. We never sell or share it, and you can delete your resumes — or your whole account — anytime.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ── -->
+  <section class="final-cta reveal">
+    <h2>Your next application deserves<br><span class="grad-text">a 91+ resume</span></h2>
+    <p>Takes less than a minute. Free forever.</p>
+    <a href="builder.html" class="btn btn-primary btn-lg">Build my resume — free →</a>
   </section>
 
   <!-- ── Footer ── -->
-  <footer class="v2-footer">
-    <div class="v2-footer-inner">
-      <div class="v2-footer-logo">Resume<span>AI</span></div>
-      <p>© 2026 ResumeAI · Powered by Groq AI · 100% Free</p>
-      <div class="v2-footer-links">
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="login.html">Login</a>
-        <a href="signup.html">Sign Up</a>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5h6L10 22l8.5-11.5h-6L13 2z" fill="#fff"/></svg></span>
+          Resume<span>AI</span>
+        </a>
+        <p>AI-powered ATS resume builder.<br>Free forever.</p>
       </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="builder.html">Resume builder</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#how-it-works">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="signup.html">Sign up free</a>
+        <a href="forgot-password.html">Reset password</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ResumeAI · Powered by Groq AI</span>
+      <span>Made for job seekers, everywhere.</span>
     </div>
   </footer>
 
+  <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="js/auth.js"></script>
-  <script>
-    // ── Auth Callback ────────────────────────────────────────────────────────
-    (async function handleAuthCallback() {
-      const hash = window.location.hash;
-      if (!hash || (!hash.includes('access_token') && !hash.includes('type='))) return;
-      try {
-        const { data: { session }, error } = await window._supabase.auth.getSession();
-        if (session) { window.location.replace('dashboard.html'); }
-        else if (error) { window.location.replace('login.html?msg=confirm_expired'); }
-      } catch (err) { console.error('[auth callback] Unexpected error:', err); }
-    })();
-
-    // ── Smart CTA Navigation ─────────────────────────────────────────────────
-    async function smartNav() {
-      try {
-        const user = await window._auth.getUser();
-        window.location.href = user ? 'builder.html' : 'signup.html';
-      } catch (_) {
-        window.location.href = 'signup.html';
-      }
-    }
-
-    // ── Wire CTAs ────────────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', function() {
-      ['nav-cta-btn','hero-cta-btn','hero-right-cta','features-cta-btn','cta-strip-btn','cta-final-btn'].forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) el.addEventListener('click', smartNav);
-      });
-    });
-
-    // ── Update CTA if logged in ──────────────────────────────────────────────
-    (async function updateNavCTA() {
-      try {
-        const user = await window._auth.getUser();
-        if (user) {
-          const navBtn = document.getElementById('nav-cta-btn');
-          const heroBtn = document.getElementById('hero-cta-btn');
-          if (navBtn) navBtn.textContent = 'Open Builder →';
-          if (heroBtn) heroBtn.innerHTML = '<span class="v2-cta-spinner"></span>⚡ Open My Builder';
-        }
-      } catch (_) {}
-    })();
-  </script>
 
   <script>
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Nav scroll state
+    const nav = document.getElementById('site-nav');
+    addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 12), { passive: true });
 
-  // ── Scroll Progress ────────────────────────────────────────────────────────
-  const progressBar = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    progressBar.style.width = Math.min(pct, 100) + '%';
-  }, { passive: true });
-
-  // ── Nav Scroll ─────────────────────────────────────────────────────────────
-  const nav = document.getElementById('v2-nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
-
-  // ── Hamburger ──────────────────────────────────────────────────────────────
-  const hamburger = document.getElementById('hamburger-btn');
-  const navLinks  = document.getElementById('v2-nav-links');
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      hamburger.classList.toggle('is-open', open);
-      hamburger.setAttribute('aria-expanded', String(open));
+    // Mobile menu
+    const burger = document.getElementById('hamburger');
+    const links  = document.getElementById('nav-links');
+    burger.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
     });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
     }));
-  }
 
-  // ── Reveal on Scroll ───────────────────────────────────────────────────────
-  if (!prefersReduced) {
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const delay = e.target.style.getPropertyValue('--delay') || '0s';
-          setTimeout(() => {
-            e.target.classList.add('revealed');
-            revealObs.unobserve(e.target);
-          }, parseFloat(delay) * 1000);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.v2-reveal').forEach(el => revealObs.observe(el));
-  } else {
-    document.querySelectorAll('.v2-reveal').forEach(el => el.classList.add('revealed'));
-  }
-
-  // ── Counters ───────────────────────────────────────────────────────────────
-  const counterObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
-      if (!target) return;
-      if (prefersReduced) { el.textContent = target + suffix; counterObs.unobserve(el); return; }
-      let start = null;
-      const step = ts => {
-        if (!start) start = ts;
-        const prog = Math.min((ts - start) / 1600, 1), ease = 1 - Math.pow(1-prog, 3);
-        el.textContent = Math.floor(ease * target) + suffix;
-        if (prog < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-      counterObs.unobserve(el);
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
-
-  // ── Ticker pause on hover ──────────────────────────────────────────────────
-  const ticker = document.querySelector('.v2-ticker');
-  if (ticker) {
-    ticker.addEventListener('mouseenter', () => ticker.querySelector('.v2-ticker-track').style.animationPlayState = 'paused');
-    ticker.addEventListener('mouseleave', () => ticker.querySelector('.v2-ticker-track').style.animationPlayState = 'running');
-  }
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
-
 </body>
 </html>

@@ -4,41 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Your saved AI-generated resumes. View, download, and manage all your ATS-optimized resumes in one place.">
-  <title>ResumeAI — My Resumes</title>
-  <link rel="stylesheet" href="css/base.css">
+  <title>My Resumes — ResumeAI</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <script src="js/theme.js"></script>
 </head>
 <body class="dashboard-page">
 
-  <!-- ── Nav ── -->
-  <nav class="dash-nav">
-    <div class="dash-nav-left">
-      <div class="logo">Resume<span>AI</span></div>
+  <!-- ── App bar ── -->
+  <nav class="app-nav">
+    <div class="app-nav-side">
+      <a href="index.html" class="logo" aria-label="ResumeAI home">
+        <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5h6L10 22l8.5-11.5h-6L13 2z" fill="#fff"/></svg></span>
+        Resume<span>AI</span>
+      </a>
     </div>
-    <div class="dash-nav-right">
-      <div class="nav-user">
-        <div class="nav-user-avatar" id="user-avatar" role="img" aria-label="User avatar">?</div>
-        <span id="user-email">Loading…</span>
-      </div>
-      <a href="builder.html" class="nav-new-btn">+ New Resume</a>
+    <div class="app-nav-side">
+      <a href="builder.html" class="btn btn-primary btn-sm">+ New Resume</a>
       <button class="theme-toggle" aria-label="Toggle theme">
         <span class="t-icon">🌙</span>
         <span class="t-label t-label-dark">Light</span>
         <span class="t-label t-label-light">Dark</span>
       </button>
-      <button class="nav-signout-btn" id="signout-btn">Sign out</button>
+      <div class="nav-user">
+        <div class="nav-user-avatar" id="user-avatar" role="img" aria-label="User avatar">?</div>
+        <span id="user-email" class="nav-user-name">Loading…</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="signout-btn">Sign out</button>
     </div>
   </nav>
 
   <!-- ── Main ── -->
   <main class="dash-main">
 
-    <!-- Header -->
-    <div class="dash-header">
+    <header class="dash-header">
       <p class="dash-greeting">Good to see you back 👋</p>
-      <h1 class="dash-title">My <span>Resumes</span></h1>
-    </div>
+      <h1 class="dash-title">My <span class="grad-text">Resumes</span></h1>
+    </header>
 
     <!-- Stats -->
     <div class="dash-stats" id="dash-stats" style="display:none">
@@ -56,10 +62,8 @@
       </div>
     </div>
 
-    <!-- Section Title -->
-    <div class="dash-section-title">All Resumes</div>
+    <div class="dash-section-title">All resumes</div>
 
-    <!-- Resume Grid -->
     <div id="resume-grid-container">
       <!-- Skeleton loaders shown while fetching -->
       <div class="resume-grid" id="skeleton-grid">
@@ -71,61 +75,62 @@
       <div class="resume-grid" id="resume-grid" style="display:none"></div>
       <!-- Empty state -->
       <div class="dash-empty" id="dash-empty" style="display:none">
-        <div class="dash-empty-icon">📄</div>
+        <div class="dash-empty-art" aria-hidden="true">
+          <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        </div>
         <h3>No resumes saved yet</h3>
         <p>Generate your first AI-tailored resume and it'll appear here automatically.</p>
-        <a href="builder.html" class="nav-new-btn" style="margin-top:0.5rem">+ Build My First Resume</a>
+        <a href="builder.html" class="btn btn-primary" style="margin-top:0.8rem">+ Build my first resume</a>
       </div>
     </div>
 
   </main>
 
-  <!-- ── Delete Confirm Dialog ── -->
-  <div class="delete-dialog-overlay" id="delete-overlay">
-    <div class="delete-dialog">
-      <h3>Delete this resume?</h3>
+  <!-- ── Delete confirm dialog ── -->
+  <div class="dialog-overlay" id="delete-overlay">
+    <div class="dialog" role="alertdialog" aria-labelledby="delete-title">
+      <h3 id="delete-title">Delete this resume?</h3>
       <p>This action cannot be undone. The resume will be permanently removed from your account.</p>
-      <div class="delete-dialog-actions">
-        <button class="btn-secondary" id="delete-cancel" aria-label="Cancel deletion">Cancel</button>
-        <button class="auth-submit" style="width:auto;padding:0.7rem 1.5rem;margin-top:0;background:linear-gradient(135deg,#ef4444,#dc2626)" id="delete-confirm" aria-label="Confirm deletion">Delete</button>
+      <div class="dialog-actions">
+        <button class="btn btn-outline" id="delete-cancel" aria-label="Cancel deletion">Cancel</button>
+        <button class="btn btn-danger" id="delete-confirm" aria-label="Confirm deletion">Delete</button>
       </div>
     </div>
   </div>
 
-  <!-- ── Resume Preview Modal ── -->
+  <!-- ── Resume preview modal ── -->
   <div class="preview-overlay" id="preview-overlay">
-    <div class="preview-panel" id="preview-panel">
+    <div class="preview-panel" id="preview-panel" role="dialog" aria-labelledby="preview-title">
 
-      <!-- Panel Header -->
       <div class="preview-header">
         <div class="preview-header-left">
           <h2 class="preview-title" id="preview-title">Resume Preview</h2>
           <span class="preview-date" id="preview-date"></span>
         </div>
         <div class="preview-header-actions">
-          <button class="preview-action-btn primary" id="preview-pdf-btn">&#11015; Download PDF</button>
-          <button class="preview-action-btn" id="preview-docx-btn">&#128196; Word</button>
-          <button class="preview-action-btn" id="preview-txt-btn">&#128203; ATS Text</button>
-          <button class="preview-close-btn" id="preview-close" aria-label="Close preview">&#10005;</button>
+          <button class="preview-action-btn primary" id="preview-pdf-btn">⬇ PDF</button>
+          <button class="preview-action-btn" id="preview-docx-btn">📄 Word</button>
+          <button class="preview-action-btn" id="preview-txt-btn">📋 ATS Text</button>
+          <button class="preview-close-btn" id="preview-close" aria-label="Close preview">✕</button>
         </div>
       </div>
 
-      <!-- Resume Content -->
       <div class="preview-body">
         <div class="preview-resume-wrap">
-          <div class="preview-resume-content" id="preview-resume-content">
-            <!-- resume HTML injected here -->
-          </div>
+          <div class="preview-resume-content" id="preview-resume-content"></div>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 
-  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <!-- DOMPurify: sanitize AI-generated HTML before rendering (#1 XSS) -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>

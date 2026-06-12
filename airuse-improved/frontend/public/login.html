@@ -4,119 +4,114 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Log in to ResumeAI to access your saved resumes and continue building ATS-optimized resumes.">
-  <title>Log In &mdash; ResumeAI</title>
+  <title>Log In — ResumeAI</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/auth.css">
   <script src="js/theme.js"></script>
 </head>
 <body>
 
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+  <div class="auth-shell">
 
-  <a href="index.html" class="auth-back">&#8592; Back to home</a>
+    <!-- ── Brand panel ── -->
+    <aside class="auth-brand" aria-hidden="true">
+      <a href="index.html" class="logo">
+        <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L4.5 13.5h6L10 22l8.5-11.5h-6L13 2z" fill="#fff"/></svg></span>
+        Resume<span>AI</span>
+      </a>
 
-  <div class="auth-theme-wrap">
-    <button class="theme-toggle" aria-label="Toggle theme">
-      <span class="t-icon">&#127769;</span>
-      <span class="t-label t-label-dark">Light</span>
-      <span class="t-label t-label-light">Dark</span>
-    </button>
-  </div>
-
-  <div class="auth-page">
-    <div class="auth-card">
-
-      <!-- Logo -->
-      <div class="auth-logo">
-        <div class="logo">Resume<span>AI</span></div>
-        <span class="tagline">AI-Powered ATS Resume Builder</span>
+      <div class="auth-brand-mid">
+        <h2>Welcome back.<br>Your resumes are waiting.</h2>
+        <p>Pick up where you left off — every resume you generate is saved to your dashboard automatically.</p>
+        <ul class="auth-points">
+          <li><span class="pt-icon">🎯</span><span><b>91+ average ATS score</b> — scored against the real job description</span></li>
+          <li><span class="pt-icon">⚡</span><span><b>Under 10 seconds</b> from job posting to tailored resume</span></li>
+          <li><span class="pt-icon">📄</span><span><b>PDF, Word &amp; ATS text</b> exports for any job portal</span></li>
+        </ul>
       </div>
 
-      <h1 class="auth-heading">Welcome back</h1>
-      <p class="auth-subheading">Log in to access your saved resumes</p>
+      <figure class="auth-brand-quote">
+        <blockquote>“My resume scored 46 on Jobscan. After ResumeAI it hit 93 — and I got callbacks from 3 of the next 5 applications.”</blockquote>
+        <figcaption><b>Sneha R.</b> · Software Engineer</figcaption>
+      </figure>
+    </aside>
 
-      <div class="auth-alert" id="auth-alert"></div>
+    <!-- ── Form panel ── -->
+    <main class="auth-main">
+      <div class="auth-topbar">
+        <a href="index.html" class="auth-back">← Back to home</a>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <span class="t-icon">🌙</span>
+          <span class="t-label t-label-dark">Light</span>
+          <span class="t-label t-label-light">Dark</span>
+        </button>
+      </div>
 
-      <!-- Google Sign In -->
-      <button class="social-btn google-btn" id="google-btn" type="button">
-        <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-          <path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/>
-          <path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/>
-          <path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/>
-          <path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/>
-        </svg>
-        Continue with Google
-      </button>
+      <div class="auth-card">
+        <h1 class="auth-heading">Log in</h1>
+        <p class="auth-subheading">Access your saved resumes and dashboard</p>
 
-      <!-- Divider -->
-      <div class="auth-divider"><span>or sign in with email</span></div>
+        <div class="auth-alert" id="auth-alert" role="alert"></div>
 
-      <!-- Email/Password Form -->
-      <form class="auth-form" id="login-form" novalidate>
+        <button class="social-btn google-btn" id="google-btn" type="button"></button>
 
-        <div class="auth-field">
-          <label for="login-email">Email address</label>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#9993;</span>
+        <div class="auth-divider"><span>or sign in with email</span></div>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="auth-field">
+            <label for="login-email">Email address</label>
             <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required>
           </div>
-        </div>
 
-        <div class="auth-field">
-          <div class="field-row-label">
-            <label for="login-password">Password</label>
-            <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+          <div class="auth-field">
+            <div class="field-row-label">
+              <label for="login-password">Password</label>
+              <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+            </div>
+            <div class="pw-wrap">
+              <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="pw-toggle" id="pw-toggle-login" aria-label="Show password">👁</button>
+            </div>
           </div>
-          <div class="input-icon-wrap">
-            <span class="input-icon">&#128274;</span>
-            <input type="password" id="login-password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" required>
-            <button type="button" class="pw-toggle" id="pw-toggle-login" aria-label="Show password">&#128065;</button>
-          </div>
-        </div>
 
-        <button type="submit" class="auth-submit" id="login-btn">
-          <div class="spinner"></div>
-          <span class="btn-label">Log in &rarr;</span>
-        </button>
+          <button type="submit" class="auth-submit" id="login-btn">
+            <div class="spinner"></div>
+            <span class="btn-label">Log in →</span>
+          </button>
 
-        <p class="auth-trust">&#128274; 256-bit encrypted &middot; Never sold &middot; Delete anytime</p>
+          <p class="auth-trust">🔒 256-bit encrypted · Never sold · Delete anytime</p>
+        </form>
 
-      </form>
+        <p class="auth-footer">
+          Don’t have an account? <a href="signup.html">Sign up free</a>
+        </p>
 
-      <!-- Phone OTP: hidden until SMS provider is configured (#18) -->
-      <!--
-      <div class="auth-divider"><span>or</span></div>
-      <button class="social-btn phone-btn" id="phone-signin-btn" type="button">
-        <span>&#128222;</span> Continue with Phone
-      </button>
-      <div class="phone-panel" id="phone-panel" style="display:none">
-        ...
+        <p class="auth-terms">
+          By continuing, you agree to our
+          <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+        </p>
       </div>
-      -->
-
-      <p class="auth-footer">
-        Don&rsquo;t have an account? <a href="signup.html">Sign up free</a>
-      </p>
-
-      <p class="auth-terms">
-        By continuing, you agree to our
-        <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
-      </p>
-
-    </div>
+    </main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/auth.js"></script>
 
   <script>
-    const form        = document.getElementById('login-form');
-    const btn         = document.getElementById('login-btn');
-    const alertEl     = document.getElementById('auth-alert');
+    const form    = document.getElementById('login-form');
+    const btn     = document.getElementById('login-btn');
+    const alertEl = document.getElementById('auth-alert');
 
-    // ── Helpers ────────────────────────────────────────────────────────────────
+    // ── Google button content (single source — restored after loading state) ──
+    const GOOGLE_BTN_HTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+    const googleBtn = document.getElementById('google-btn');
+    googleBtn.innerHTML = GOOGLE_BTN_HTML;
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
     function showAlert(msg, type = 'error') {
       alertEl.textContent = msg;
       alertEl.className   = `auth-alert ${type}`;
@@ -128,21 +123,21 @@
       btnEl.classList.toggle('loading', on);
     }
 
-    // ── Show confirm_expired message ─────────────────────────────────────────
+    // ── Expired confirmation link message ────────────────────────────────────
     const params = new URLSearchParams(window.location.search);
     if (params.get('msg') === 'confirm_expired') {
-      showAlert('&#9888;&#65039; Your confirmation link expired. Please log in or sign up again.');
+      showAlert('⚠️ Your confirmation link expired. Please log in or sign up again.');
     }
 
-    // ── Password visibility toggle ────────────────────────────────────────────
-    document.getElementById('pw-toggle-login').addEventListener('click', function() {
+    // ── Password visibility toggle ───────────────────────────────────────────
+    document.getElementById('pw-toggle-login').addEventListener('click', function () {
       const inp = document.getElementById('login-password');
       const isText = inp.type === 'text';
       inp.type = isText ? 'password' : 'text';
-      this.textContent = isText ? '\uD83D\uDC41' : '\uD83D\uDC41\uFE0F';
+      this.textContent = isText ? '👁' : '👁️';
     });
 
-    // ── Email/Password login ───────────────────────────────────────────────────
+    // ── Email/password login ─────────────────────────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       hideAlert();
@@ -154,8 +149,9 @@
 
       setLoading(btn, true);
       try {
-        const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
+        const { error } = await window._supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        // Open-redirect safe: only allow known pages
         const raw      = new URLSearchParams(window.location.search).get('redirect') || '';
         const SAFE     = ['dashboard.html', 'builder.html', 'index.html'];
         const redirect = SAFE.includes(raw) ? raw : 'dashboard.html';
@@ -166,8 +162,7 @@
       }
     });
 
-    // ── Google OAuth with loading state (#17) ─────────────────────────────────
-    const googleBtn = document.getElementById('google-btn');
+    // ── Google OAuth ─────────────────────────────────────────────────────────
     googleBtn.addEventListener('click', async () => {
       googleBtn.classList.add('loading');
       googleBtn.innerHTML = '<span class="google-spinner"></span> Redirecting to Google…';
@@ -180,19 +175,16 @@
       } catch (err) {
         showAlert('Google sign-in failed: ' + (err.message || 'Please try again.'));
         googleBtn.classList.remove('loading');
-        googleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+        googleBtn.innerHTML = GOOGLE_BTN_HTML;
       }
-      // Fallback re-enable after 6s if redirect didn't happen
+      // Fallback re-enable if the redirect didn't happen
       setTimeout(() => {
         if (googleBtn.classList.contains('loading')) {
           googleBtn.classList.remove('loading');
-          googleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48" fill="none"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8.9 20-20 0-1.2-.1-2.5-.4-3.5z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.7 36 24 36c-5.3 0-9.7-3-11.3-7.5L6.1 33.5C9.5 39.7 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.4 4.2-4.3 5.6l6.2 5.2C43 34.4 44 29.5 44 24c0-1.2-.1-2.5-.4-3.5z" fill="#1976D2"/></svg> Continue with Google';
+          googleBtn.innerHTML = GOOGLE_BTN_HTML;
         }
       }, 6000);
     });
-
-    // ── Phone sign-in — disabled (#18: no SMS provider configured) ────────────
-    // Phone OTP JS removed. Re-enable when SMS provider (Twilio) is set up.
   </script>
 
 </body>
