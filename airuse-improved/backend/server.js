@@ -19,10 +19,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc:  ["'self'"],
-      scriptSrc:   ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+      scriptSrc:   ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "va.vercel-scripts.com"],
       styleSrc:    ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
       fontSrc:     ["'self'", "fonts.gstatic.com"],
-      connectSrc:  ["'self'", "*.supabase.co", "api.groq.com"],
+      connectSrc:  ["'self'", "*.supabase.co", "api.groq.com", "*.vercel-scripts.com", "vercel.live"],
       imgSrc:      ["'self'", "data:"],
       objectSrc:   ["'none'"],
       upgradeInsecureRequests: [],
