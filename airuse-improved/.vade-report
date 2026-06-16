@@ -1,80 +1,93 @@
-# Vercel Web Analytics Installation Report
+# Vercel Speed Insights Implementation Report
 
-Successfully installed and configured Vercel Web Analytics for the ResumeAI project.
+## Summary
+Successfully installed and configured Vercel Speed Insights for the airuse-improved project following the latest official documentation from https://vercel.com/docs/speed-insights/quickstart.
 
-## Changes Implemented
+## Changes Made
 
 ### 1. Package Installation
-- **Added dependency**: `@vercel/analytics` version `^2.0.1`
-- **Modified**: `package.json` - Added @vercel/analytics to dependencies
-- **Updated**: `package-lock.json` - Locked dependency versions (139 new packages added)
+- **Added dependency**: `@vercel/speed-insights@2.0.0` to package.json
+- **Updated lock file**: package-lock.json now includes all Speed Insights dependencies (153 packages)
 
-### 2. Analytics Integration
-Following the official Vercel documentation for HTML5 projects, added Web Analytics scripts to both HTML pages:
+### 2. Speed Insights Script Created
+- **Created**: `frontend/public/js/speed-insights.js`
+  - Implements the Speed Insights initialization script for vanilla JavaScript
+  - Injects the Vercel Speed Insights tracking script from `https://va.vercel-scripts.com/v1/speed-insights/script.js`
+  - Includes proper error handling and prevents duplicate script injection
+  - Uses IIFE pattern to avoid polluting global namespace
 
-- **Modified**: `frontend/public/index.html`
-  - Added Vercel Web Analytics initialization script before closing body tag
-  - Added deferred loading of `/_vercel/insights/script.js`
-  - Preserves all existing functionality and animations
+### 3. HTML Files Updated
+Added `<script src="js/speed-insights.js" defer></script>` to all 8 HTML pages:
+- `frontend/public/index.html` (landing page)
+- `frontend/public/builder.html` (resume builder)
+- `frontend/public/dashboard.html` (user dashboard)
+- `frontend/public/login.html` (login page)
+- `frontend/public/signup.html` (signup page)
+- `frontend/public/forgot-password.html` (password reset)
+- `frontend/public/privacy.html` (privacy policy)
+- `frontend/public/terms.html` (terms of service)
 
-- **Modified**: `frontend/public/builder.html`
-  - Added Vercel Web Analytics initialization script before application scripts
-  - Added deferred loading of `/_vercel/insights/script.js`
-  - Maintains proper load order with existing PDF upload, renderer, and builder scripts
+### 4. Content Security Policy (CSP) Updated
+Modified `backend/server.js` to allow Speed Insights:
+- **scriptSrc**: Added `va.vercel-scripts.com` to allow the Speed Insights script to load
+- **connectSrc**: Added `*.vercel-scripts.com` and `vercel.live` to allow Speed Insights to send performance data to Vercel
 
 ## Implementation Details
 
-### HTML5 Integration Method
-Used the standard HTML5 integration approach as documented in Vercel's official quickstart guide:
-```javascript
-window.va = window.va || function () { 
-  (window.vaq = window.vaq || []).push(arguments); 
-};
-```
+### Framework Detection
+This project uses vanilla JavaScript (not Next.js, React, Vue, or other frameworks), so the implementation follows the vanilla/other frameworks approach from the Vercel documentation.
 
-This initialization script creates a queue for analytics events before the main script loads asynchronously.
+### How It Works
+1. When each HTML page loads, the `speed-insights.js` script executes
+2. The script initializes the Speed Insights queue (`window.si` and `window.siq`)
+3. It dynamically creates a script element pointing to Vercel's Speed Insights CDN
+4. The script is injected into the page head with the `defer` attribute
+5. Once loaded, Speed Insights automatically tracks Core Web Vitals and other performance metrics
 
-### Script Placement
-- Scripts placed just before closing `</body>` tag
-- Uses `defer` attribute for non-blocking async loading
-- Positioned before application-specific scripts to ensure analytics loads early
+### Security
+- All Speed Insights domains are properly whitelisted in the Content Security Policy
+- Script loading includes error handling to gracefully handle content blockers
+- Uses defer attribute to prevent blocking page rendering
 
-### Vercel Integration
-The analytics script path `/_vercel/insights/script.js` is automatically served by Vercel when:
-1. Web Analytics is enabled in the Vercel dashboard for this project
-2. The project is deployed to Vercel
-3. The domain matches the configured project
+## Next Steps for Users
 
-## Next Steps for Deployment
+After deployment to Vercel:
+1. Enable Speed Insights in the Vercel dashboard:
+   - Navigate to your project settings
+   - Select "Speed Insights" from the sidebar
+   - Click "Enable" button
+2. Deploy the changes to Vercel
+3. Visit your site to verify the tracking script loads (check browser DevTools Network tab for requests to `va.vercel-scripts.com`)
+4. Monitor performance metrics in the Vercel Speed Insights dashboard
 
-To complete the setup, the project owner needs to:
-1. **Enable Analytics in Vercel Dashboard**:
-   - Go to project settings on Vercel
-   - Navigate to the Analytics section
-   - Click "Enable Web Analytics"
+## Verification
 
-2. **Deploy the changes**:
-   - Push these changes to the repository
-   - Deploy to Vercel (automatic via git integration)
-
-3. **Verify Installation**:
-   - Visit the deployed site
-   - Open browser DevTools > Network tab
-   - Look for requests to `/_vercel/insights/view` 
-   - Check the Analytics dashboard after users visit the site
-
-## Technical Notes
-
-- No build process changes required (static HTML project)
-- Zero impact on existing functionality
-- Analytics scripts load asynchronously (non-blocking)
-- Privacy-compliant by default (no cookies, no personal data collection)
-- Works seamlessly with the existing Express.js backend serving static files
+✅ Package installed successfully: `@vercel/speed-insights@2.0.0`
+✅ All 8 HTML files updated with Speed Insights script
+✅ JavaScript syntax validated successfully
+✅ CSP configuration updated to allow Speed Insights
+✅ Lock file updated with new dependencies
+✅ No build errors introduced
 
 ## Files Modified
-- `package.json` - Added @vercel/analytics dependency
-- `package-lock.json` - Updated with new dependency tree
-- `frontend/public/index.html` - Added analytics scripts
-- `frontend/public/builder.html` - Added analytics scripts
 
-All changes follow best practices from the official Vercel documentation retrieved on April 20, 2026.
+- `package.json` - Added @vercel/speed-insights dependency
+- `package-lock.json` - Updated with Speed Insights dependencies
+- `backend/server.js` - Updated CSP to allow Speed Insights domains
+- `frontend/public/js/speed-insights.js` - Created new script
+- `frontend/public/index.html` - Added script tag
+- `frontend/public/builder.html` - Added script tag
+- `frontend/public/dashboard.html` - Added script tag
+- `frontend/public/login.html` - Added script tag
+- `frontend/public/signup.html` - Added script tag
+- `frontend/public/forgot-password.html` - Added script tag
+- `frontend/public/privacy.html` - Added script tag
+- `frontend/public/terms.html` - Added script tag
+
+## Notes
+
+- The implementation preserves all existing code structure
+- No breaking changes introduced
+- Speed Insights will start collecting data once enabled in Vercel dashboard after deployment
+- The script is loaded with `defer` attribute to optimize page load performance
+- Error handling ensures graceful degradation if Speed Insights script fails to load
